@@ -1,17 +1,12 @@
 import { useState, useEffect } from 'react';
-import { IProduct, IData } from '../types';
+import { IProduct } from '../types';
+import data from '../assets/products.json';
 
 function useFetch() {
   const [products, setProducts] = useState<IProduct[]>([]);
 
-  async function fetchData(): Promise<void> {
-    try {
-      const data: Response = await fetch('https://dummyjson.com/products?limit=10');
-      const res: IData = await data.json();
-      setProducts(res.products);
-    } catch (err: unknown) {
-      console.log(err);
-    }
+  function fetchData() {
+    setProducts(data.products);
   }
 
   useEffect(() => {

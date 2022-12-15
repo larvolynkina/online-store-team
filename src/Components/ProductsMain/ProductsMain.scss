@@ -1,0 +1,7 @@
+@import '../../sass/style.scss'; 
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

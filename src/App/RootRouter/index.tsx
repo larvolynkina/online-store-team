@@ -16,7 +16,7 @@ export default function RootRouter() {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/product/:id" element={<Product />} />
         <Route path="/shopping-cart" element={<ShoppingCart />} />
       </Routes>
     </div>

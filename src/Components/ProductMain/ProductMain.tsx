@@ -1,5 +1,6 @@
 import React from 'react';
 import './ProductMain.scss';
+import { useNavigate } from 'react-router-dom';
 import { IProduct } from '../../types';
 
 type ProductMainProps = {
@@ -7,6 +8,7 @@ type ProductMainProps = {
 }
 
 function ProductMain({ product } :ProductMainProps) {
+  const navigate = useNavigate();
   return (
     <li className="product">
       <div className="product__image">
@@ -30,7 +32,7 @@ function ProductMain({ product } :ProductMainProps) {
         </dl>
       </div>
       <div className="product__buttons">
-        <button className="btn btn_details" type="button">Details</button>
+        <button onClick={() => navigate(`/product/${product.id}`)} className="btn btn_details" type="button">Details</button>
         <button className="btn btn_cart" type="button">Add to cart</button>
       </div>
     </li>

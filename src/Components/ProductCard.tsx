@@ -17,6 +17,7 @@ export default function ProductCard() {
           description={data.description}
           price={data.price}
           stock={data.stock}
+          rating={data.rating}
         />
       </div>
     </div>

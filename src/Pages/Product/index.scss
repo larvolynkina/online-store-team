@@ -11,6 +11,7 @@
     margin: 0 0 20px 0;
     text-align: center;
   }
+
   &__content{
     display: flex;
   }
@@ -19,11 +20,13 @@
 .gallery-product{
   flex: 0 1 50%;
   display: flex;
+
   &__list{
     display: flex;
     flex-direction: column;
     margin: 0 20px 0 0;
   }
+
   &__item{
     width: 80px;
     height: 50px;
@@ -36,11 +39,40 @@
       outline: 1px solid black;
     }
   }
+
   &__img-mini{
     width: 100%;
     height: 100%;
   }
+
   &__main{
     flex: 0 1 500px;
   }
+}
+
+.desc-card {
+
+  &__title{}
+
+  &__list{}
+}
+
+.desc-card__item{
+
+  &_rating{}
+
+  &_brand{}
+
+  &_description{}
+
+  &_price{}
+
+  &_category{}
+
+  &_stock{}
+}
+
+.btns-card{
+  &__cart{}
+  &__buy-now{}
 }

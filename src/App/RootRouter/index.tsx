@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Header from '../../Components/header';
 import Main from '../../Pages/Main';
 import Product from '../../Pages/Product';
+import ShoppingCart from '../../Pages/ShoppingCart';
 
 // Компонент который осуществляет роутинг по страницам SPA,
 // header вынесен из роутов,то он будет постоянным
@@ -16,6 +17,7 @@ export default function RootRouter() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/product" element={<Product />} />
+        <Route path="/shopping-cart" element={<ShoppingCart />} />
       </Routes>
     </div>
   );

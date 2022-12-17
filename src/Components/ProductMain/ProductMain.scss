@@ -9,6 +9,10 @@
     margin-bottom: 25px;
     cursor: pointer;
 
+    &_active {
+        box-shadow: 0px 2px 8px $main-color;
+    }
+
     &__img {
         width: 100%;
         border-top-left-radius: 8px;

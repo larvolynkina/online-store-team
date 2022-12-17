@@ -34,12 +34,17 @@
 
     &__cart {
         position: relative;
-        padding: 4px 7px;
+        padding: 5px;
         border-radius: 50%;
         background-color: $main-color;
         color: $background-color-light;
         font-weight: 300;
         font-size: 14px;
+        width: 16px;
+        height: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
         &::before {
             position: absolute;

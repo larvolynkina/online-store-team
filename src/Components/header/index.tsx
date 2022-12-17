@@ -1,8 +1,12 @@
-// import { NavLink } from 'react-router-dom';
 import './index.scss';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-export default function Header() {
+type HeaderProps = {
+  headerCartCount: number;
+  headerCartSum: number;
+}
+
+export default function Header({ headerCartCount, headerCartSum }: HeaderProps) {
   const navigate: NavigateFunction = useNavigate();
   return (
     <header className="header">
@@ -10,11 +14,12 @@ export default function Header() {
       <p className="header__cart-total">
         Cart total:
         {' '}
-        <span>$0</span>
+        <span>
+          $
+          {headerCartSum}
+        </span>
       </p>
-      <p className="header__cart">
-        0
-      </p>
+      <div className="header__cart">{headerCartCount}</div>
     </header>
   );
 }

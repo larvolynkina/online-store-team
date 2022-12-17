@@ -1,13 +1,17 @@
 import ProductsMain from '../../Components/ProductsMain/ProductsMain';
 import useFetch from '../../Hooks/useFetch';
 
-function Main() {
+type MainProps = {
+  headerRender: () => void;
+}
+
+function Main({ headerRender }: MainProps) {
   const { products } = useFetch();
 
   return (
     <>
       <h1>Main</h1>
-      <ProductsMain products={products} />
+      <ProductsMain headerRender={headerRender} products={products} />
     </>
   );
 }

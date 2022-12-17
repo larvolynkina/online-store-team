@@ -19,4 +19,10 @@ interface IData {
   products: IProduct[]
 }
 
-export type { IProduct, IData };
+interface ICartItem {
+  id: number;
+  price: number;
+  count: number;
+}
+
+export type { IProduct, IData, ICartItem };

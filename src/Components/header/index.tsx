@@ -1,16 +1,25 @@
-// import { NavLink } from 'react-router-dom';
+import './index.scss';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-export default function Header() {
+type HeaderProps = {
+  headerCartCount: number;
+  headerCartSum: number;
+}
+
+export default function Header({ headerCartCount, headerCartSum }: HeaderProps) {
+  const navigate: NavigateFunction = useNavigate();
   return (
-    <div>
-      {/* <nav>
-        <NavLink to="/">
-          Main
-        </NavLink>
-        <NavLink to="/product">
-          Product
-        </NavLink>
-      </nav> */}
-    </div>
+    <header className="header">
+      <button type="button" onClick={() => navigate('/')} className="header__logo">Online Store</button>
+      <p className="header__cart-total">
+        Cart total:
+        {' '}
+        <span>
+          $
+          {headerCartSum}
+        </span>
+      </p>
+      <div className="header__cart">{headerCartCount}</div>
+    </header>
   );
 }

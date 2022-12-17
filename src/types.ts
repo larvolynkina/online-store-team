@@ -19,6 +19,12 @@ interface IData {
   products: IProduct[]
 }
 
+interface ICartItem {
+  id: number;
+  price: number;
+  count: number;
+}
+
 interface IGallery{
   images: string[] | undefined;
   title: string | undefined
@@ -36,5 +42,5 @@ interface IImageLink{
 }
 
 export type {
-  IProduct, IData, IGallery, IGalleryImage, IImageLink,
+  IProduct, IData, ICartItem, IGallery, IGalleryImage, IImageLink,
 };

@@ -5,12 +5,15 @@ import './ProductsMain.scss';
 
 type ProductsMainProps = {
   products: IProduct[];
-}
+  headerRender: () => void;
+};
 
-function ProductsMain({ products }: ProductsMainProps) {
+function ProductsMain({ products, headerRender }: ProductsMainProps) {
   return (
     <ul className="products">
-      {products.map((product: IProduct) => <ProductMain key={product.id} product={product} />)}
+      {products.map((product: IProduct) => (
+        <ProductMain key={product.id} product={product} headerRender={headerRender} />
+      ))}
     </ul>
   );
 }

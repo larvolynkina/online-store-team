@@ -25,14 +25,14 @@ function ProductMain({ product, headerRender }: ProductMainProps) {
     };
     array.push(item);
     const arrayToJson: string = JSON.stringify(array);
-    localStorage.setItem('cart', arrayToJson);
+    localStorage.setItem('cart_@vFKSQ', arrayToJson);
   }
 
   function addToCartFromMain(): void {
     if (cartButton === 'Add to cart') {
       setCartButton('Delete');
       setProductClass('product product_active');
-      const json = localStorage.getItem('cart');
+      const json = localStorage.getItem('cart_@vFKSQ');
       if (json) {
         const cartArray: TCartArray = JSON.parse(json);
         addItemtoLocalStorage(cartArray);
@@ -43,21 +43,21 @@ function ProductMain({ product, headerRender }: ProductMainProps) {
     } else {
       setCartButton('Add to cart');
       setProductClass('product');
-      const json: string | null = localStorage.getItem('cart');
+      const json: string | null = localStorage.getItem('cart_@vFKSQ');
       if (json) {
         const cartArray: TCartArray = JSON.parse(json);
         const filteredArray: TCartArray = cartArray.filter(
           (value: ICartItem) => value.id !== product.id,
         );
         const arrayToJson: string = JSON.stringify(filteredArray);
-        localStorage.setItem('cart', arrayToJson);
+        localStorage.setItem('cart_@vFKSQ', arrayToJson);
       }
     }
     headerRender();
   }
 
   function isProductInCart(): void {
-    const json: string | null = localStorage.getItem('cart');
+    const json: string | null = localStorage.getItem('cart_@vFKSQ');
     if (json) {
       const array: TCartArray = JSON.parse(json);
       const productsInCartLength: number = array.filter(

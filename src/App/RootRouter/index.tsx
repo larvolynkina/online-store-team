@@ -11,7 +11,7 @@ export default function RootRouter() {
   const [headerCartSum, setHeaderCartSum] = useState<number>(0);
 
   function renderHeaderInfo(): void {
-    const json: string | null = localStorage.getItem('cart');
+    const json: string | null = localStorage.getItem('cart_@vFKSQ');
     if (json) {
       const array: ICartItem[] = JSON.parse(json);
       const count: number = array

@@ -19,4 +19,22 @@ interface IData {
   products: IProduct[]
 }
 
-export type { IProduct, IData };
+interface IGallery{
+  images: string[] | undefined;
+  title: string | undefined
+}
+
+interface IGalleryImage{
+  url: string;
+  alt: string | undefined;
+}
+
+interface IImageLink{
+  imageLink: string;
+  onClick(): void
+  alt: string;
+}
+
+export type {
+  IProduct, IData, IGallery, IGalleryImage, IImageLink,
+};

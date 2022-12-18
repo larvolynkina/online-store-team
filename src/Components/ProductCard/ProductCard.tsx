@@ -4,30 +4,18 @@ import ProductCardTitle from '../ProductCardTitle/ProductCardTitle';
 import ProductDescription from '../ProductDescription/ProductDescription';
 import ProductGallery from '../ProductGallery/ProductGallery';
 
-export default function ProductCard({
-  images,
-  title,
-  brand,
-  category,
-  description,
-  price,
-  stock,
-  rating,
-}: Partial<IProduct>) {
+export default function ProductCard({ product, products, headerRender }:
+   {
+    product: IProduct,
+    products: IProduct[],
+    headerRender: () => void
+  }) {
   return (
     <div className="product__card card-product">
-      <ProductCardTitle title={title} />
+      <ProductCardTitle title={product.title} />
       <div className="card-product__content">
-        <ProductGallery images={images} title={title} />
-        <ProductDescription
-          title={title}
-          brand={brand}
-          category={category}
-          description={description}
-          price={price}
-          stock={stock}
-          rating={rating}
-        />
+        <ProductGallery images={product.images} title={product.title} />
+        <ProductDescription product={product} products={products} headerRender={headerRender} />
       </div>
     </div>
   );

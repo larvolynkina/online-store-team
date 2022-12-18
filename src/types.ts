@@ -1,3 +1,8 @@
+export enum InnerButton {
+  Remove = 'Remove from cart',
+  Add = 'Add to cart'
+}
+
 interface IProduct {
   brand: string,
   category: string,

@@ -15,6 +15,10 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
     "import/extensions": [1, "ignorePackages", {
         "ts": "never",
         "tsx": "never"

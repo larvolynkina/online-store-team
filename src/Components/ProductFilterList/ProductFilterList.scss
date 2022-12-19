@@ -2,4 +2,7 @@
 
 .filter-list {
     display: flex;
+    flex-basis: 24%;
+    flex-direction: column;
+    gap: 30px;
 }

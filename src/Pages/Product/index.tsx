@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom';
 import ProductCard from '../../Components/ProductCard/ProductCard';
+import ProductBreadcrumbs from '../../Components/ProductBreadcrumbs/ProductBreadcrumbs';
 import useFetch from '../../Hooks/useFetch';
 import { IProduct } from '../../types';
 
-function Product({ headerRender } : {headerRender: () => void }) {
+function Product({ headerRender } : { headerRender: () => void }) {
   const { products } = useFetch();
   const params = useParams();
   const currentProduct: IProduct | undefined = products
@@ -13,7 +14,20 @@ function Product({ headerRender } : {headerRender: () => void }) {
     <>
       <h1>Product</h1>
       {currentProduct
-        ? <ProductCard product={currentProduct} products={products} headerRender={headerRender} />
+        ? (
+          <div className="product-page">
+            <ProductBreadcrumbs
+              category={currentProduct.category}
+              brand={currentProduct.brand}
+              title={currentProduct.title}
+            />
+            <ProductCard
+              product={currentProduct}
+              products={products}
+              headerRender={headerRender}
+            />
+          </div>
+        )
         : <h1>Страница не найдена</h1>}
     </>
   );

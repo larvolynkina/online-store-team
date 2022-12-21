@@ -3,11 +3,19 @@
 
   &__number{}
 
-  &__details{}
+  &__details{
+    cursor: pointer;
+  }
 
   &__title{}
 
   &__description{}
 
   &__rating{}
+
+  &__controls{}
+
+  &__stock{}
+
+  &__count-control{}
 }

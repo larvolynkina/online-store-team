@@ -1,14 +1,29 @@
 import './index.scss';
+import React, { SetStateAction } from 'react';
 import ProductBuyButton from '../ProductBuyButton/ProductBuyButton';
 import ProductCartButton from '../ProductCartButton/ProductCartButton';
-import { IProduct } from '../../types';
+import { InnerButton, IProduct } from '../../types';
 
-function ProductDescription({ product, products, headerRender }:
+function ProductDescription(
+  {
+    productInCart,
+    setProductInCart,
+    product,
+    headerRender,
+    btnInner,
+    addItem,
+    removeItem,
+  }:
    {
+    productInCart: boolean,
+    setProductInCart: React.Dispatch<SetStateAction<boolean>>
     product: IProduct,
-    products: IProduct[],
-    headerRender: () => void
-  }) {
+    headerRender: () => void,
+    btnInner: InnerButton,
+    addItem: () => void,
+    removeItem: () => void
+  },
+) {
   return (
     <section className="card-product__desc desc-card">
       <h3 className="desc-card__title">{product.title}</h3>
@@ -21,8 +36,19 @@ function ProductDescription({ product, products, headerRender }:
         <li className="desc-card__item desc-card__item_stock">{`In stock: ${product.stock}`}</li>
       </ul>
       <div className="description-card__btns btns-card">
-        <ProductCartButton id={product.id} products={products} headerRender={headerRender} />
-        <ProductBuyButton />
+        <ProductCartButton
+          productInCart={productInCart}
+          headerRender={headerRender}
+          btnInner={btnInner}
+          addItem={addItem}
+          removeItem={removeItem}
+          setProductInCart={setProductInCart}
+        />
+        <ProductBuyButton
+          headerRender={headerRender}
+          addItem={addItem}
+          productInCart={productInCart}
+        />
       </div>
     </section>
   );

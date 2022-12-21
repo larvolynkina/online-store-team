@@ -1,3 +1,5 @@
+import React, { SetStateAction } from 'react';
+
 export enum InnerButton {
   Remove = 'Remove from cart',
   Add = 'Add to cart'
@@ -46,6 +48,21 @@ interface IImageLink{
   alt: string;
 }
 
+type TBreadcrumbs = Pick<IProduct, 'category' | 'brand' | 'title'>;
+
+type TPromocodes = {
+  [key: string]: number;
+}
+
+type TPromo = {
+  setDiscount: React.Dispatch<SetStateAction<boolean>>;
+  promoCodes: TPromocodes;
+  setPromocodes: React.Dispatch<SetStateAction<TPromocodes>>;
+  setAmount: React.Dispatch<SetStateAction<number>>;
+  total: number;
+}
+
 export type {
-  IProduct, IData, ICartItem, IGallery, IGalleryImage, IImageLink,
+  IProduct, IData, ICartItem, IGallery, IGalleryImage, IImageLink, TBreadcrumbs,
+  TPromocodes, TPromo,
 };

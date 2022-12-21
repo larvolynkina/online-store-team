@@ -1,21 +1,30 @@
 import './index.scss';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export default function ProductBuyButton() {
-  function showAlert() {
-    alert('Типа модалка :))');
+export default function ProductBuyButton(
+  {
+    headerRender,
+    addItem,
+    productInCart,
+  }:
+  {
+    headerRender: () => void,
+    addItem: () => void,
+    productInCart: boolean
+  },
+) {
+  const navigate = useNavigate();
+
+  function goToCart() {
+    if (!productInCart) {
+      addItem();
+      headerRender();
+    }
+    navigate('/shopping-cart');
   }
   return (
-    <Link
-      to="/shopping-cart"
-      className="btns-card__buy-now"
-      onClick={
-      ():void => {
-        setTimeout(showAlert, 500);
-      }
-      }
-    >
+    <button type="button" className="btns-card__buy-now" onClick={() => goToCart()}>
       Buy now
-    </Link>
+    </button>
   );
 }

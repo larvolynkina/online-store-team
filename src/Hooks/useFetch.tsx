@@ -12,7 +12,7 @@ function useFetch() {
   useEffect(() => {
     fetchData();
   }, []);
-  return { products };
+  return { products, setProducts };
 }
 
 export default useFetch;

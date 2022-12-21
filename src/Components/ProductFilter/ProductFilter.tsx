@@ -1,8 +1,23 @@
-import React from 'react';
+import ProductFilterCheckbox from '../ProductFilterCheckbox/ProductFilterCheckbox';
+import './ProductFilter.scss';
 
-function ProductFilter() {
+type ProductFilterProps = {
+  name: string;
+  list: string[];
+};
+
+function ProductFilter({ name, list }: ProductFilterProps) {
   return (
-    <div>ProductFilter</div>
+    <div className="filter">
+      <h2 className="filter__title">{name}</h2>
+      {list.map((item: string) => (
+        <ProductFilterCheckbox
+          key={item}
+          item={item}
+          name={name}
+        />
+      ))}
+    </div>
   );
 }
 

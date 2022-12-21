@@ -5,18 +5,11 @@ import useFetch from '../../Hooks/useFetch';
 import ProductFilterList from '../../Components/ProductFilterList/ProductFilterList';
 import './index.scss';
 import { IProduct } from '../../types';
+import ProductsMainHeader from '../../Components/ProductsMainHeader/ProductsMainHeader';
 
 type MainProps = {
   headerRender: () => void;
 };
-
-// interface IFilterContextObject {
-//   filtered: IProduct[],
-// }
-
-// type TFilter = {
-//   [key: string]: string;
-// };
 
 export const FilterContext = createContext<IProduct[]>([]);
 
@@ -25,6 +18,7 @@ function Main({ headerRender }: MainProps) {
   const { products } = useFetch();
 
   function isFiltered(arr: IProduct[]) {
+    console.log('filter');
     const categoryfiltered: IProduct[][] = [];
     const brandFiltered: IProduct[][] = [];
     if (searchParams.toString()) {
@@ -56,7 +50,10 @@ function Main({ headerRender }: MainProps) {
     <FilterContext.Provider value={filtered}>
       <div className="container">
         <ProductFilterList />
-        <ProductsMain headerRender={headerRender} products={filtered} />
+        <div className="products-wrapper">
+          <ProductsMainHeader />
+          <ProductsMain headerRender={headerRender} products={filtered} />
+        </div>
       </div>
     </FilterContext.Provider>
   );

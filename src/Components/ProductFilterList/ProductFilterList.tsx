@@ -2,6 +2,7 @@ import './ProductFilterList.scss';
 import ProductFilter from '../ProductFilter/ProductFilter';
 import useFetch from '../../Hooks/useFetch';
 import { IProduct } from '../../types';
+import DualSlider from '../DualSlider/DualSlider';
 
 function ProductFilterList() {
   const { products } = useFetch();
@@ -12,6 +13,7 @@ function ProductFilterList() {
     <div className="filter-list">
       <ProductFilter name="Category" list={categories} />
       <ProductFilter name="Brand" list={brands} />
+      <DualSlider name="Price" />
     </div>
   );
 }

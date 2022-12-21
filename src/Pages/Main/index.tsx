@@ -13,9 +13,12 @@ type MainProps = {
 };
 
 interface IFilterFunctions {
-  category(items: IProduct[]): IProduct[];
-  brand(items: IProduct[]): IProduct[];
-  price(items: IProduct[]): IProduct[];
+  category(items: IProduct[], value: string): IProduct[];
+  brand(items: IProduct[], value: string): IProduct[];
+  price(items: IProduct[], value: string): IProduct[];
+  stock(items: IProduct[], value: string): IProduct[];
+  count(items: IProduct[], value: string): IProduct[];
+  filter(items: IProduct[], value: string): IProduct[];
 }
 
 export const FilterContext = createContext<IProduct[]>([]);
@@ -26,41 +29,47 @@ function Main({ headerRender }: MainProps) {
 
   function isFiltered(arr: IProduct[]) {
     const filterFunctions: IFilterFunctions = {
-      category(items: IProduct[]) : IProduct[] {
-        const categoryFilters = searchParams.getAll('category');
+      category(items: IProduct[], value: string): IProduct[] {
+        return filterFunctions.filter(items, value);
+      },
+
+      brand(items: IProduct[], value: string): IProduct[] {
+        return filterFunctions.filter(items, value);
+      },
+
+      price(items: IProduct[], value: string): IProduct[] {
+        return filterFunctions.count(items, value);
+      },
+
+      stock(items: IProduct[], value: string): IProduct[] {
+        return filterFunctions.count(items, value);
+      },
+
+      filter(items: IProduct[], value: string) {
+        const propertyFilters = searchParams.getAll(value);
         const result: IProduct[][] = [];
-        if (categoryFilters.length > 0) {
-          categoryFilters.forEach((filter: string) => {
+        if (propertyFilters.length > 0) {
+          propertyFilters.forEach((filter: string) => {
             result.push(
-              items.filter((product: IProduct) => product.category === filter),
+              items.filter((product: IProduct) => product[value as keyof IProduct] === filter),
             );
           });
         }
         return result.flat();
       },
 
-      brand(items: IProduct[]) : IProduct[] {
-        const brandFilters = searchParams.getAll('brand');
+      count(items: IProduct[], value: string): IProduct[] {
+        const countFilters: string | null = searchParams.get(value);
         const result: IProduct[][] = [];
-        if (brandFilters.length > 0) {
-          brandFilters.forEach((filter: string) => {
-            result.push(
-              items.filter((product: IProduct) => product.brand === filter),
-            );
-          });
-        }
-        return result.flat();
-      },
-
-      price(items: IProduct[]) : IProduct[] {
-        const priceFilters: string | null = searchParams.get('price');
-        const result: IProduct[][] = [];
-        if (priceFilters) {
-          const priceFiltersArr: string[] = priceFilters.split('↕');
-          const min: number = Math.min(...priceFiltersArr.map((item) => +item));
-          const max: number = Math.max(...priceFiltersArr.map((item) => +item));
+        if (countFilters) {
+          const countFiltersArr: string[] = countFilters.split('↕');
+          const min: number = Math.min(...countFiltersArr.map((item) => +item));
+          const max: number = Math.max(...countFiltersArr.map((item) => +item));
           result.push(
-            items.filter((product: IProduct) => product.price >= min && product.price <= max),
+            items.filter(
+              (product: IProduct) => +product[value as keyof IProduct] >= min
+                && +product[value as keyof IProduct] <= max,
+            ),
           );
         }
         return result.flat();
@@ -75,9 +84,9 @@ function Main({ headerRender }: MainProps) {
 
     function recursiveFilter(items: IProduct[], keys: string[]): IProduct[] {
       if (keys.length === 1) {
-        return filterFunctions[keys[0] as keyof IFilterFunctions](items);
+        return filterFunctions[keys[0] as keyof IFilterFunctions](items, keys[0]);
       }
-      const newItems = filterFunctions[keys[0] as keyof IFilterFunctions](items);
+      const newItems = filterFunctions[keys[0] as keyof IFilterFunctions](items, keys[0]);
       const newKeys: string[] = keys.filter((item: string) => item !== keys[0]);
       return recursiveFilter(newItems, newKeys);
     }

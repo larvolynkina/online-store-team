@@ -13,7 +13,8 @@ function ProductFilterList() {
     <div className="filter-list">
       <ProductFilter name="Category" list={categories} />
       <ProductFilter name="Brand" list={brands} />
-      <DualSlider name="Price" />
+      <DualSlider name="Price" label="$" />
+      <DualSlider name="Stock" label="" />
     </div>
   );
 }

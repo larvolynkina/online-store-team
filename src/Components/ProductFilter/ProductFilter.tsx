@@ -1,4 +1,5 @@
 import ProductFilterCheckbox from '../ProductFilterCheckbox/ProductFilterCheckbox';
+import './ProductFilter.scss';
 
 type ProductFilterProps = {
   name: string;

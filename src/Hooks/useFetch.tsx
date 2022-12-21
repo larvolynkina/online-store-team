@@ -7,7 +7,6 @@ function useFetch() {
 
   function fetchData() {
     setProducts(data.products);
-    console.log('setProducts');
   }
 
   useEffect(() => {

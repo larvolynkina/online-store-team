@@ -1,6 +1,4 @@
-import React, {
-  useContext, useEffect, useState,
-} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { DebounceInput } from 'react-debounce-input';
 import { FilterContext } from '../../Pages/Main';
@@ -10,62 +8,69 @@ import data from '../../assets/products.json';
 
 interface DualSliderProps {
   name: string;
+  label: string;
 }
 
-function DualSlider({ name }: DualSliderProps) {
+function DualSlider({ name, label }: DualSliderProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const filtered: IProduct[] = useContext(FilterContext);
   const [rangeMinValue, setRangeMinValue] = useState<string>('');
   const [rangeMaxValue, setRangeMaxValue] = useState<string>('');
+  const [isMoving, setIsMoving] = useState<boolean>(false);
 
-  const min: number = Math.min(...data.products.map((item: IProduct) => item.price));
-  const max: number = Math.max(...data.products.map((item: IProduct) => item.price));
+  const filter: string = name.toLowerCase();
+
+  const min: number = Math.min(
+    ...data.products.map((item: IProduct) => +item[filter as keyof IProduct]),
+  );
+  const max: number = Math.max(
+    ...data.products.map((item: IProduct) => +item[filter as keyof IProduct]),
+  );
 
   function getMinValue(array: IProduct[]): number {
-    if (searchParams.has('price')) {
-      const priceQuery = searchParams.get('price');
-      if (priceQuery) {
-        const minQueryPrice = Math.min(...priceQuery.split('↕').map((item) => +item));
-        return +minQueryPrice;
-      }
+    if (isMoving) {
+      setIsMoving(false);
+      return +rangeMinValue;
     }
-    const priceArray = array.map((item: IProduct) => item.price);
-    const priceArrayMin = Math.min(...priceArray);
-    return priceArrayMin;
+    const filterArray = array.map((item: IProduct) => +item[filter as keyof IProduct]);
+    const filterArrayMin = Math.min(...filterArray);
+    return filterArrayMin;
   }
 
   function getMaxValue(array: IProduct[]): number {
-    if (searchParams.has('price')) {
-      const priceQuery = searchParams.get('price');
-      if (priceQuery) {
-        const maxQueryPrice = Math.max(...priceQuery.split('↕').map((item) => +item));
-        return +maxQueryPrice;
-      }
+    if (isMoving) {
+      setIsMoving(false);
+      return +rangeMaxValue;
     }
-    const priceArray = array.map((item: IProduct) => item.price);
-    const priceArrayMax = Math.max(...priceArray);
-    return priceArrayMax;
+    const filterArray = array.map((item: IProduct) => +item[filter as keyof IProduct]);
+    const filterArrayMax = Math.max(...filterArray);
+    return filterArrayMax;
   }
 
   function changeRangeMinValue(event: React.ChangeEvent<HTMLInputElement>): void {
+    setIsMoving(true);
     if (+event.target.value > +rangeMaxValue) {
-      setRangeMinValue(event.target.value);
+      setRangeMinValue(rangeMaxValue);
       setRangeMaxValue(event.target.value);
+      searchParams.set(filter, `${rangeMaxValue}↕${event.target.value}`);
     } else {
       setRangeMinValue(event.target.value);
+      searchParams.set(filter, `${event.target.value}↕${rangeMaxValue}`);
     }
-    searchParams.set('price', `${event.target.value}↕${rangeMaxValue}`);
     setSearchParams(searchParams);
   }
 
   function changeRangeMaxValue(event: React.ChangeEvent<HTMLInputElement>): void {
+    setIsMoving(true);
     if (+event.target.value < +rangeMinValue) {
+      setRangeMaxValue(rangeMinValue);
       setRangeMinValue(event.target.value);
-      setRangeMaxValue(event.target.value);
+      searchParams.set(filter, `${event.target.value}↕${rangeMinValue}`);
     } else {
       setRangeMaxValue(event.target.value);
+      searchParams.set(filter, `${rangeMinValue}↕${event.target.value}`);
     }
-    searchParams.set('price', `${rangeMinValue}↕${event.target.value}`);
+
     setSearchParams(searchParams);
   }
 
@@ -82,11 +87,11 @@ function DualSlider({ name }: DualSliderProps) {
       <div className="dualSlider">
         <div className="dualSlider__values">
           <span className="dualSlider__valueMin">
-            $
+            {label}
             {rangeMinValue}
           </span>
           <span className="dualSlider__valueMax">
-            $
+            {label}
             {rangeMaxValue}
           </span>
         </div>

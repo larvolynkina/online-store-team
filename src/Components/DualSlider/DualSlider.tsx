@@ -23,26 +23,28 @@ function DualSlider({ name }: DualSliderProps) {
 
   function getMinValue(array: IProduct[]): number {
     if (searchParams.has('price')) {
-      const result = searchParams.get('price');
-      if (result) {
-        const mini = Math.min(...result.split('↕').map((item) => +item));
-        return +mini;
+      const priceQuery = searchParams.get('price');
+      if (priceQuery) {
+        const minQueryPrice = Math.min(...priceQuery.split('↕').map((item) => +item));
+        return +minQueryPrice;
       }
     }
     const priceArray = array.map((item: IProduct) => item.price);
-    return Math.min(...priceArray);
+    const priceArrayMin = Math.min(...priceArray);
+    return priceArrayMin;
   }
 
   function getMaxValue(array: IProduct[]): number {
     if (searchParams.has('price')) {
-      const result = searchParams.get('price');
-      if (result) {
-        const maxi = Math.max(...result.split('↕').map((item) => +item));
-        return +maxi;
+      const priceQuery = searchParams.get('price');
+      if (priceQuery) {
+        const maxQueryPrice = Math.max(...priceQuery.split('↕').map((item) => +item));
+        return +maxQueryPrice;
       }
     }
     const priceArray = array.map((item: IProduct) => item.price);
-    return Math.max(...priceArray);
+    const priceArrayMax = Math.max(...priceArray);
+    return priceArrayMax;
   }
 
   function changeRangeMinValue(event: React.ChangeEvent<HTMLInputElement>): void {

@@ -1,0 +1,32 @@
+.summary{
+  padding: 10px;
+  border: 1px solid black;
+  flex: 0 1 auto;
+
+  &__title{}
+
+  &__container{}
+}
+
+.products-summary{
+
+  &__label{}
+
+  &__output{}
+}
+
+.total{
+  display: flex;
+  &.discounted{
+    .total__output{
+      text-decoration: line-through;
+      color: red;
+    }
+  }
+}
+.total__label{
+  margin: 0 5px 0 0;
+}
+.total__output{
+  margin: 0 5px 0 0;
+}

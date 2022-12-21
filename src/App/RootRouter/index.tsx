@@ -32,8 +32,8 @@ export default function RootRouter() {
       <Header headerCartCount={headerCartCount} headerCartSum={headerCartSum} />
       <Routes>
         <Route path="/" element={<Main headerRender={() => renderHeaderInfo()} />} />
-        <Route path="/product/:id" element={<Product />} />
-        <Route path="/shopping-cart" element={<ShoppingCart />} />
+        <Route path="/product/:id" element={<Product headerRender={() => renderHeaderInfo()} />} />
+        <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} />} />
       </Routes>
     </div>
   );

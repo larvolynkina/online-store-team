@@ -1,3 +1,10 @@
+import React, { SetStateAction } from 'react';
+
+export enum InnerButton {
+  Remove = 'Remove from cart',
+  Add = 'Add to cart'
+}
+
 interface IProduct {
   brand: string,
   category: string,
@@ -25,4 +32,37 @@ interface ICartItem {
   count: number;
 }
 
-export type { IProduct, IData, ICartItem };
+interface IGallery{
+  images: string[] | undefined;
+  title: string | undefined
+}
+
+interface IGalleryImage{
+  url: string;
+  alt: string | undefined;
+}
+
+interface IImageLink{
+  imageLink: string;
+  onClick(): void
+  alt: string;
+}
+
+type TBreadcrumbs = Pick<IProduct, 'category' | 'brand' | 'title'>;
+
+type TPromocodes = {
+  [key: string]: number;
+}
+
+type TPromo = {
+  setDiscount: React.Dispatch<SetStateAction<boolean>>;
+  promoCodes: TPromocodes;
+  setPromocodes: React.Dispatch<SetStateAction<TPromocodes>>;
+  setAmount: React.Dispatch<SetStateAction<number>>;
+  total: number;
+}
+
+export type {
+  IProduct, IData, ICartItem, IGallery, IGalleryImage, IImageLink, TBreadcrumbs,
+  TPromocodes, TPromo,
+};

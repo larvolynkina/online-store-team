@@ -1,0 +1,18 @@
+.card-product{
+  max-width: 80%;
+  margin: 10px auto;
+  padding: 10px;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__title{
+    margin: 0 0 20px 0;
+    text-align: center;
+  }
+
+  &__content{
+    display: flex;
+  }
+}

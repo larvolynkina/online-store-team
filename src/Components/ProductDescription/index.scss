@@ -1,0 +1,26 @@
+.desc-card {
+
+  &__title{}
+
+  &__list{}
+}
+
+.desc-card__item{
+
+  &_rating{}
+
+  &_brand{}
+
+  &_description{}
+
+  &_price{}
+
+  &_category{}
+
+  &_stock{}
+}
+
+.btns-card{
+  display: flex;
+  flex-direction: column;
+}

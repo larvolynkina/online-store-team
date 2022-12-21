@@ -1,0 +1,9 @@
+.breadcrumbs{
+  display: flex;
+  &__item{
+    &:not(:last-child)::after{
+      content: "/";
+    }
+    &_store{}
+  }
+}

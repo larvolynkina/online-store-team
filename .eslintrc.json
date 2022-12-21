@@ -15,6 +15,13 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "no-shadow": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "jsx-a11y/label-has-associated-control": [ "error", {
+      "assert": "either"
+    }],
     "import/extensions": [1, "ignorePackages", {
         "ts": "never",
         "tsx": "never"

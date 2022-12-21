@@ -1,0 +1,21 @@
+.item-cart{
+  display: flex;
+
+  &__number{}
+
+  &__details{
+    cursor: pointer;
+  }
+
+  &__title{}
+
+  &__description{}
+
+  &__rating{}
+
+  &__controls{}
+
+  &__stock{}
+
+  &__count-control{}
+}

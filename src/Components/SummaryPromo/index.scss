@@ -1,0 +1,17 @@
+.promo{
+  display: flex;
+  flex-direction: column;
+
+  &__label{}
+
+  &__input{}
+
+  &__codes{
+
+    &__label{}
+
+    &__output{}
+  }
+
+  &__btn{}
+}

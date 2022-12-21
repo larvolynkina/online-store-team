@@ -1,0 +1,16 @@
+.cart{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cart__items{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid black;
+  margin: 0 10px 0 0;
+  flex: 1 1 auto;
+}
+
+.cart__header{}

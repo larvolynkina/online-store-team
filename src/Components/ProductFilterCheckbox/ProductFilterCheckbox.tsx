@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { FilterContext } from '../../Pages/Main';
 import { IProduct } from '../../types';
@@ -15,9 +15,9 @@ export default function ProductFilterCheckbox({ item, name }: IProductFilterChec
   const filtered = useContext(FilterContext);
   // console.log(filtered);
 
-  function addFilter(target: any) {
+  function addFilter(event: React.ChangeEvent<HTMLInputElement>) {
     const filter: string = name.toLowerCase();
-    if (target.checked) {
+    if (event.target.checked) {
       searchParams.append(filter, item);
       setSearchParams(searchParams);
       setCheked(true);
@@ -42,7 +42,7 @@ export default function ProductFilterCheckbox({ item, name }: IProductFilterChec
 
   useEffect(() => {
     setCheked(isChecked(item));
-  }, [checked]);
+  }, [checked, searchParams]);
 
   const activeItems = filtered.filter(
     (it: IProduct) => it[name.toLowerCase() as keyof IProduct] === item,
@@ -56,9 +56,9 @@ export default function ProductFilterCheckbox({ item, name }: IProductFilterChec
     <div className="filter__item">
       <input
         checked={checked}
-        onChange={(event) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setCheked(event.target.checked);
-          addFilter(event.target);
+          addFilter(event);
         }}
         type="checkbox"
         name=""

@@ -19,6 +19,7 @@ interface IFilterFunctions {
   stock(items: IProduct[], value: string): IProduct[];
   count(items: IProduct[], value: string): IProduct[];
   filter(items: IProduct[], value: string): IProduct[];
+  search(items: IProduct[], value: string): IProduct[];
 }
 
 export const FilterContext = createContext<IProduct[]>([]);
@@ -69,6 +70,27 @@ function Main({ headerRender }: MainProps) {
             items.filter(
               (product: IProduct) => +product[value as keyof IProduct] >= min
                 && +product[value as keyof IProduct] <= max,
+            ),
+          );
+        }
+        return result.flat();
+      },
+
+      search(items: IProduct[], value: string): IProduct[] {
+        const searchFilter: string | null = searchParams.get(value);
+        const result: IProduct[][] = [];
+        if (searchFilter) {
+          result.push(
+            items.filter(
+              (
+                product: IProduct,
+              ) => product.title.toLowerCase().includes(searchFilter.toLowerCase())
+              || product.description.toLowerCase().includes(searchFilter.toLowerCase())
+              || product.brand.toLowerCase().includes(searchFilter.toLowerCase())
+              || product.category.toLowerCase().includes(searchFilter.toLowerCase())
+              || product.stock.toString().includes(searchFilter.toLowerCase())
+              || product.rating.toString().includes(searchFilter.toLowerCase())
+              || product.price.toString().includes(searchFilter.toLowerCase()),
             ),
           );
         }

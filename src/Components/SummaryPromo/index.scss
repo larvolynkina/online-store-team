@@ -1,4 +1,4 @@
-.promo{
+.promo {
   display: flex;
   flex-direction: column;
 
@@ -6,12 +6,14 @@
 
   &__input{}
 
-  &__codes{
-
-    &__label{}
-
-    &__output{}
+  &__output{
+    display: flex;
   }
 
-  &__btn{}
+  &__title{
+    margin: 0 10px 0 0;
+  }
+
+  &__list{}
+
 }

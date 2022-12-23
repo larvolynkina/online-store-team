@@ -1,70 +1,89 @@
 import React, { useEffect, useState } from 'react';
 import { TPromocodes, TPromo } from '../../types';
+import PromoCodesItem from '../PromoCodesItem/PromoCodesItem';
 import './index.scss';
 
 export default function SummaryPromo(
   {
     setDiscount,
-    promoCodes,
-    setPromocodes,
     setAmount,
     total,
   }: TPromo,
 ) {
-  const validPromoCodes: TPromocodes = { RS: 10, EPM: 20 };
+  const validPromoCodes: TPromocodes = {
+    RS: ['Rolling Scopes School', 10],
+    EPM: ['EPAM Systems', 15],
+  };
 
   const [inputValue, setInputValue] = useState<string>('');
-  const [placeholder, setPlaceholder] = useState<string>('Enter promo code');
+  const [appliedPromoCodes, setAppliedPromoCodes] = useState<TPromocodes>({});
+  const [isValidCode, setIsValidCode] = useState<boolean>(false);
+  const [isAppliedCode, setIsAppliedCode] = useState<boolean>(false);
+  const [currentCode, setCurrentCode] = useState<string>('');
 
   function changeInputValue(event: React.FocusEvent<HTMLInputElement>):void {
     const target = event.target as HTMLInputElement;
     setInputValue(target.value);
   }
 
-  function clearInput(event: React.FocusEvent<HTMLInputElement>) {
-    const target = event.target as HTMLInputElement;
-    setPlaceholder('Enter promo code');
-    target.value = '';
-  }
-
-  function addNewPromocode(data: string):void {
-    const appliedPromoCodes: TPromocodes = { ...promoCodes };
-    appliedPromoCodes[data] = validPromoCodes[data];
-    setPromocodes(appliedPromoCodes);
-  }
-
-  function removePromocodes():void {
-    setPromocodes({});
-    setAmount(total);
-    setDiscount(false);
-  }
-
   function applyDiscount():void {
     let discounted: number = total;
-    Object.values(promoCodes).forEach((value: number) => {
-      discounted = Math.floor(discounted - ((discounted / 100) * value));
+    Object.values(appliedPromoCodes).forEach((item: [string, number]) => {
+      discounted = Math.floor(discounted - ((discounted / 100) * item[1]));
     });
     setAmount(discounted);
   }
 
-  useEffect(() => {
-    if (inputValue in validPromoCodes && total) {
-      setDiscount(true);
-      addNewPromocode(inputValue);
-      applyDiscount();
+  function addNewPromocode():void {
+    const newPromoCodes: TPromocodes = { ...appliedPromoCodes };
+    newPromoCodes[inputValue] = validPromoCodes[inputValue];
+    setAppliedPromoCodes(newPromoCodes);
+    setCurrentCode(inputValue);
+    setDiscount(true);
+  }
+
+  function removePromocode(value: string):void {
+    const newPromoCodes: TPromocodes = { ...appliedPromoCodes };
+    delete newPromoCodes[value];
+    setAppliedPromoCodes(newPromoCodes);
+    if (!Object.keys(newPromoCodes).length) {
+      setDiscount(false);
     }
+    if (value === currentCode) {
+      setIsAppliedCode(false);
+    }
+  }
+
+  function checkPromocode():void {
+    if (inputValue in validPromoCodes) {
+      setCurrentCode(inputValue);
+      setIsValidCode(true);
+      if (inputValue in appliedPromoCodes) {
+        setIsAppliedCode(true);
+      } else {
+        setIsAppliedCode(false);
+      }
+    } else {
+      setIsValidCode(false);
+    }
+  }
+
+  useEffect(() => {
+    checkPromocode();
   }, [inputValue]);
 
   useEffect(() => {
-    applyDiscount();
-  }, [promoCodes]);
+    if (currentCode in appliedPromoCodes) {
+      setIsAppliedCode(true);
+    }
+  }, [appliedPromoCodes]);
 
   useEffect(() => {
-    if (total === 0) {
-      removePromocodes();
-    } else {
-      applyDiscount();
-    }
+    applyDiscount();
+  }, [appliedPromoCodes]);
+
+  useEffect(() => {
+    applyDiscount();
   }, [total]);
 
   return (
@@ -72,18 +91,38 @@ export default function SummaryPromo(
       <label htmlFor="promo-input" className="promo__label">Use promo code RS or EPM to get discount:</label>
       <input
         id="promo-input"
-        type="text"
-        placeholder={placeholder}
+        type="search"
+        placeholder="Enter promo code"
         className="promo__input"
-        onFocus={() => setPlaceholder('')}
-        onBlur={(e: React.FocusEvent<HTMLInputElement>):void => clearInput(e)}
         onChange={(e: React.FocusEvent<HTMLInputElement>):void => changeInputValue(e)}
       />
-      <div className="promo__applied-codes codes">
-        <span className="codes__label">Applied promo codes:</span>
-        <span className="codes__output">{Object.keys(promoCodes).join(', ')}</span>
+      {isValidCode && (
+      <div className="promo__output">
+        <p className="promo__title">{`${validPromoCodes[currentCode][0]} - ${validPromoCodes[currentCode][1]}%`}</p>
+        {!isAppliedCode
+        && (
+        <button className="promo__btn" type="button" onClick={():void => addNewPromocode()}>
+          Add
+        </button>
+        )}
       </div>
-      <button type="button" className="promo__btn" onClick={() => removePromocodes()}>Delete promocode</button>
+      )}
+      {Object.keys(appliedPromoCodes).length > 0 && (
+      <div>
+        <h2>Applied codes</h2>
+        <ul className="promo__list applied-codes">
+          {Object.entries(appliedPromoCodes)
+            .map((item: [string, [string, number]]) => (
+              <PromoCodesItem
+                promocode={item[1][0]}
+                discountPercentage={item[1][1]}
+                key={item[0]}
+                removePromocode={():void => removePromocode(item[0])}
+              />
+            ))}
+        </ul>
+      </div>
+      )}
     </div>
   );
 }

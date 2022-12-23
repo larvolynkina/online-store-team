@@ -2,7 +2,7 @@ import './index.scss';
 import React, { SetStateAction } from 'react';
 import ProductBuyButton from '../ProductBuyButton/ProductBuyButton';
 import ProductCartButton from '../ProductCartButton/ProductCartButton';
-import { InnerButton, IProduct } from '../../types';
+import { ProductInnerButton, IProduct } from '../../types';
 
 function ProductDescription(
   {
@@ -19,7 +19,7 @@ function ProductDescription(
     setProductInCart: React.Dispatch<SetStateAction<boolean>>
     product: IProduct,
     headerRender: () => void,
-    btnInner: InnerButton,
+    btnInner: ProductInnerButton,
     addItem: () => void,
     removeItem: () => void
   },

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ICartItem, TPromocodes } from '../../types';
+import { ICartItem } from '../../types';
 import './index.scss';
 import SummaryPromo from '../SummaryPromo/SummaryPromo';
 
@@ -10,9 +10,8 @@ export default function CartSummary({ currentCart } : {currentCart: ICartItem[]}
 
   const [discount, setDiscount] = useState<boolean>(false);
   const [totalClass, setTotalClass] = useState<string>('summary__total total');
-  const [promoCodes, setPromocodes] = useState<TPromocodes>({});
-  const [amount, setAmount] = useState<number>(() => getTotalSum());
-  const [total, setTotal] = useState<number>(() => getTotalSum());
+  const [amount, setAmount] = useState<number>(():number => getTotalSum());
+  const [total, setTotal] = useState<number>(():number => getTotalSum());
 
   useEffect(() => {
     if (discount) {
@@ -23,7 +22,7 @@ export default function CartSummary({ currentCart } : {currentCart: ICartItem[]}
   }, [discount]);
 
   useEffect(() => {
-    setTotal(() => getTotalSum());
+    setTotal(():number => getTotalSum());
   }, [currentCart]);
 
   return (
@@ -41,8 +40,6 @@ export default function CartSummary({ currentCart } : {currentCart: ICartItem[]}
         </div>
         <SummaryPromo
           setDiscount={setDiscount}
-          promoCodes={promoCodes}
-          setPromocodes={setPromocodes}
           setAmount={setAmount}
           total={total}
         />

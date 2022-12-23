@@ -1,5 +1,5 @@
 import React, { SetStateAction } from 'react';
-import { InnerButton } from '../../types';
+import { ProductInnerButton } from '../../types';
 import './index.scss';
 
 export default function ProductCartButton({
@@ -14,7 +14,7 @@ export default function ProductCartButton({
     productInCart: boolean,
     setProductInCart: React.Dispatch<SetStateAction<boolean>>,
     headerRender: () => void
-    btnInner: InnerButton,
+    btnInner: ProductInnerButton,
     addItem: () => void,
     removeItem: () => void
   }) {

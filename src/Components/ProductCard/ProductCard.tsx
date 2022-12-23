@@ -1,6 +1,6 @@
 import './index.scss';
 import { useState, useEffect } from 'react';
-import { IProduct, ICartItem, InnerButton } from '../../types';
+import { IProduct, ICartItem, ProductInnerButton } from '../../types';
 import ProductCardTitle from '../ProductCardTitle/ProductCardTitle';
 import ProductDescription from '../ProductDescription/ProductDescription';
 import ProductGallery from '../ProductGallery/ProductGallery';
@@ -47,7 +47,9 @@ export default function ProductCard({ product, products, headerRender }:
 
   const check = checkItem();
   const [productInCart, setProductInCart] = useState<boolean>(check);
-  const btnInner: InnerButton = productInCart ? InnerButton.Remove : InnerButton.Add;
+  const btnInner: ProductInnerButton = productInCart
+    ? ProductInnerButton.Remove
+    : ProductInnerButton.Add;
 
   useEffect(() => {
     setProductInCart(check);

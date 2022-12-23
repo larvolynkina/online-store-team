@@ -28,6 +28,7 @@ function Search() {
     const search: string | null = searchParams.get('search');
     if (search) {
       setSearchValue(search);
+      setClassName('search__clearBtn search__clearBtn_active');
     } else {
       setSearchValue('');
     }
@@ -41,6 +42,7 @@ function Search() {
     <div className="search">
       <input
         className="search__input"
+        autoComplete="off"
         type="text"
         id="search"
         value={searchValue}

@@ -19,6 +19,8 @@ interface IFilterFunctions {
   stock(items: IProduct[], value: string): IProduct[];
   count(items: IProduct[], value: string): IProduct[];
   filter(items: IProduct[], value: string): IProduct[];
+  search(items: IProduct[], value: string): IProduct[];
+  sort(items: IProduct[], value: string): IProduct[];
 }
 
 export const FilterContext = createContext<IProduct[]>([]);
@@ -74,13 +76,57 @@ function Main({ headerRender }: MainProps) {
         }
         return result.flat();
       },
+
+      search(items: IProduct[], value: string): IProduct[] {
+        const searchFilter: string | null = searchParams.get(value);
+        const result: IProduct[][] = [];
+        if (searchFilter) {
+          result.push(
+            items.filter(
+              (
+                product: IProduct,
+              ) => product.title.toLowerCase().includes(searchFilter.toLowerCase())
+              || product.description.toLowerCase().includes(searchFilter.toLowerCase())
+              || product.brand.toLowerCase().includes(searchFilter.toLowerCase())
+              || product.category.toLowerCase().includes(searchFilter.toLowerCase())
+              || product.stock.toString().includes(searchFilter.toLowerCase())
+              || product.rating.toString().includes(searchFilter.toLowerCase())
+              || product.price.toString().includes(searchFilter.toLowerCase()),
+            ),
+          );
+        }
+        return result.flat();
+      },
+
+      sort(items: IProduct[], value: string): IProduct[] {
+        const sortFilter: string | null = searchParams.get(value);
+        const result: IProduct[][] = [];
+        if (sortFilter) {
+          const sortObject: string = sortFilter.split('-')[0];
+          const sortDirection: string = sortFilter.split('-')[1];
+          if (sortDirection === 'ASC') {
+            result.push(
+              [...items].sort(
+                (a, b) => +a[sortObject as keyof IProduct] - +b[sortObject as keyof IProduct],
+              ),
+            );
+          } else {
+            result.push(
+              [...items].sort(
+                (a, b) => +b[sortObject as keyof IProduct] - +a[sortObject as keyof IProduct],
+              ),
+            );
+          }
+        }
+        return result.flat();
+      },
     };
 
     const allFilters: string[] = [];
     searchParams.forEach((_key, value) => {
       allFilters.push(value);
     });
-    const uniqueFilters = [...new Set(allFilters)];
+    const uniqueFilters = [...new Set(allFilters)].sort();
 
     function recursiveFilter(items: IProduct[], keys: string[]): IProduct[] {
       if (keys.length === 1) {

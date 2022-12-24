@@ -123,8 +123,11 @@ function Main({ headerRender }: MainProps) {
     };
 
     const allFilters: string[] = [];
+    const validFilters: string[] = ['category', 'brand', 'price', 'stock', 'search', 'sort'];
     searchParams.forEach((_key, value) => {
-      allFilters.push(value);
+      if (validFilters.includes(value)) {
+        allFilters.push(value);
+      }
     });
     const uniqueFilters = [...new Set(allFilters)].sort();
 

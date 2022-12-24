@@ -1,10 +1,13 @@
 @import './../../sass/style.scss';
 
 .dualSlider {
+  margin-top: 10px;
+  margin-bottom: 30px;
 
   &__values {
     display: flex;
     justify-content: space-between;
+    padding: 0 20px;
   }
 
   &__ranges {

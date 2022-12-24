@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Header from '../../Components/header';
 import Main from '../../Pages/Main';
 import Product from '../../Pages/Product';
+import Error from '../../Pages/Error';
 import ShoppingCart from '../../Pages/ShoppingCart';
 import { ICartItem } from '../../types';
 
@@ -34,6 +35,7 @@ export default function RootRouter() {
         <Route path="/" element={<Main headerRender={() => renderHeaderInfo()} />} />
         <Route path="/product/:id" element={<Product headerRender={() => renderHeaderInfo()} />} />
         <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );

@@ -4,9 +4,14 @@
     background-color: $background-color-light;
     padding: 20px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1240px;
+        margin: 0 auto;
+    }
 
     &__logo {
         position: relative;

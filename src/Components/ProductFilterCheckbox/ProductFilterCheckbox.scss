@@ -1,0 +1,31 @@
+@import './../../sass/style.scss';
+
+.filter {
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 300;
+        font-size: 16px;
+        padding: 5px;
+        padding-left: 0;
+        padding-right: 10px;
+
+        &_active {
+            font-weight: 500;
+        }
+    }
+
+    &__item-wrapper {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        input, label {
+            cursor: pointer;
+        }
+        label {
+            text-transform: capitalize;
+        }
+        
+    }
+}

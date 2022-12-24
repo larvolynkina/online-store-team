@@ -5,7 +5,7 @@ import ProductGalleryImage from '../ProductGalleryImage/ProductGalleryImage';
 import { IGallery } from '../../types';
 
 export default function ProductGallery({ images = [], title }: IGallery) {
-  const [url, setUrl] = useState(images[0]);
+  const [url, setUrl] = useState('');
   useEffect(() => {
     setUrl(images[0]);
   }, [images[0]]);

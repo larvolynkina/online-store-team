@@ -1,0 +1,24 @@
+.personal {
+
+  &__title {
+    margin: 0 0 20px 0;
+  }
+
+  &__input {
+    margin: 0 0 10px 0;
+    
+    &.invalid {
+      outline: 1px solid red;
+      outline-offset: -1px;
+    }
+
+    &.valid {
+      outline: 1px solid green;
+      outline-offset: -1px;
+    }
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}

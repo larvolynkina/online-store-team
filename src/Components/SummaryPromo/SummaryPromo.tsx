@@ -8,6 +8,7 @@ export default function SummaryPromo(
     setDiscount,
     setAmount,
     total,
+    promocodes,
   }: TPromo,
 ) {
   const validPromoCodes: TPromocodes = {
@@ -16,7 +17,7 @@ export default function SummaryPromo(
   };
 
   const [inputValue, setInputValue] = useState<string>('');
-  const [appliedPromoCodes, setAppliedPromoCodes] = useState<TPromocodes>({});
+  const [appliedPromoCodes, setAppliedPromoCodes] = useState<TPromocodes>(promocodes);
   const [isValidCode, setIsValidCode] = useState<boolean>(false);
   const [isAppliedCode, setIsAppliedCode] = useState<boolean>(false);
   const [currentCode, setCurrentCode] = useState<string>('');
@@ -40,15 +41,19 @@ export default function SummaryPromo(
     setAppliedPromoCodes(newPromoCodes);
     setCurrentCode(inputValue);
     setDiscount(true);
+    localStorage.setItem('promo_@vFKSQ', JSON.stringify(newPromoCodes));
   }
 
   function removePromocode(value: string):void {
     const newPromoCodes: TPromocodes = { ...appliedPromoCodes };
     delete newPromoCodes[value];
     setAppliedPromoCodes(newPromoCodes);
+    localStorage.setItem('promo_@vFKSQ', JSON.stringify(newPromoCodes));
+
     if (!Object.keys(newPromoCodes).length) {
       setDiscount(false);
     }
+
     if (value === currentCode) {
       setIsAppliedCode(false);
     }
@@ -58,11 +63,7 @@ export default function SummaryPromo(
     if (inputValue in validPromoCodes) {
       setCurrentCode(inputValue);
       setIsValidCode(true);
-      if (inputValue in appliedPromoCodes) {
-        setIsAppliedCode(true);
-      } else {
-        setIsAppliedCode(false);
-      }
+      setIsAppliedCode(inputValue in appliedPromoCodes);
     } else {
       setIsValidCode(false);
     }
@@ -109,7 +110,7 @@ export default function SummaryPromo(
       )}
       {Object.keys(appliedPromoCodes).length > 0 && (
       <div>
-        <h2>Applied codes</h2>
+        <h4>Applied codes</h4>
         <ul className="promo__list applied-codes">
           {Object.entries(appliedPromoCodes)
             .map((item: [string, [string, number]]) => (

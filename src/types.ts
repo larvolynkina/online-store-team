@@ -58,6 +58,7 @@ type TPromo = {
   setDiscount: React.Dispatch<SetStateAction<boolean>>;
   setAmount: React.Dispatch<SetStateAction<number>>;
   total: number;
+  promocodes: TPromocodes;
 }
 
 type TPromoCodesItem = {

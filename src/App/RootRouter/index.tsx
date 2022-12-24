@@ -4,6 +4,7 @@ import Header from '../../Components/header';
 import Main from '../../Pages/Main';
 import Product from '../../Pages/Product';
 import ShoppingCart from '../../Pages/ShoppingCart';
+import Modal from '../../Components/Modal/Modal';
 import { ICartItem } from '../../types';
 
 export default function RootRouter() {
@@ -35,6 +36,7 @@ export default function RootRouter() {
         <Route path="/product/:id" element={<Product headerRender={() => renderHeaderInfo()} />} />
         <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} />} />
       </Routes>
+      <Modal />
     </div>
   );
 }

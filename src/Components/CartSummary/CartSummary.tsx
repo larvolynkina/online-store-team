@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ICartItem } from '../../types';
+import { ICartItem, TPromocodes } from '../../types';
 import './index.scss';
 import SummaryPromo from '../SummaryPromo/SummaryPromo';
 
@@ -8,18 +8,12 @@ export default function CartSummary({ currentCart } : {currentCart: ICartItem[]}
   const getTotalSum = ():number => currentCart
     .reduce((total, product) => total + product.count * product.price, 0);
 
-  const [discount, setDiscount] = useState<boolean>(false);
-  const [totalClass, setTotalClass] = useState<string>('summary__total total');
+  const storagePromo: string | null = localStorage.getItem('promo_@vFKSQ');
+  const promocodes: TPromocodes = storagePromo ? JSON.parse(storagePromo) : {};
+
+  const [discount, setDiscount] = useState<boolean>(Object.keys(promocodes).length > 0);
   const [amount, setAmount] = useState<number>(():number => getTotalSum());
   const [total, setTotal] = useState<number>(():number => getTotalSum());
-
-  useEffect(() => {
-    if (discount) {
-      setTotalClass('summary__total total discounted');
-    } else {
-      setTotalClass('summary__total total');
-    }
-  }, [discount]);
 
   useEffect(() => {
     setTotal(():number => getTotalSum());
@@ -33,7 +27,7 @@ export default function CartSummary({ currentCart } : {currentCart: ICartItem[]}
           <span className="products-summary__label">Products:</span>
           <span className="products-summary__output">{totalProduct}</span>
         </div>
-        <div className={totalClass}>
+        <div className={discount ? 'summary__total total discounted' : 'summary__total total'}>
           <span className="total__label">Total:</span>
           <span className="total__output">{`$${total}`}</span>
           {discount && <span className="total__discount">{`$${amount}`}</span>}
@@ -42,6 +36,7 @@ export default function CartSummary({ currentCart } : {currentCart: ICartItem[]}
           setDiscount={setDiscount}
           setAmount={setAmount}
           total={total}
+          promocodes={promocodes}
         />
         <button type="button" className="summary__btn">Buy now</button>
       </div>

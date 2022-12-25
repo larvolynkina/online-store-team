@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useInput from '../../Hooks/useInput';
 import './index.scss';
 import visaIcon from '../../assets/icons/visaIcon.svg';
@@ -16,11 +16,18 @@ export default function FormGroupCard() {
   };
 
   const [cardImageSrc, setCardImageSrc] = useState<string>(cardImages.universalCard);
-  const [cardInputValue, setCardInputValue] = useState<string>('');
 
-  function replaceCardSymbols(event: React.ChangeEvent) {
+  function replaceSymbols(event: React.ChangeEvent) {
     const target = event.target as HTMLInputElement;
-    target.value = target.value.replace(/[^\d\s]/g, '').trim();
+    if (target.id === 'card-number') {
+      target.value = target.value.replace(/[^\d\s]/g, '').trim();
+    }
+    if (target.id === 'card-cvv') {
+      target.value = target.value.replace(/[^\d]/g, '');
+    }
+    if (target.id === 'card-valid') {
+      target.value = target.value.replace(/[^\d/]/g, '');
+    }
   }
 
   function addCardSpaces(event: React.KeyboardEvent) {
@@ -29,11 +36,6 @@ export default function FormGroupCard() {
     && event.key !== 'Backspace' && target.value.length !== 19) {
       target.value += ' ';
     }
-  }
-
-  function replaceCvvSymbols(event: React.ChangeEvent) {
-    const target = event.target as HTMLInputElement;
-    target.value = target.value.replace(/[^\d]/g, '');
   }
 
   function addValidSeparator(event: React.KeyboardEvent) {
@@ -46,23 +48,15 @@ export default function FormGroupCard() {
     }
   }
 
-  function replaceValidSymbols(event: React.ChangeEvent) {
+  function checkPaymentSystem(event: React.KeyboardEvent) {
     const target = event.target as HTMLInputElement;
-    target.value = target.value.replace(/[^\d/]/g, '');
-  }
-
-  function checkPaymentSystem(value: string) {
-    const firstChar:string = value.slice(0, 1);
+    const firstChar:string = target.value.slice(0, 1);
     if (firstChar in cardImages) {
       setCardImageSrc(cardImages[firstChar]);
     } else {
       setCardImageSrc(cardImages.universalCard);
     }
   }
-
-  useEffect(() => {
-    checkPaymentSystem(cardInputValue);
-  }, [cardInputValue]);
 
   const cardNumber = useInput('', 'credit-card__input', { isEmpty: true, isCardNumber: true });
   const cardCvv = useInput('', 'credit-card__input', { isEmpty: true, isCvv: true });
@@ -81,9 +75,9 @@ export default function FormGroupCard() {
             placeholder="0000 0000 0000 0000"
             maxLength={19}
             onKeyDown={(e: React.KeyboardEvent):void => addCardSpaces(e)}
+            onKeyUp={(e: React.KeyboardEvent):void => checkPaymentSystem(e)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>):void => {
-              setCardInputValue(e.target.value);
-              replaceCardSymbols(e);
+              replaceSymbols(e);
               cardNumber.onChange(e);
             }}
             onBlur={():void => cardNumber.onBlur()}
@@ -104,7 +98,7 @@ export default function FormGroupCard() {
             placeholder="MM/YY"
             onKeyDown={(e: React.KeyboardEvent):void => addValidSeparator(e)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>):void => {
-              replaceValidSymbols(e);
+              replaceSymbols(e);
               cardValid.onChange(e);
             }}
             onBlur={():void => cardValid.onBlur()}
@@ -124,7 +118,7 @@ export default function FormGroupCard() {
             placeholder="CVV"
             maxLength={3}
             onChange={(e: React.ChangeEvent<HTMLInputElement>):void => {
-              replaceCvvSymbols(e);
+              replaceSymbols(e);
               cardCvv.onChange(e);
             }}
             onBlur={():void => cardCvv.onBlur()}
@@ -135,8 +129,8 @@ export default function FormGroupCard() {
             && <p className="credit-card__error">{cardCvv.emptyError || cardCvv.error}</p>}
           </div>
         </div>
-        <div className="credit-card__item credit-card__item_img">
-          <img src={cardImageSrc} alt="card-icon" />
+        <div className="credit-card__item credit-card__item_payment-system">
+          <img className="credit-card__img" src={cardImageSrc} alt="card-icon" />
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import FormGroupCard from '../FormGroupCard/FormGroupCard';
 import FormGroupPersonal from '../FormGroupPersonal/FormGroupPersonal';
 import './index.scss';
 
@@ -8,7 +9,7 @@ export default function Modal() {
         <div className="modal__content">
           <form action="" className="modal__form form">
             <FormGroupPersonal />
-            <div className="form__group" />
+            <FormGroupCard />
           </form>
         </div>
       </div>

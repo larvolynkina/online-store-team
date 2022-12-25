@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import useValidation from './useValidation';
 
-export default function useInput(initValue: string, validations:{[key: string]: boolean}) {
+export default function useInput(
+  initValue: string,
+  classname: string,
+  validations:{[key: string]: boolean},
+) {
   const [value, setValue] = useState<string>(initValue);
   const [isDirty, setDirty] = useState<boolean>(false);
   const [inputClassName, setInputClassName] = useState('');
@@ -11,11 +15,11 @@ export default function useInput(initValue: string, validations:{[key: string]: 
 
   useEffect(() => {
     if (!isDirty) {
-      setInputClassName('personal__input');
+      setInputClassName(classname);
     } else if (isDirty && !valid.isEmpty && !valid.error) {
-      setInputClassName('personal__input valid');
+      setInputClassName(`${classname} valid`);
     } else {
-      setInputClassName('personal__input invalid');
+      setInputClassName(`${classname} invalid`);
     }
   }, [isDirty, valid.isEmpty, valid.error]);
 

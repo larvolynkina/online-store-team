@@ -54,6 +54,10 @@ type TPromocodes = {
   [key: string]: [string, number];
 }
 
+type TImages = {
+  [key: string]: string;
+}
+
 type TPromo = {
   setDiscount: React.Dispatch<SetStateAction<boolean>>;
   setAmount: React.Dispatch<SetStateAction<number>>;
@@ -69,5 +73,5 @@ type TPromoCodesItem = {
 
 export type {
   IProduct, IData, ICartItem, IGallery, IGalleryImage, IImageLink, TBreadcrumbs,
-  TPromocodes, TPromo, TPromoCodesItem,
+  TPromocodes, TPromo, TPromoCodesItem, TImages,
 };

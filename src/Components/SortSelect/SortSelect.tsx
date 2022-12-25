@@ -28,8 +28,8 @@ function SortSelect() {
   }, [searchParams]);
 
   return (
-    <form>
-      <select value={selectValue} onChange={addSortType} name="sort">
+    <form className="select-form">
+      <select className="sortSelect" value={selectValue} onChange={addSortType} name="sort">
         <option disabled value="">Sort options:</option>
         <option value="price-ASC">Sort by price ASC</option>
         <option value="price-DESC">Sort by price DESC</option>

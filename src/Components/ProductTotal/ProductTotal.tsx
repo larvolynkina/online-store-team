@@ -15,7 +15,7 @@ function ProductTotal() {
   }, [filtered]);
 
   return (
-    <p>
+    <p className="products-header__total">
       Found:
       {' '}
       <span>{total}</span>

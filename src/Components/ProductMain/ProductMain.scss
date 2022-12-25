@@ -2,15 +2,28 @@
 
 .product {
     background-color: $background-color-light;
-    font-size: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
     flex-basis: 32%;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
     border-radius: 8px;
-    margin-bottom: 25px;
     cursor: pointer;
 
     &_active {
         box-shadow: 0px 2px 8px $main-color;
+    }
+
+    &__data {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    &__image {
+        height: 200px;
+        overflow: hidden;
+        margin-bottom: 5px;
     }
 
     &__img {
@@ -18,8 +31,13 @@
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
         object-fit: cover;
+        height: inherit;
         object-position: left top;
-        height: 250px;
+        transition: all 0.4s ease;
+        &:hover {
+            scale: 1.1;
+            object-position: center center;
+        }
     }
 
     &__digits {
@@ -35,15 +53,18 @@
         position: relative;
         background-color: $main-color;
         color: $background-color-light;
-        padding: 7px 30px 7px 10px;
+        padding: 6px 24px 5px 8px;
         border-radius: 3px;
-        font-size: 1.1rem;
+        font-size: 14px;
         font-weight: 300;
+        &:hover {
+            background: $hover-color;
+        }
         &::after {
             position: absolute;
             content: url('./../../assets/icons/rating.svg');
-            right: 10px;
-            top: 8px;
+            right: 6px;
+            top: 5px;
         }
     }
 
@@ -53,12 +74,12 @@
     }
 
     &__title {
-        font-size: 1.3rem;
+        font-size: 16px;
         font-weight: 500;
     }
 
     &__descr {
-        font-size: 1rem;
+        font-size: 14px;
         font-weight: 300;
         overflow: hidden;
         display: -webkit-box;
@@ -75,17 +96,17 @@
 
     &__list {
         margin: 0;
+        font-size: 14px;
+        line-height: 120%;
     }
 
     &__term {
         float: left;
         margin-right: 5px;
-        font-size: 1rem;
         font-weight: 500;
     }
 
     &__def {
-        font-size: 1rem;
         font-weight: 300;
     }
 
@@ -94,20 +115,30 @@
     }
 }
 
+.product_list {
+    
+}
+
 .btn {
     width: 50%;
     text-transform: uppercase;
-    padding: 14px;
-    font-size: 1rem;
+    padding: 14px 0;
+    font-size: 14px;
     font-weight: 500;
 
     &_cart {
         background-color: $main-color;
         color: $background-color-light;
         border-bottom-right-radius: 8px;
+        &:hover {
+            background: $hover-color;
+        }
     }
 
     &_details {
         border-bottom-left-radius: 8px;
+        &:hover {
+            background: #dddddd;
+        }
     }
 }

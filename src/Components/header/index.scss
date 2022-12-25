@@ -30,7 +30,7 @@
     }
 
     &__cart-total {
-        font-size: 1.1rem;
+        font-size: 16px;
         font-weight: 500;
         & span {
             color: $main-color;
@@ -48,6 +48,9 @@
         justify-content: space-between;
         align-items: flex-end;
         cursor: pointer;
+        &:hover {
+            background: $hover-color;
+        }
     }
 
     &__cart-button {

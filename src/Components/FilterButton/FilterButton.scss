@@ -2,10 +2,13 @@
 
 .filterButton {
     padding: 8px 16px;
-    background: #6F64F8;
+    background: $main-color;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
     border-radius: 8px;
     color: #fff;
     font-weight: 500;
     text-transform: capitalize;
+    &:hover {
+        background: $hover-color;
+    }
 }

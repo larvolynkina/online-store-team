@@ -7,6 +7,7 @@ import ProductFilterList from '../../Components/ProductFilterList/ProductFilterL
 import './index.scss';
 import { IProduct } from '../../types';
 import ProductsMainHeader from '../../Components/ProductsMainHeader/ProductsMainHeader';
+import ProductsNotFound from '../../Components/ProductsNotFound/ProductsNotFound';
 
 type MainProps = {
   headerRender: () => void;
@@ -86,12 +87,12 @@ function Main({ headerRender }: MainProps) {
               (
                 product: IProduct,
               ) => product.title.toLowerCase().includes(searchFilter.toLowerCase())
-              || product.description.toLowerCase().includes(searchFilter.toLowerCase())
-              || product.brand.toLowerCase().includes(searchFilter.toLowerCase())
-              || product.category.toLowerCase().includes(searchFilter.toLowerCase())
-              || product.stock.toString().includes(searchFilter.toLowerCase())
-              || product.rating.toString().includes(searchFilter.toLowerCase())
-              || product.price.toString().includes(searchFilter.toLowerCase()),
+                || product.description.toLowerCase().includes(searchFilter.toLowerCase())
+                || product.brand.toLowerCase().includes(searchFilter.toLowerCase())
+                || product.category.toLowerCase().includes(searchFilter.toLowerCase())
+                || product.stock.toString().includes(searchFilter.toLowerCase())
+                || product.rating.toString().includes(searchFilter.toLowerCase())
+                || product.price.toString().includes(searchFilter.toLowerCase()),
             ),
           );
         }
@@ -123,8 +124,11 @@ function Main({ headerRender }: MainProps) {
     };
 
     const allFilters: string[] = [];
+    const validFilters: string[] = ['category', 'brand', 'price', 'stock', 'search', 'sort'];
     searchParams.forEach((_key, value) => {
-      allFilters.push(value);
+      if (validFilters.includes(value)) {
+        allFilters.push(value);
+      }
     });
     const uniqueFilters = [...new Set(allFilters)].sort();
 
@@ -151,7 +155,11 @@ function Main({ headerRender }: MainProps) {
         <ProductFilterList />
         <div className="products-wrapper">
           <ProductsMainHeader />
-          <ProductsMain headerRender={headerRender} products={filtered} />
+          {filtered.length > 0 ? (
+            <ProductsMain headerRender={headerRender} products={filtered} />
+          ) : (
+            <ProductsNotFound />
+          )}
         </div>
       </div>
     </FilterContext.Provider>

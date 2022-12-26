@@ -1,8 +1,25 @@
-@import './../../sass/style.scss';
-
 .products-header {
     display: flex;
     width: 100%;
     justify-content: space-between;
     padding: 15px 0;
+    align-items: center;
+    gap: 30px;
+
+    &__total {
+        font-size: 14px;
+        font-weight: 500;
+        width: 40%;
+    }
+}
+
+.products-header-block {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 50%;
+}
+
+.products-header-block:last-child {
+    justify-content: flex-end;
 }

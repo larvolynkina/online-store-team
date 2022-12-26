@@ -83,13 +83,14 @@ function DualSlider({ name, label }: DualSliderProps) {
 
   return (
     <>
-      <h2>{name}</h2>
+      <h2 className="filter__title">{name}</h2>
       <div className="dualSlider">
         <div className="dualSlider__values">
           <span className="dualSlider__valueMin">
             {label}
             {rangeMinValue}
           </span>
+          ⟷
           <span className="dualSlider__valueMax">
             {label}
             {rangeMaxValue}
@@ -119,6 +120,7 @@ function DualSlider({ name, label }: DualSliderProps) {
           />
         </div>
       </div>
+      <span className="filter__line" />
     </>
   );
 }

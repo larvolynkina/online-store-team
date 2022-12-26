@@ -3,9 +3,11 @@ import { Route, Routes } from 'react-router-dom';
 import Header from '../../Components/header';
 import Main from '../../Pages/Main';
 import Product from '../../Pages/Product';
+import Error from '../../Pages/Error';
 import ShoppingCart from '../../Pages/ShoppingCart';
 import Modal from '../../Components/Modal/Modal';
 import { ICartItem } from '../../types';
+import Footer from '../../Components/Footer/Footer';
 
 export default function RootRouter() {
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
@@ -31,7 +33,7 @@ export default function RootRouter() {
   }, []);
 
   return (
-    <div>
+    <><>
       <Header headerCartCount={headerCartCount} headerCartSum={headerCartSum} />
       <Routes>
         <Route path="/" element={<Main headerRender={() => renderHeaderInfo()} />} />
@@ -39,6 +41,14 @@ export default function RootRouter() {
         <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} setModalVisible={setModalVisible} />} />
       </Routes>
       <Modal className={isModalVisible ? 'modal visible' : 'modal'} setModalVisible={setModalVisible} />
-    </div>
+    </><main className="main">
+        <Routes>
+          <Route path="/" element={<Main headerRender={() => renderHeaderInfo()} />} />
+          <Route path="/product/:id" element={<Product headerRender={() => renderHeaderInfo()} />} />
+          <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </main><Footer /></>
+    </>
   );
 }

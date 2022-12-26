@@ -70,13 +70,14 @@ export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
             id="card-number"
             placeholder="0000 0000 0000 0000"
             maxLength={19}
+            value={cardNumber.value}
             onKeyDown={(e: React.KeyboardEvent):void => addCardSpaces(e)}
             onKeyUp={(e: React.KeyboardEvent):void => checkPaymentSystem(e)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>):void => {
               replaceSymbols(e);
-              cardNumber.onChange(e);
+              cardNumber.setInputValue(e);
             }}
-            onBlur={():void => cardNumber.onBlur()}
+            onBlur={():void => cardNumber.setDirtyInput()}
           />
           <div className="credit-card__error-wrapper">
             {cardNumber.isDirty
@@ -91,13 +92,14 @@ export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
             className={cardValid.inputClassName}
             id="card-valid"
             maxLength={5}
+            value={cardValid.value}
             placeholder="MM/YY"
             onKeyDown={(e: React.KeyboardEvent):void => addValidSeparator(e)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>):void => {
               replaceSymbols(e);
-              cardValid.onChange(e);
+              cardValid.setInputValue(e);
             }}
-            onBlur={():void => cardValid.onBlur()}
+            onBlur={():void => cardValid.setDirtyInput()}
           />
           <div className="credit-card__error-wrapper">
             {cardValid.isDirty
@@ -113,11 +115,12 @@ export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
             id="card-cvv"
             placeholder="CVV"
             maxLength={3}
+            value={cardCvv.value}
             onChange={(e: React.ChangeEvent<HTMLInputElement>):void => {
               replaceSymbols(e);
-              cardCvv.onChange(e);
+              cardCvv.setInputValue(e);
             }}
-            onBlur={():void => cardCvv.onBlur()}
+            onBlur={():void => cardCvv.setDirtyInput()}
           />
           <div className="credit-card__error-wrapper">
             {cardCvv.isDirty

@@ -11,7 +11,6 @@ export default function useValidation(currentValue: string, validations: {[key: 
   const [isCardNumber, setCardNumber] = useState<boolean>(false);
   const [isCvv, setCvv] = useState<boolean>(false);
   const [isValid, setValid] = useState<boolean>(false);
-  const [isValidInputs, setValidInputs] = useState<boolean>(false);
 
   const emailReg = /^\S+@\S+\.\S+$/i;
   const phoneReg = /\+\d{9,}/;
@@ -107,26 +106,6 @@ export default function useValidation(currentValue: string, validations: {[key: 
     });
   }, [currentValue]);
 
-  useEffect(() => {
-    if (isEmpty || !isEmail || !isAddress || !isName
-        || !isPhone || !isCardNumber || !isCvv || !isValid) {
-      setValidInputs(false);
-    } else {
-      setValidInputs(true);
-    }
-  }, [isEmpty,
-    isEmail,
-    isAddress,
-    isName,
-    isPhone,
-    isCardNumber,
-    isCvv,
-    isValid]);
-
-  useEffect(() => {
-    console.log(isValidInputs);
-  }, [isValidInputs]);
-
   return {
     isEmpty,
     isEmail,
@@ -138,6 +117,5 @@ export default function useValidation(currentValue: string, validations: {[key: 
     isValid,
     error,
     emptyError,
-    isValidInputs,
   };
 }

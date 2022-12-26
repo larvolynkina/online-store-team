@@ -1,5 +1,5 @@
 import React from 'react';
-import { IInput } from '../../types';
+import { IModalForm } from '../../types';
 import './index.scss';
 
 export default function FormGroupPersonal(
@@ -8,13 +8,7 @@ export default function FormGroupPersonal(
     phone,
     address,
     email,
-  }:
-  {
-    name: IInput,
-    phone: IInput,
-    address: IInput,
-    email: IInput,
-  },
+  }: Pick<IModalForm, 'name'|'phone'|'address'|'email'>,
 ) {
   return (
     <div className="form__group personal">
@@ -27,8 +21,8 @@ export default function FormGroupPersonal(
           className={name.inputClassName}
           placeholder="Enter name"
           id="name"
-          onBlur={():void => name.onBlur()}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>):void => name.onChange(e)}
+          onBlur={():void => name.setDirtyInput()}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>):void => name.setInputValue(e)}
         />
         <div className="personal__error-wrapper">
           {(name.isDirty && (name.isEmpty || !name.isName))
@@ -43,8 +37,8 @@ export default function FormGroupPersonal(
           className={phone.inputClassName}
           placeholder="Enter phone number"
           id="phone"
-          onBlur={():void => phone.onBlur()}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>):void => phone.onChange(e)}
+          onBlur={():void => phone.setDirtyInput()}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>):void => phone.setInputValue(e)}
         />
         <div className="personal__error-wrapper">
           {(phone.isDirty && (phone.isEmpty || !phone.isPhone))
@@ -59,8 +53,8 @@ export default function FormGroupPersonal(
           className={address.inputClassName}
           placeholder="Enter address"
           id="address"
-          onBlur={():void => address.onBlur()}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>):void => address.onChange(e)}
+          onBlur={():void => address.setDirtyInput()}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>):void => address.setInputValue(e)}
         />
         <div className="personal__error-wrapper">
           {(address.isDirty && (address.isEmpty || !address.isAddress))
@@ -75,8 +69,8 @@ export default function FormGroupPersonal(
           className={email.inputClassName}
           placeholder="Enter email"
           id="email"
-          onBlur={():void => email.onBlur()}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>):void => email.onChange(e)}
+          onBlur={():void => email.setDirtyInput()}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>):void => email.setInputValue(e)}
         />
         <div className="personal__error-wrapper">
           {(email.isDirty && (email.isEmpty || !email.isEmail))

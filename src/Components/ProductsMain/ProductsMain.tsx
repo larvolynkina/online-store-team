@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, SetStateAction } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ProductMain from '../ProductMain/ProductMain';
 import { IProduct } from '../../types';
@@ -7,9 +7,10 @@ import './ProductsMain.scss';
 type ProductsMainProps = {
   products: IProduct[];
   headerRender: () => void;
+  setCartEmpty: React.Dispatch<SetStateAction<boolean>>
 };
 
-function ProductsMain({ products, headerRender }: ProductsMainProps) {
+function ProductsMain({ products, headerRender, setCartEmpty }: ProductsMainProps) {
   const [className, setClassName] = useState('products');
   const [searchParams] = useSearchParams();
 
@@ -34,7 +35,12 @@ function ProductsMain({ products, headerRender }: ProductsMainProps) {
   return (
     <ul className={className}>
       {products.map((product: IProduct) => (
-        <ProductMain key={product.id} product={product} headerRender={headerRender} />
+        <ProductMain
+          key={product.id}
+          product={product}
+          headerRender={headerRender}
+          setCartEmpty={setCartEmpty}
+        />
       ))}
     </ul>
   );

@@ -11,12 +11,14 @@ export default function ProductCard(
     products,
     headerRender,
     setModalVisible,
+    setCartEmpty,
   }:
    {
     product: IProduct,
     products: IProduct[],
     headerRender: () => void,
-    setModalVisible: React.Dispatch<SetStateAction<boolean>>
+    setModalVisible: React.Dispatch<SetStateAction<boolean>>,
+    setCartEmpty: React.Dispatch<SetStateAction<boolean>>
   },
 ) {
   const storage: string | null = localStorage.getItem('cart_@vFKSQ');
@@ -43,6 +45,7 @@ export default function ProductCard(
       cart.push(cartItem);
     }
     localStorage.setItem('cart_@vFKSQ', JSON.stringify(cart));
+    setCartEmpty(false);
   }
 
   function removeItem():void {

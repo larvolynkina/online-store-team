@@ -23,8 +23,8 @@ export default function ProductBuyButton(
       addItem();
       headerRender();
     }
+    setTimeout(() => setModalVisible(true), 500);
     navigate('/shopping-cart');
-    setModalVisible(true);
   }
   return (
     <button type="button" className="btns-card__buy-now" onClick={() => goToCart()}>

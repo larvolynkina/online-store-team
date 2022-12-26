@@ -5,8 +5,18 @@ import ProductBreadcrumbs from '../../Components/ProductBreadcrumbs/ProductBread
 import useFetch from '../../Hooks/useFetch';
 import { IProduct } from '../../types';
 
-function Product({ headerRender, setModalVisible }
-  : { headerRender: () => void, setModalVisible: React.Dispatch<SetStateAction<boolean>> }) {
+function Product(
+  {
+    headerRender,
+    setModalVisible,
+    setCartEmpty,
+  }:
+  {
+    headerRender: () => void,
+    setModalVisible: React.Dispatch<SetStateAction<boolean>>,
+    setCartEmpty: React.Dispatch<SetStateAction<boolean>>
+  },
+) {
   const { products } = useFetch();
   const params = useParams();
   const currentProduct: IProduct | undefined = products
@@ -28,6 +38,7 @@ function Product({ headerRender, setModalVisible }
               products={products}
               headerRender={headerRender}
               setModalVisible={setModalVisible}
+              setCartEmpty={setCartEmpty}
             />
           </div>
         )

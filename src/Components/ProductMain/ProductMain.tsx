@@ -2,17 +2,18 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import './ProductMain.scss';
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import { IProduct, ICartItem } from '../../types';
 
 type ProductMainProps = {
   product: IProduct;
   headerRender: () => void;
+  setCartEmpty: React.Dispatch<SetStateAction<boolean>>
 };
 
 type TCartArray = Array<ICartItem>;
 
-function ProductMain({ product, headerRender }: ProductMainProps) {
+function ProductMain({ product, headerRender, setCartEmpty }: ProductMainProps) {
   const navigate = useNavigate();
   const [cartButton, setCartButton] = useState('Add to cart');
   const [productClass, setProductClass] = useState('product');
@@ -32,6 +33,7 @@ function ProductMain({ product, headerRender }: ProductMainProps) {
     if (cartButton === 'Add to cart') {
       setCartButton('Delete');
       setProductClass('product product_active');
+      setCartEmpty(false);
       const json = localStorage.getItem('cart_@vFKSQ');
       if (json) {
         const cartArray: TCartArray = JSON.parse(json);
@@ -51,6 +53,9 @@ function ProductMain({ product, headerRender }: ProductMainProps) {
         );
         const arrayToJson: string = JSON.stringify(filteredArray);
         localStorage.setItem('cart_@vFKSQ', arrayToJson);
+        if (!filteredArray.length) {
+          setCartEmpty(true);
+        }
       }
     }
     headerRender();

@@ -63,15 +63,34 @@ interface IValidations {
   isValid: boolean;
   error: string;
   emptyError: string;
-  isValidInputs: boolean;
 }
 
 interface IInput extends IValidations{
   value: string;
   isDirty: boolean;
   inputClassName: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: () => void;
+  isValidInputs: boolean;
+  setInputValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setDirtyInput: () => void;
+  clearInput: () => void;
+}
+
+interface IModal {
+  className: string;
+  setModalVisible: React.Dispatch<SetStateAction<boolean>>;
+  setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
+}
+
+interface IModalForm {
+  cardNumber: IInput;
+  cardCvv: IInput;
+  cardValid: IInput;
+  name: IInput;
+  phone: IInput;
+  address: IInput;
+  email: IInput;
+  closeModal: () => void;
+  setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
 }
 
 type TBreadcrumbs = Pick<IProduct, 'category' | 'brand' | 'title'>;
@@ -95,5 +114,5 @@ type TPromoCodesItem = {
 
 export type {
   IProduct, IData, ICartItem, IGallery, IGalleryImage, IImageLink, TBreadcrumbs,
-  TPromocodes, TPromo, TPromoCodesItem, TImages, IInput, IValidations,
+  TPromocodes, TPromo, TPromoCodesItem, TImages, IInput, IValidations, IModal, IModalForm,
 };

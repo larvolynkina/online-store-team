@@ -10,9 +10,14 @@ export default function useInput(
   const [value, setValue] = useState<string>(initValue);
   const [isDirty, setDirty] = useState<boolean>(false);
   const [inputClassName, setInputClassName] = useState<string>('');
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>):void => setValue(e.target.value);
-  const onBlur = ():void => setDirty(true);
+  const [isValidInputs, setValidInputs] = useState<boolean>(false);
   const valid: IValidations = useValidation(value, validations);
+  const setInputValue = (e: React.ChangeEvent<HTMLInputElement>):void => setValue(e.target.value);
+  const setDirtyInput = ():void => setDirty(true);
+  const clearInput = ():void => {
+    setValue('');
+    setDirty(false);
+  };
 
   useEffect(() => {
     if (!isDirty) {
@@ -24,12 +29,22 @@ export default function useInput(
     }
   }, [isDirty, valid.isEmpty, valid.error]);
 
+  useEffect(() => {
+    if (!isDirty || valid.error || valid.emptyError) {
+      setValidInputs(false);
+    } else {
+      setValidInputs(true);
+    }
+  }, [isDirty, valid.error, valid.emptyError]);
+
   return {
     value,
     isDirty,
     inputClassName,
-    onChange,
-    onBlur,
+    isValidInputs,
+    setInputValue,
+    setDirtyInput,
+    clearInput,
     ...valid,
   };
 }

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { createContext } from 'react';
+import React, { createContext, SetStateAction } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ProductsMain from '../../Components/ProductsMain/ProductsMain';
 import useFetch from '../../Hooks/useFetch';
@@ -11,6 +11,7 @@ import ProductsNotFound from '../../Components/ProductsNotFound/ProductsNotFound
 
 type MainProps = {
   headerRender: () => void;
+  setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
 };
 
 interface IFilterFunctions {
@@ -26,7 +27,7 @@ interface IFilterFunctions {
 
 export const FilterContext = createContext<IProduct[]>([]);
 
-function Main({ headerRender }: MainProps) {
+function Main({ headerRender, setCartEmpty }: MainProps) {
   const [searchParams] = useSearchParams();
   const { products } = useFetch();
 
@@ -156,7 +157,11 @@ function Main({ headerRender }: MainProps) {
         <div className="products-wrapper">
           <ProductsMainHeader />
           {filtered.length > 0 ? (
-            <ProductsMain headerRender={headerRender} products={filtered} />
+            <ProductsMain
+              headerRender={headerRender}
+              products={filtered}
+              setCartEmpty={setCartEmpty}
+            />
           ) : (
             <ProductsNotFound />
           )}

@@ -1,4 +1,4 @@
-@import '../../sass/style.scss'; 
+@import './../../sass/abstracts/variables';
 
 .product {
     background-color: $background-color-light;
@@ -71,6 +71,7 @@
     &__info {
         margin-top: 15px;
         padding: 0 10px;
+        flex-grow: 1;
     }
 
     &__title {

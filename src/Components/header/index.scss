@@ -1,4 +1,4 @@
-@import '../../sass/style.scss'; 
+@import '../../sass/abstracts/variables'; 
 
 .header {
     background-color: $background-color-light;
@@ -22,11 +22,15 @@
         font-weight: 700;
         background-color: transparent;
         cursor: pointer;
+        transition: scale 0.5s ease;
         &::before {
             position: absolute;
             left: -46px;
             top: 3px;
             content: url('./../../assets/icons/logo.svg');
+        }
+        &:hover {
+            scale: 0.9;
         }
     }
 

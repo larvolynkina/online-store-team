@@ -18,24 +18,26 @@ export default function Header({ headerCartCount, headerCartSum }: HeaderProps) 
 
   return (
     <header className="header">
-      <button type="button" onClick={() => navigate('/')} className="header__logo">Online Store</button>
-      <p className="header__cart-total">
-        Cart total:
-        {' '}
-        <span>
-          $
-          {headerCartSum}
-        </span>
-      </p>
-      <div
-        onClick={() => navigate('/shopping-cart')}
-        onKeyDown={(event: React.KeyboardEvent<HTMLDivElement>) => addKeyHandlerOnCart(event)}
-        className="header__cart"
-        role="button"
-        tabIndex={0}
-      >
-        <button className="header__cart-button" type="button" aria-label="Go to cart" />
-        <div>{headerCartCount}</div>
+      <div className="header__wrapper">
+        <button type="button" onClick={() => navigate('/')} className="header__logo">Online Store</button>
+        <p className="header__cart-total">
+          Cart total:
+          {' '}
+          <span>
+            $
+            {headerCartSum}
+          </span>
+        </p>
+        <div
+          onClick={() => navigate('/shopping-cart')}
+          onKeyDown={(event: React.KeyboardEvent<HTMLDivElement>) => addKeyHandlerOnCart(event)}
+          className="header__cart"
+          role="button"
+          tabIndex={0}
+        >
+          <button className="header__cart-button" type="button" aria-label="Go to cart" />
+          <div>{headerCartCount}</div>
+        </div>
       </div>
     </header>
   );

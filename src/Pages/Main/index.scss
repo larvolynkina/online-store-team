@@ -1,14 +1,33 @@
-@import './../../sass/style.scss';
-
 .container {
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    gap: 25px;
+    max-width: 1240px;
+    margin:  0 auto;
 }
 
 .products-wrapper {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
     flex-basis: 74%;
+    height: fit-content;
+}
+
+.products-noFound {
+    display: flex;
+    flex-direction: column;
+    min-height: 30vh;
+    justify-content: center;
+    align-items: center;
+    p {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+}
+
+.products__header {
+    font-size: 20px;
+    font-weight: 500;
 }

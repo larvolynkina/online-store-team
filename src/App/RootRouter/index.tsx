@@ -3,8 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 import Header from '../../Components/header';
 import Main from '../../Pages/Main';
 import Product from '../../Pages/Product';
+import Error from '../../Pages/Error';
 import ShoppingCart from '../../Pages/ShoppingCart';
 import { ICartItem } from '../../types';
+import Footer from '../../Components/Footer/Footer';
 
 export default function RootRouter() {
   const [headerCartCount, setHeaderCartCount] = useState<number>(0);
@@ -28,13 +30,17 @@ export default function RootRouter() {
   }, []);
 
   return (
-    <div>
+    <>
       <Header headerCartCount={headerCartCount} headerCartSum={headerCartSum} />
-      <Routes>
-        <Route path="/" element={<Main headerRender={() => renderHeaderInfo()} />} />
-        <Route path="/product/:id" element={<Product headerRender={() => renderHeaderInfo()} />} />
-        <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} />} />
-      </Routes>
-    </div>
+      <main className="main">
+        <Routes>
+          <Route path="/" element={<Main headerRender={() => renderHeaderInfo()} />} />
+          <Route path="/product/:id" element={<Product headerRender={() => renderHeaderInfo()} />} />
+          <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </main>
+      <Footer />
+    </>
   );
 }

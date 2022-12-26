@@ -8,16 +8,20 @@ type ProductFilterProps = {
 
 function ProductFilter({ name, list }: ProductFilterProps) {
   return (
-    <div className="filter">
+    <>
       <h2 className="filter__title">{name}</h2>
-      {list.map((item: string) => (
-        <ProductFilterCheckbox
-          key={item}
-          item={item}
-          name={name}
-        />
-      ))}
-    </div>
+      <div className="filter">
+        {list.map((item: string) => (
+          <ProductFilterCheckbox
+            key={item}
+            item={item}
+            name={name}
+          />
+        ))}
+      </div>
+      <span className="filter__line" />
+    </>
+
   );
 }
 

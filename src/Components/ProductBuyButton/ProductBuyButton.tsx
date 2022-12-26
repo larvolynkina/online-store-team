@@ -1,5 +1,5 @@
 import './index.scss';
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import React, { SetStateAction } from 'react';
 
 export default function ProductBuyButton(
@@ -16,18 +16,18 @@ export default function ProductBuyButton(
     setModalVisible: React.Dispatch<SetStateAction<boolean>>
   },
 ) {
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
-  function goToCart() {
+  function goToCart():void {
     if (!productInCart) {
       addItem();
       headerRender();
     }
-    setTimeout(() => setModalVisible(true), 500);
+    setTimeout(():void => setModalVisible(true), 500);
     navigate('/shopping-cart');
   }
   return (
-    <button type="button" className="btns-card__buy-now" onClick={() => goToCart()}>
+    <button type="button" className="btns-card__buy-now" onClick={():void => goToCart()}>
       Buy now
     </button>
   );

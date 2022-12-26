@@ -43,7 +43,7 @@ export default function Modal({ className, setModalVisible, setCartEmpty }: IMod
             phone={phone}
             address={address}
             email={email}
-            closeModal={() => closeModal()}
+            closeModal={():void => closeModal()}
             setCartEmpty={setCartEmpty}
           />
         </div>

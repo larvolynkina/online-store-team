@@ -112,7 +112,22 @@ type TPromoCodesItem = {
   removePromocode: () => void;
 }
 
+type TCountButton = {
+  className: string;
+  onClick: () => void;
+  children: string
+}
+
+interface TProductCard {
+  product: IProduct;
+  products: IProduct[];
+  headerRender: () => void;
+  setModalVisible: React.Dispatch<SetStateAction<boolean>>;
+  setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
+}
+
 export type {
   IProduct, IData, ICartItem, IGallery, IGalleryImage, IImageLink, TBreadcrumbs,
   TPromocodes, TPromo, TPromoCodesItem, TImages, IInput, IValidations, IModal, IModalForm,
+  TCountButton, TProductCard,
 };

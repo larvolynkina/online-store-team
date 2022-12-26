@@ -5,9 +5,11 @@ import SummaryPromo from '../SummaryPromo/SummaryPromo';
 
 export default function CartSummary({ currentCart, setModalVisible }:
   {currentCart: ICartItem[], setModalVisible: React.Dispatch<SetStateAction<boolean>>}) {
-  const totalProduct: number = currentCart.reduce((total, product) => total + product.count, 0);
+  const totalProduct: number = currentCart
+    .reduce((total: number, product: ICartItem) => total + product.count, 0);
+
   const getTotalSum = ():number => currentCart
-    .reduce((total, product) => total + product.count * product.price, 0);
+    .reduce((total: number, product: ICartItem) => total + product.count * product.price, 0);
 
   const storagePromo: string | null = localStorage.getItem('promo_@vFKSQ');
   const promocodes: TPromocodes = storagePromo ? JSON.parse(storagePromo) : {};
@@ -39,7 +41,7 @@ export default function CartSummary({ currentCart, setModalVisible }:
           total={total}
           promocodes={promocodes}
         />
-        <button type="button" className="summary__btn" onClick={() => setModalVisible(true)}>Buy now</button>
+        <button type="button" className="summary__btn" onClick={():void => setModalVisible(true)}>Buy now</button>
       </div>
     </section>
   );

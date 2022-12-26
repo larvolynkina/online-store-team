@@ -1,6 +1,9 @@
 import './index.scss';
-import React, { useState, useEffect, SetStateAction } from 'react';
-import { IProduct, ICartItem, ProductInnerButton } from '../../types';
+import { useState, useEffect } from 'react';
+import {
+  IProduct, ICartItem, ProductInnerButton,
+  TProductCard,
+} from '../../types';
 import ProductCardTitle from '../ProductCardTitle/ProductCardTitle';
 import ProductDescription from '../ProductDescription/ProductDescription';
 import ProductGallery from '../ProductGallery/ProductGallery';
@@ -12,14 +15,7 @@ export default function ProductCard(
     headerRender,
     setModalVisible,
     setCartEmpty,
-  }:
-   {
-    product: IProduct,
-    products: IProduct[],
-    headerRender: () => void,
-    setModalVisible: React.Dispatch<SetStateAction<boolean>>,
-    setCartEmpty: React.Dispatch<SetStateAction<boolean>>
-  },
+  }: TProductCard,
 ) {
   const storage: string | null = localStorage.getItem('cart_@vFKSQ');
 
@@ -56,7 +52,7 @@ export default function ProductCard(
     }
   }
 
-  const check = checkItem();
+  const check: boolean = checkItem();
   const [productInCart, setProductInCart] = useState<boolean>(check);
   const btnInner: ProductInnerButton = productInCart
     ? ProductInnerButton.Remove
@@ -76,8 +72,8 @@ export default function ProductCard(
           headerRender={headerRender}
           btnInner={btnInner}
           productInCart={productInCart}
-          addItem={() => addItem()}
-          removeItem={() => removeItem()}
+          addItem={():void => addItem()}
+          removeItem={():void => removeItem()}
           setProductInCart={setProductInCart}
           setModalVisible={setModalVisible}
         />

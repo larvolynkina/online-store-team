@@ -11,16 +11,16 @@ export default function Cart(
     setModalVisible,
     headerRender,
     isCartEmpty,
+    cart,
   }:
   {
     products: Array<IProduct>,
     setModalVisible: React.Dispatch<SetStateAction<boolean>>,
     headerRender: () => void,
-    isCartEmpty: boolean
+    isCartEmpty: boolean,
+    cart: Array<ICartItem>
   },
 ) {
-  const storage: string | null = localStorage.getItem('cart_@vFKSQ');
-  const cart: ICartItem[] = storage ? JSON.parse(storage) : [];
   const [currentCart, setCurrentCart] = useState<ICartItem[]>(cart);
 
   useEffect(() => {

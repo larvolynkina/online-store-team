@@ -10,8 +10,11 @@ import { ICartItem } from '../../types';
 import Footer from '../../Components/Footer/Footer';
 
 export default function RootRouter() {
+  const storage: string | null = localStorage.getItem('cart_@vFKSQ');
+  const cart: ICartItem[] = storage ? JSON.parse(storage) : [];
+
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
-  const [isCartEmpty, setCartEmpty] = useState<boolean>(true);
+  const [isCartEmpty, setCartEmpty] = useState<boolean>(!cart.length);
 
   const [headerCartCount, setHeaderCartCount] = useState<number>(0);
   const [headerCartSum, setHeaderCartSum] = useState<number>(0);
@@ -56,6 +59,7 @@ export default function RootRouter() {
                 isCartEmpty={isCartEmpty}
                 setModalVisible={setModalVisible}
                 headerRender={() => renderHeaderInfo()}
+                cart={cart}
               />
             )}
           />

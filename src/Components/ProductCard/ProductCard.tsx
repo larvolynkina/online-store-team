@@ -1,16 +1,22 @@
 import './index.scss';
 import { useState, useEffect } from 'react';
-import { IProduct, ICartItem, InnerButton } from '../../types';
+import {
+  IProduct, ICartItem, ProductInnerButton,
+  TProductCard,
+} from '../../types';
 import ProductCardTitle from '../ProductCardTitle/ProductCardTitle';
 import ProductDescription from '../ProductDescription/ProductDescription';
 import ProductGallery from '../ProductGallery/ProductGallery';
 
-export default function ProductCard({ product, products, headerRender }:
-   {
-    product: IProduct,
-    products: IProduct[],
-    headerRender: () => void
-  }) {
+export default function ProductCard(
+  {
+    product,
+    products,
+    headerRender,
+    setModalVisible,
+    setCartEmpty,
+  }: TProductCard,
+) {
   const storage: string | null = localStorage.getItem('cart_@vFKSQ');
 
   function checkItem():boolean {
@@ -35,6 +41,7 @@ export default function ProductCard({ product, products, headerRender }:
       cart.push(cartItem);
     }
     localStorage.setItem('cart_@vFKSQ', JSON.stringify(cart));
+    setCartEmpty(false);
   }
 
   function removeItem():void {
@@ -45,9 +52,11 @@ export default function ProductCard({ product, products, headerRender }:
     }
   }
 
-  const check = checkItem();
+  const check: boolean = checkItem();
   const [productInCart, setProductInCart] = useState<boolean>(check);
-  const btnInner: InnerButton = productInCart ? InnerButton.Remove : InnerButton.Add;
+  const btnInner: ProductInnerButton = productInCart
+    ? ProductInnerButton.Remove
+    : ProductInnerButton.Add;
 
   useEffect(() => {
     setProductInCart(check);
@@ -63,9 +72,10 @@ export default function ProductCard({ product, products, headerRender }:
           headerRender={headerRender}
           btnInner={btnInner}
           productInCart={productInCart}
-          addItem={() => addItem()}
-          removeItem={() => removeItem()}
+          addItem={():void => addItem()}
+          removeItem={():void => removeItem()}
           setProductInCart={setProductInCart}
+          setModalVisible={setModalVisible}
         />
       </div>
     </div>

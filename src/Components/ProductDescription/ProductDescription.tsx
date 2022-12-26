@@ -2,7 +2,7 @@ import './index.scss';
 import React, { SetStateAction } from 'react';
 import ProductBuyButton from '../ProductBuyButton/ProductBuyButton';
 import ProductCartButton from '../ProductCartButton/ProductCartButton';
-import { InnerButton, IProduct } from '../../types';
+import { ProductInnerButton, IProduct } from '../../types';
 
 function ProductDescription(
   {
@@ -13,15 +13,17 @@ function ProductDescription(
     btnInner,
     addItem,
     removeItem,
+    setModalVisible,
   }:
    {
     productInCart: boolean,
     setProductInCart: React.Dispatch<SetStateAction<boolean>>
     product: IProduct,
     headerRender: () => void,
-    btnInner: InnerButton,
+    btnInner: ProductInnerButton,
     addItem: () => void,
-    removeItem: () => void
+    removeItem: () => void,
+    setModalVisible: React.Dispatch<SetStateAction<boolean>>
   },
 ) {
   return (
@@ -48,6 +50,7 @@ function ProductDescription(
           headerRender={headerRender}
           addItem={addItem}
           productInCart={productInCart}
+          setModalVisible={setModalVisible}
         />
       </div>
     </section>

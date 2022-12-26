@@ -1,6 +1,6 @@
 import React, { SetStateAction } from 'react';
 
-export enum InnerButton {
+export enum ProductInnerButton {
   Remove = 'Remove from cart',
   Add = 'Add to cart'
 }
@@ -48,21 +48,86 @@ interface IImageLink{
   alt: string;
 }
 
+type TImages = {
+  [key: string]: string;
+}
+
+interface IValidations {
+  isEmpty: boolean;
+  isEmail: boolean;
+  isAddress: boolean;
+  isName: boolean;
+  isPhone: boolean;
+  isCardNumber: boolean;
+  isCvv: boolean;
+  isValid: boolean;
+  error: string;
+  emptyError: string;
+}
+
+interface IInput extends IValidations{
+  value: string;
+  isDirty: boolean;
+  inputClassName: string;
+  isValidInputs: boolean;
+  setInputValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setDirtyInput: () => void;
+  clearInput: () => void;
+}
+
+interface IModal {
+  className: string;
+  setModalVisible: React.Dispatch<SetStateAction<boolean>>;
+  setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
+}
+
+interface IModalForm {
+  cardNumber: IInput;
+  cardCvv: IInput;
+  cardValid: IInput;
+  name: IInput;
+  phone: IInput;
+  address: IInput;
+  email: IInput;
+  closeModal: () => void;
+  setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
+}
+
 type TBreadcrumbs = Pick<IProduct, 'category' | 'brand' | 'title'>;
 
 type TPromocodes = {
-  [key: string]: number;
+  [key: string]: [string, number];
 }
 
 type TPromo = {
   setDiscount: React.Dispatch<SetStateAction<boolean>>;
-  promoCodes: TPromocodes;
-  setPromocodes: React.Dispatch<SetStateAction<TPromocodes>>;
   setAmount: React.Dispatch<SetStateAction<number>>;
   total: number;
+  promocodes: TPromocodes;
+}
+
+type TPromoCodesItem = {
+  promocode: string;
+  discountPercentage: number;
+  removePromocode: () => void;
+}
+
+type TCountButton = {
+  className: string;
+  onClick: () => void;
+  children: string
+}
+
+interface TProductCard {
+  product: IProduct;
+  products: IProduct[];
+  headerRender: () => void;
+  setModalVisible: React.Dispatch<SetStateAction<boolean>>;
+  setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export type {
   IProduct, IData, ICartItem, IGallery, IGalleryImage, IImageLink, TBreadcrumbs,
-  TPromocodes, TPromo,
+  TPromocodes, TPromo, TPromoCodesItem, TImages, IInput, IValidations, IModal, IModalForm,
+  TCountButton, TProductCard,
 };

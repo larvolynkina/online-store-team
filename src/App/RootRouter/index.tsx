@@ -5,10 +5,17 @@ import Main from '../../Pages/Main';
 import Product from '../../Pages/Product';
 import Error from '../../Pages/Error';
 import ShoppingCart from '../../Pages/ShoppingCart';
+import Modal from '../../Components/Modal/Modal';
 import { ICartItem } from '../../types';
 import Footer from '../../Components/Footer/Footer';
 
 export default function RootRouter() {
+  const storage: string | null = localStorage.getItem('cart_@vFKSQ');
+  const cart: ICartItem[] = storage ? JSON.parse(storage) : [];
+
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
+  const [isCartEmpty, setCartEmpty] = useState<boolean>(!cart.length);
+
   const [headerCartCount, setHeaderCartCount] = useState<number>(0);
   const [headerCartSum, setHeaderCartSum] = useState<number>(0);
 
@@ -34,13 +41,37 @@ export default function RootRouter() {
       <Header headerCartCount={headerCartCount} headerCartSum={headerCartSum} />
       <main className="main">
         <Routes>
-          <Route path="/" element={<Main headerRender={() => renderHeaderInfo()} />} />
-          <Route path="/product/:id" element={<Product headerRender={() => renderHeaderInfo()} />} />
-          <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} />} />
+          <Route path="/" element={<Main headerRender={() => renderHeaderInfo()} setCartEmpty={setCartEmpty} />} />
+          <Route
+            path="/product/:id"
+            element={(
+              <Product
+                headerRender={() => renderHeaderInfo()}
+                setModalVisible={setModalVisible}
+                setCartEmpty={setCartEmpty}
+              />
+            )}
+          />
+          <Route
+            path="/shopping-cart"
+            element={(
+              <ShoppingCart
+                isCartEmpty={isCartEmpty}
+                setModalVisible={setModalVisible}
+                headerRender={() => renderHeaderInfo()}
+                cart={cart}
+              />
+            )}
+          />
           <Route path="*" element={<Error />} />
         </Routes>
       </main>
       <Footer />
+      <Modal
+        className={isModalVisible ? 'modal visible' : 'modal'}
+        setModalVisible={setModalVisible}
+        setCartEmpty={setCartEmpty}
+      />
     </>
   );
 }

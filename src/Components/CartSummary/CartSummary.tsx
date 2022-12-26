@@ -1,29 +1,25 @@
-import { useEffect, useState } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import { ICartItem, TPromocodes } from '../../types';
 import './index.scss';
 import SummaryPromo from '../SummaryPromo/SummaryPromo';
 
-export default function CartSummary({ currentCart } : {currentCart: ICartItem[]}) {
-  const totalProduct: number = currentCart.reduce((total, product) => total + product.count, 0);
+export default function CartSummary({ currentCart, setModalVisible }:
+  {currentCart: ICartItem[], setModalVisible: React.Dispatch<SetStateAction<boolean>>}) {
+  const totalProduct: number = currentCart
+    .reduce((total: number, product: ICartItem) => total + product.count, 0);
+
   const getTotalSum = ():number => currentCart
-    .reduce((total, product) => total + product.count * product.price, 0);
+    .reduce((total: number, product: ICartItem) => total + product.count * product.price, 0);
 
-  const [discount, setDiscount] = useState<boolean>(false);
-  const [totalClass, setTotalClass] = useState<string>('summary__total total');
-  const [promoCodes, setPromocodes] = useState<TPromocodes>({});
-  const [amount, setAmount] = useState<number>(() => getTotalSum());
-  const [total, setTotal] = useState<number>(() => getTotalSum());
+  const storagePromo: string | null = localStorage.getItem('promo_@vFKSQ');
+  const promocodes: TPromocodes = storagePromo ? JSON.parse(storagePromo) : {};
 
-  useEffect(() => {
-    if (discount) {
-      setTotalClass('summary__total total discounted');
-    } else {
-      setTotalClass('summary__total total');
-    }
-  }, [discount]);
+  const [discount, setDiscount] = useState<boolean>(Object.keys(promocodes).length > 0);
+  const [amount, setAmount] = useState<number>(():number => getTotalSum());
+  const [total, setTotal] = useState<number>(():number => getTotalSum());
 
   useEffect(() => {
-    setTotal(() => getTotalSum());
+    setTotal(():number => getTotalSum());
   }, [currentCart]);
 
   return (
@@ -34,19 +30,18 @@ export default function CartSummary({ currentCart } : {currentCart: ICartItem[]}
           <span className="products-summary__label">Products:</span>
           <span className="products-summary__output">{totalProduct}</span>
         </div>
-        <div className={totalClass}>
+        <div className={discount ? 'summary__total total discounted' : 'summary__total total'}>
           <span className="total__label">Total:</span>
           <span className="total__output">{`$${total}`}</span>
           {discount && <span className="total__discount">{`$${amount}`}</span>}
         </div>
         <SummaryPromo
           setDiscount={setDiscount}
-          promoCodes={promoCodes}
-          setPromocodes={setPromocodes}
           setAmount={setAmount}
           total={total}
+          promocodes={promocodes}
         />
-        <button type="button" className="summary__btn">Buy now</button>
+        <button type="button" className="summary__btn" onClick={():void => setModalVisible(true)}>Buy now</button>
       </div>
     </section>
   );

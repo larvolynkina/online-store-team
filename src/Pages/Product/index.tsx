@@ -1,10 +1,22 @@
+import React, { SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductCard from '../../Components/ProductCard/ProductCard';
 import ProductBreadcrumbs from '../../Components/ProductBreadcrumbs/ProductBreadcrumbs';
 import useFetch from '../../Hooks/useFetch';
 import { IProduct } from '../../types';
 
-function Product({ headerRender } : { headerRender: () => void }) {
+function Product(
+  {
+    headerRender,
+    setModalVisible,
+    setCartEmpty,
+  }:
+  {
+    headerRender: () => void,
+    setModalVisible: React.Dispatch<SetStateAction<boolean>>,
+    setCartEmpty: React.Dispatch<SetStateAction<boolean>>
+  },
+) {
   const { products } = useFetch();
   const params = useParams();
   const currentProduct: IProduct | undefined = products
@@ -25,6 +37,8 @@ function Product({ headerRender } : { headerRender: () => void }) {
               product={currentProduct}
               products={products}
               headerRender={headerRender}
+              setModalVisible={setModalVisible}
+              setCartEmpty={setCartEmpty}
             />
           </div>
         )

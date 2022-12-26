@@ -48,14 +48,36 @@ interface IImageLink{
   alt: string;
 }
 
+type TImages = {
+  [key: string]: string;
+}
+
+interface IValidations {
+  isEmpty: boolean;
+  isEmail: boolean;
+  isAddress: boolean;
+  isName: boolean;
+  isPhone: boolean;
+  isCardNumber: boolean;
+  isCvv: boolean;
+  isValid: boolean;
+  error: string;
+  emptyError: string;
+  isValidInputs: boolean;
+}
+
+interface IInput extends IValidations{
+  value: string;
+  isDirty: boolean;
+  inputClassName: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: () => void;
+}
+
 type TBreadcrumbs = Pick<IProduct, 'category' | 'brand' | 'title'>;
 
 type TPromocodes = {
   [key: string]: [string, number];
-}
-
-type TImages = {
-  [key: string]: string;
 }
 
 type TPromo = {
@@ -73,5 +95,5 @@ type TPromoCodesItem = {
 
 export type {
   IProduct, IData, ICartItem, IGallery, IGalleryImage, IImageLink, TBreadcrumbs,
-  TPromocodes, TPromo, TPromoCodesItem, TImages,
+  TPromocodes, TPromo, TPromoCodesItem, TImages, IInput, IValidations,
 };

@@ -13,6 +13,7 @@ function ProductDescription(
     btnInner,
     addItem,
     removeItem,
+    setModalVisible,
   }:
    {
     productInCart: boolean,
@@ -21,7 +22,8 @@ function ProductDescription(
     headerRender: () => void,
     btnInner: ProductInnerButton,
     addItem: () => void,
-    removeItem: () => void
+    removeItem: () => void,
+    setModalVisible: React.Dispatch<SetStateAction<boolean>>
   },
 ) {
   return (
@@ -48,6 +50,7 @@ function ProductDescription(
           headerRender={headerRender}
           addItem={addItem}
           productInCart={productInCart}
+          setModalVisible={setModalVisible}
         />
       </div>
     </section>

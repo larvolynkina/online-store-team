@@ -8,6 +8,8 @@ import Modal from '../../Components/Modal/Modal';
 import { ICartItem } from '../../types';
 
 export default function RootRouter() {
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
+
   const [headerCartCount, setHeaderCartCount] = useState<number>(0);
   const [headerCartSum, setHeaderCartSum] = useState<number>(0);
 
@@ -33,10 +35,10 @@ export default function RootRouter() {
       <Header headerCartCount={headerCartCount} headerCartSum={headerCartSum} />
       <Routes>
         <Route path="/" element={<Main headerRender={() => renderHeaderInfo()} />} />
-        <Route path="/product/:id" element={<Product headerRender={() => renderHeaderInfo()} />} />
-        <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} />} />
+        <Route path="/product/:id" element={<Product headerRender={() => renderHeaderInfo()} setModalVisible={setModalVisible} />} />
+        <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} setModalVisible={setModalVisible} />} />
       </Routes>
-      <Modal />
+      <Modal className={isModalVisible ? 'modal visible' : 'modal'} setModalVisible={setModalVisible} />
     </div>
   );
 }

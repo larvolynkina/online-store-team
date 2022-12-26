@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useValidation from './useValidation';
+import { IValidations } from '../types';
 
 export default function useInput(
   initValue: string,
@@ -8,10 +9,10 @@ export default function useInput(
 ) {
   const [value, setValue] = useState<string>(initValue);
   const [isDirty, setDirty] = useState<boolean>(false);
-  const [inputClassName, setInputClassName] = useState('');
+  const [inputClassName, setInputClassName] = useState<string>('');
   const onChange = (e: React.ChangeEvent<HTMLInputElement>):void => setValue(e.target.value);
   const onBlur = ():void => setDirty(true);
-  const valid = useValidation(value, validations);
+  const valid: IValidations = useValidation(value, validations);
 
   useEffect(() => {
     if (!isDirty) {

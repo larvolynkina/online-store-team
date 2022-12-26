@@ -1,16 +1,19 @@
 import './index.scss';
 import { useNavigate } from 'react-router-dom';
+import React, { SetStateAction } from 'react';
 
 export default function ProductBuyButton(
   {
     headerRender,
     addItem,
     productInCart,
+    setModalVisible,
   }:
   {
     headerRender: () => void,
     addItem: () => void,
     productInCart: boolean
+    setModalVisible: React.Dispatch<SetStateAction<boolean>>
   },
 ) {
   const navigate = useNavigate();
@@ -21,6 +24,7 @@ export default function ProductBuyButton(
       headerRender();
     }
     navigate('/shopping-cart');
+    setModalVisible(true);
   }
   return (
     <button type="button" className="btns-card__buy-now" onClick={() => goToCart()}>

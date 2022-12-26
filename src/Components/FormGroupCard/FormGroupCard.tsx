@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import useInput from '../../Hooks/useInput';
 import './index.scss';
 import visaIcon from '../../assets/icons/visaIcon.svg';
 import americanExpressIcon from '../../assets/icons/americanExpressIcon.svg';
 import mastercardIcon from '../../assets/icons/mastercardIcon.svg';
 import creditCard from '../../assets/icons/creditCard.svg';
-import { TImages } from '../../types';
+import { IInput, TImages } from '../../types';
 
-export default function FormGroupCard() {
+export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
+  {cardNumber: IInput, cardCvv: IInput, cardValid: IInput}) {
   const cardImages: TImages = {
     4: visaIcon,
     3: americanExpressIcon,
@@ -57,10 +57,6 @@ export default function FormGroupCard() {
       setCardImageSrc(cardImages.universalCard);
     }
   }
-
-  const cardNumber = useInput('', 'credit-card__input', { isEmpty: true, isCardNumber: true });
-  const cardCvv = useInput('', 'credit-card__input', { isEmpty: true, isCvv: true });
-  const cardValid = useInput('', 'credit-card__input', { isEmpty: true, isValid: true });
 
   return (
     <div className="form__group credit-card">

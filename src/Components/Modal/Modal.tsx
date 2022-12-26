@@ -1,16 +1,22 @@
-import FormGroupCard from '../FormGroupCard/FormGroupCard';
-import FormGroupPersonal from '../FormGroupPersonal/FormGroupPersonal';
+import React, { SetStateAction } from 'react';
+import ModalForm from '../ModalForm/ModalForm';
 import './index.scss';
 
-export default function Modal() {
+export default function Modal({ className, setModalVisible }:
+  { className: string, setModalVisible: React.Dispatch<SetStateAction<boolean>> }) {
   return (
-    <div className="modal">
+    <div
+      className={className}
+      role="presentation"
+      onClick={():void => setModalVisible(false)}
+    >
       <div className="modal__wrapper">
-        <div className="modal__content">
-          <form action="" className="modal__form form">
-            <FormGroupPersonal />
-            <FormGroupCard />
-          </form>
+        <div
+          className="modal__content"
+          role="presentation"
+          onClick={(e: React.MouseEvent):void => e.stopPropagation()}
+        >
+          <ModalForm />
         </div>
       </div>
     </div>

@@ -11,10 +11,11 @@ export default function useValidation(currentValue: string, validations: {[key: 
   const [isCardNumber, setCardNumber] = useState<boolean>(false);
   const [isCvv, setCvv] = useState<boolean>(false);
   const [isValid, setValid] = useState<boolean>(false);
+  const [isValidInputs, setValidInputs] = useState<boolean>(false);
 
   const emailReg = /^\S+@\S+\.\S+$/i;
   const phoneReg = /\+\d{9,}/;
-  const nameReg = /[a-zа-я]{3,}\s[a-zа-я]{3,}/i;
+  const nameReg = /[A-ZА-ЯЁ]{3,}\s[A-ZА-ЯЁ]{3,}/i;
   const addressReg = /\S{5,}\s\S{5,}\s\S{5,}/i;
   const creditCardReg = /\d{4}\s\d{4}\s\d{4}\s\d{4}/;
   const cvvReg = /\d{3}/;
@@ -106,6 +107,26 @@ export default function useValidation(currentValue: string, validations: {[key: 
     });
   }, [currentValue]);
 
+  useEffect(() => {
+    if (isEmpty || !isEmail || !isAddress || !isName
+        || !isPhone || !isCardNumber || !isCvv || !isValid) {
+      setValidInputs(false);
+    } else {
+      setValidInputs(true);
+    }
+  }, [isEmpty,
+    isEmail,
+    isAddress,
+    isName,
+    isPhone,
+    isCardNumber,
+    isCvv,
+    isValid]);
+
+  useEffect(() => {
+    console.log(isValidInputs);
+  }, [isValidInputs]);
+
   return {
     isEmpty,
     isEmail,
@@ -117,5 +138,6 @@ export default function useValidation(currentValue: string, validations: {[key: 
     isValid,
     error,
     emptyError,
+    isValidInputs,
   };
 }

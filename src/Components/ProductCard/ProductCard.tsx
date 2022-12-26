@@ -1,16 +1,24 @@
 import './index.scss';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, SetStateAction } from 'react';
 import { IProduct, ICartItem, ProductInnerButton } from '../../types';
 import ProductCardTitle from '../ProductCardTitle/ProductCardTitle';
 import ProductDescription from '../ProductDescription/ProductDescription';
 import ProductGallery from '../ProductGallery/ProductGallery';
 
-export default function ProductCard({ product, products, headerRender }:
+export default function ProductCard(
+  {
+    product,
+    products,
+    headerRender,
+    setModalVisible,
+  }:
    {
     product: IProduct,
     products: IProduct[],
-    headerRender: () => void
-  }) {
+    headerRender: () => void,
+    setModalVisible: React.Dispatch<SetStateAction<boolean>>
+  },
+) {
   const storage: string | null = localStorage.getItem('cart_@vFKSQ');
 
   function checkItem():boolean {
@@ -68,6 +76,7 @@ export default function ProductCard({ product, products, headerRender }:
           addItem={() => addItem()}
           removeItem={() => removeItem()}
           setProductInCart={setProductInCart}
+          setModalVisible={setModalVisible}
         />
       </div>
     </div>

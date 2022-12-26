@@ -8,6 +8,7 @@
   background: rgba(0, 0, 0, 0.4);
   overflow-y: auto;
   display: flex;
+  transform: scale(0);
 
   &__wrapper {
     flex: 0 0 100%;
@@ -26,8 +27,15 @@
     background: $background-color;
     display: flex;
     flex-direction: column;
+    transform: scale(0);
+    transition: all 0.8s ease;
   }
 
-
+  &.visible {
+    transform: scale(1);
+    .modal__content {
+      transform: scale(1);
+    }
+  }
 }
-.form {}
+

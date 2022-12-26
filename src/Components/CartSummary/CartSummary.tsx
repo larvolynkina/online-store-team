@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import { ICartItem, TPromocodes } from '../../types';
 import './index.scss';
 import SummaryPromo from '../SummaryPromo/SummaryPromo';
 
-export default function CartSummary({ currentCart } : {currentCart: ICartItem[]}) {
+export default function CartSummary({ currentCart, setModalVisible }:
+  {currentCart: ICartItem[], setModalVisible: React.Dispatch<SetStateAction<boolean>>}) {
   const totalProduct: number = currentCart.reduce((total, product) => total + product.count, 0);
   const getTotalSum = ():number => currentCart
     .reduce((total, product) => total + product.count * product.price, 0);
@@ -38,7 +39,7 @@ export default function CartSummary({ currentCart } : {currentCart: ICartItem[]}
           total={total}
           promocodes={promocodes}
         />
-        <button type="button" className="summary__btn">Buy now</button>
+        <button type="button" className="summary__btn" onClick={() => setModalVisible(true)}>Buy now</button>
       </div>
     </section>
   );

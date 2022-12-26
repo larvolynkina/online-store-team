@@ -1,13 +1,21 @@
 import React from 'react';
-import useInput from '../../Hooks/useInput';
+import { IInput } from '../../types';
 import './index.scss';
 
-export default function FormGroupPersonal() {
-  const name = useInput('', 'personal__input', { isEmpty: true, isName: true });
-  const phone = useInput('', 'personal__input', { isEmpty: true, isPhone: true });
-  const address = useInput('', 'personal__input', { isEmpty: true, isAddress: true });
-  const email = useInput('', 'personal__input', { isEmpty: true, isEmail: true });
-
+export default function FormGroupPersonal(
+  {
+    name,
+    phone,
+    address,
+    email,
+  }:
+  {
+    name: IInput,
+    phone: IInput,
+    address: IInput,
+    email: IInput,
+  },
+) {
   return (
     <div className="form__group personal">
       <h3 className="personal__title">Personal info</h3>

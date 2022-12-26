@@ -1,12 +1,15 @@
 import './index.scss';
-import { useEffect, useState } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import CartList from '../CartList/CartList';
 import CartEmpty from '../CartEmpty/CartEmpty';
 import CartSummary from '../CartSummary/CartSummary';
 import { IProduct, ICartItem } from '../../types';
 
-export default function Cart({ products, headerRender }:
-  { products: Array<IProduct>, headerRender: () => void}) {
+export default function Cart({ products, headerRender, setModalVisible }:
+  { products: Array<IProduct>,
+    headerRender: () => void,
+    setModalVisible: React.Dispatch<SetStateAction<boolean>>
+  }) {
   const storage: string | null = localStorage.getItem('cart_@vFKSQ');
   const cart: ICartItem[] = storage ? JSON.parse(storage) : [];
 
@@ -29,7 +32,7 @@ export default function Cart({ products, headerRender }:
                 products={products}
               />
             </section>
-            <CartSummary currentCart={currentCart} />
+            <CartSummary currentCart={currentCart} setModalVisible={setModalVisible} />
           </>
         )
         : <CartEmpty />}

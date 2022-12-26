@@ -33,22 +33,18 @@ export default function RootRouter() {
   }, []);
 
   return (
-    <><>
+    <>
       <Header headerCartCount={headerCartCount} headerCartSum={headerCartSum} />
-      <Routes>
-        <Route path="/" element={<Main headerRender={() => renderHeaderInfo()} />} />
-        <Route path="/product/:id" element={<Product headerRender={() => renderHeaderInfo()} setModalVisible={setModalVisible} />} />
-        <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} setModalVisible={setModalVisible} />} />
-      </Routes>
-      <Modal className={isModalVisible ? 'modal visible' : 'modal'} setModalVisible={setModalVisible} />
-    </><main className="main">
+      <main className="main">
         <Routes>
           <Route path="/" element={<Main headerRender={() => renderHeaderInfo()} />} />
-          <Route path="/product/:id" element={<Product headerRender={() => renderHeaderInfo()} />} />
-          <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} />} />
+          <Route path="/product/:id" element={<Product headerRender={() => renderHeaderInfo()} setModalVisible={setModalVisible} />} />
+          <Route path="/shopping-cart" element={<ShoppingCart headerRender={() => renderHeaderInfo()} setModalVisible={setModalVisible} />} />
           <Route path="*" element={<Error />} />
         </Routes>
-      </main><Footer /></>
+      </main>
+      <Footer />
+      <Modal className={isModalVisible ? 'modal visible' : 'modal'} setModalVisible={setModalVisible} />
     </>
   );
 }

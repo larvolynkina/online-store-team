@@ -1,32 +1,74 @@
+@import '../../sass/abstracts/variables';
+
 .summary{
-  padding: 10px;
-  border: 1px solid black;
-  flex: 0 1 auto;
+  flex: 0 0 auto;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+  border-radius: 8px;
+  background: $background-color-light;
+  overflow: hidden;
 
-  &__title{}
+  &__header {
+    background: $main-color;
+    padding: 20px;
+  }
 
-  &__container{}
+  &__title {
+    color: $background-color-light;
+  }
+
+  &__container {
+    padding: 20px;
+  }
+
+  &__btn {
+    padding: 10px 10px 10px 10px;
+    min-width: 159px;
+    width: max-content;
+    text-transform: uppercase;
+    border-radius: 8px;
+    transition: all 0.5s ease;
+    background-color: #e7e2e2;
+  
+    &:hover {
+      background-color: darken(#e7e2e2, 10);
+    }
+  }
 }
 
-.products-summary{
+.products-summary {
+  margin: 0 0 5px 0;
 
-  &__label{}
+  &__label {
+    margin: 0 5px 0 0;
+  }
 
-  &__output{}
+  &__output {
+    font-weight: 300;
+  }
 }
 
-.total{
+.total {
   display: flex;
-  &.discounted{
-    .total__output{
+  margin: 0 0 20px 0;
+
+  &.discounted {
+    .total__output {
       text-decoration: line-through;
       color: red;
     }
   }
-}
-.total__label{
-  margin: 0 5px 0 0;
-}
-.total__output{
-  margin: 0 5px 0 0;
+
+  &__label {
+    margin: 0 5px 0 0;
+  }
+
+  &__output {
+    margin: 0 5px 0 0;
+    font-weight: 300;
+  }
+
+  &__discount {
+    font-weight: 300;
+    color: $main-color;
+  }
 }

@@ -1,7 +1,7 @@
 import React, { SetStateAction } from 'react';
 
 export enum ProductInnerButton {
-  Remove = 'Remove from cart',
+  Remove = 'Remove',
   Add = 'Add to cart'
 }
 
@@ -115,10 +115,10 @@ type TPromoCodesItem = {
 type TCountButton = {
   className: string;
   onClick: () => void;
-  children: string
+  src: string;
 }
 
-interface TProductCard {
+interface IProductCard {
   product: IProduct;
   products: IProduct[];
   headerRender: () => void;
@@ -129,5 +129,5 @@ interface TProductCard {
 export type {
   IProduct, IData, ICartItem, IGallery, IGalleryImage, IImageLink, TBreadcrumbs,
   TPromocodes, TPromo, TPromoCodesItem, TImages, IInput, IValidations, IModal, IModalForm,
-  TCountButton, TProductCard,
+  TCountButton, IProductCard,
 };

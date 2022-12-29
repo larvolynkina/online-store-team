@@ -7,17 +7,19 @@ export default function CartList(
   {
     products,
     currentCart,
+    currentItems,
     setCurrentCart,
   }:
   {
     products: Array<IProduct>,
     currentCart: Array<ICartItem>,
+    currentItems: Array<ICartItem>,
     setCurrentCart: React.Dispatch<SetStateAction<ICartItem[]>>
   },
 ) {
   function getCartItems():IProduct[] {
     const itemsArr: IProduct[] = [];
-    currentCart.forEach((element: ICartItem) => {
+    currentItems.forEach((element: ICartItem) => {
       const curItem: IProduct | undefined = products
         .find((el: IProduct) => el.id === element.id);
       if (curItem) {
@@ -35,7 +37,7 @@ export default function CartList(
         <CartItem
           cartItem={cartItem}
           key={cartItem.id}
-          index={index + 1}
+          index={currentCart.findIndex((el) => el.id === cartItem.id) + 1}
           count={currentCart[index].count}
           currentCart={currentCart}
           setCurrentCart={setCurrentCart}

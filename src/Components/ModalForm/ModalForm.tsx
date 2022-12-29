@@ -1,6 +1,6 @@
 import './index.scss';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import FormGroupCard from '../FormGroupCard/FormGroupCard';
 import FormGroupPersonal from '../FormGroupPersonal/FormGroupPersonal';
 import { IModalForm } from '../../types';
@@ -18,6 +18,7 @@ export default function ModalForm(
     setCartEmpty,
   }: IModalForm,
 ) {
+  const [isOrder, setOrder] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
 
   function validateForm(event: React.MouseEvent) {
@@ -26,12 +27,14 @@ export default function ModalForm(
     if (cardNumber.isValidInputs && cardValid.isValidInputs && cardCvv.isValidInputs
       && name.isValidInputs && phone.isValidInputs && address.isValidInputs
       && email.isValidInputs) {
-      closeModal();
+      setOrder(true);
       setCartEmpty(true);
+      closeModal();
 
-      setTimeout(() => {
+      setTimeout(():void => {
         navigate('/');
-      }, 3000);
+        setOrder(false);
+      }, 4000);
     } else {
       cardNumber.setDirtyInput();
       cardValid.setDirtyInput();
@@ -57,6 +60,7 @@ export default function ModalForm(
         cardValid={cardValid}
       />
       <button type="submit" onClick={(e: React.MouseEvent):void => validateForm(e)}>confirm</button>
+      {isOrder && <p>Заказ успешно оформлен!!!</p>}
     </form>
   );
 }

@@ -5,9 +5,9 @@ export default function PromoCodesItem(
   { promocode, discountPercentage, removePromocode }: TPromoCodesItem,
 ) {
   return (
-    <li className="applied-codes__item">
-      <p className="applied-codes__title">{`${promocode} - ${discountPercentage}%`}</p>
-      <button className="applied-codes__btn" type="button" onClick={removePromocode}>Remove</button>
+    <li className="codes-list__item codes-item">
+      <p className="codes-item__title">{`${promocode} - ${discountPercentage}%`}</p>
+      <button className="codes-item__btn" type="button" onClick={removePromocode}>Remove</button>
     </li>
   );
 }

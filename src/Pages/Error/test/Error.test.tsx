@@ -14,5 +14,4 @@ test('Error page test', () => {
   expect(linkGoToMain).toBeInTheDocument();
   userEvent.click(linkGoToMain);
   expect(screen.queryByText(/404/)).toBeNull();
-  screen.debug();
 });

@@ -57,6 +57,7 @@ export default function RootRouter() {
             element={(
               <ShoppingCart
                 isCartEmpty={isCartEmpty}
+                setCartEmpty={setCartEmpty}
                 setModalVisible={setModalVisible}
                 headerRender={() => renderHeaderInfo()}
                 cart={cart}

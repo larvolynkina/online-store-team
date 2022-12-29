@@ -1,4 +1,4 @@
-import React, { SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import Cart from '../../Components/Cart/Cart';
 import useFetch from '../../Hooks/useFetch';
 import { ICartItem } from '../../types';
@@ -8,12 +8,14 @@ export default function ShoppingCart(
     setModalVisible,
     headerRender,
     isCartEmpty,
+    setCartEmpty,
     cart,
   }:
   {
     setModalVisible: React.Dispatch<SetStateAction<boolean>>,
     headerRender: () => void,
     isCartEmpty: boolean,
+    setCartEmpty: Dispatch<SetStateAction<boolean>>,
     cart: Array<ICartItem>
   },
 ) {
@@ -26,6 +28,7 @@ export default function ShoppingCart(
       setModalVisible={setModalVisible}
       headerRender={headerRender}
       cart={cart}
+      setCartEmpty={setCartEmpty}
     />
   );
 }

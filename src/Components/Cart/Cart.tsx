@@ -1,5 +1,11 @@
 import './index.scss';
-import React, { SetStateAction, useEffect, useState } from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
+import { Link } from 'react-router-dom';
 import CartList from '../CartList/CartList';
 import CartEmpty from '../CartEmpty/CartEmpty';
 import CartSummary from '../CartSummary/CartSummary';
@@ -12,6 +18,7 @@ export default function Cart(
     setModalVisible,
     headerRender,
     isCartEmpty,
+    setCartEmpty,
     cart,
   }:
   {
@@ -19,6 +26,7 @@ export default function Cart(
     setModalVisible: React.Dispatch<SetStateAction<boolean>>,
     headerRender: () => void,
     isCartEmpty: boolean,
+    setCartEmpty: Dispatch<SetStateAction<boolean>>
     cart: Array<ICartItem>
   },
 ) {
@@ -33,7 +41,6 @@ export default function Cart(
   function setPage(number: number):void {
     const num = number;
     setCurrentPage(num);
-    console.log(currentItems);
   }
 
   useEffect(() => {
@@ -68,6 +75,14 @@ export default function Cart(
                   setCurrentCart={setCurrentCart}
                   products={products}
                 />
+                <div className="cart__btns">
+                  <Link to="/" className="cart__btn cart__btn_continue">
+                    continue shopping
+                  </Link>
+                  <button type="button" className="cart__btn cart__btn_clear" onClick={() => setCartEmpty(true)}>
+                    clear cart
+                  </button>
+                </div>
               </section>
               <CartSummary currentCart={currentCart} setModalVisible={setModalVisible} />
             </>

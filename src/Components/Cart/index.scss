@@ -31,4 +31,36 @@
   &__title {
     color: $background-color-light;
   }
+
+  &__btns {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px 20px 20px;
+  }
+
+  &__btn {
+    padding: 8px 10px;
+    border-radius: 5px;
+    text-transform: capitalize;
+    text-align: center;
+    min-width: 179px;
+    transition: all ease 0.5s;
+
+    &_clear {
+      background: $main-color;
+      color: $background-color-light;
+
+      &:hover {
+        background: $hover-color;
+      }
+    }
+
+    &_continue {
+      background: #e7e2e2;
+
+      &:hover {
+        background: darken(#e7e2e2, 10);
+      }
+    }
+  }
 }

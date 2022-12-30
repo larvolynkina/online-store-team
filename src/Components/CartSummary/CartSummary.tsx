@@ -24,7 +24,9 @@ export default function CartSummary({ currentCart, setModalVisible }:
 
   return (
     <section className="cart__summary summary">
-      <h3 className="summary__title">Summary</h3>
+      <header className="summary__header">
+        <h3 className="summary__title">Summary</h3>
+      </header>
       <div className="summary__container">
         <div className="summary__products products-summary">
           <span className="products-summary__label">Products:</span>

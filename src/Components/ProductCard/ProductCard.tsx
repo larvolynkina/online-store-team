@@ -2,7 +2,7 @@ import './index.scss';
 import { useState, useEffect } from 'react';
 import {
   IProduct, ICartItem, ProductInnerButton,
-  TProductCard,
+  IProductCard,
 } from '../../types';
 import ProductCardTitle from '../ProductCardTitle/ProductCardTitle';
 import ProductDescription from '../ProductDescription/ProductDescription';
@@ -15,7 +15,7 @@ export default function ProductCard(
     headerRender,
     setModalVisible,
     setCartEmpty,
-  }: TProductCard,
+  }: IProductCard,
 ) {
   const storage: string | null = localStorage.getItem('cart_@vFKSQ');
 

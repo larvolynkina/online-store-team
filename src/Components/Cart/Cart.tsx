@@ -1,8 +1,15 @@
 import './index.scss';
-import React, { SetStateAction, useEffect, useState } from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
+import { Link } from 'react-router-dom';
 import CartList from '../CartList/CartList';
 import CartEmpty from '../CartEmpty/CartEmpty';
 import CartSummary from '../CartSummary/CartSummary';
+import CartPagination from '../CartPagination/CartPagination';
 import { IProduct, ICartItem } from '../../types';
 
 export default function Cart(
@@ -11,17 +18,32 @@ export default function Cart(
     setModalVisible,
     headerRender,
     isCartEmpty,
+    setCartEmpty,
     cart,
+    isOrder,
   }:
   {
     products: Array<IProduct>,
     setModalVisible: React.Dispatch<SetStateAction<boolean>>,
     headerRender: () => void,
     isCartEmpty: boolean,
-    cart: Array<ICartItem>
+    setCartEmpty: Dispatch<SetStateAction<boolean>>,
+    cart: Array<ICartItem>,
+    isOrder: boolean,
   },
 ) {
   const [currentCart, setCurrentCart] = useState<ICartItem[]>(cart);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage] = useState<number>(3);
+
+  const indexOfLastItem: number = currentPage * itemsPerPage;
+  const indexOfFirstItem: number = indexOfLastItem - itemsPerPage;
+  const currentItems = currentCart.slice(indexOfFirstItem, indexOfLastItem);
+
+  function setPage(number: number):void {
+    const num = number;
+    setCurrentPage(num);
+  }
 
   useEffect(() => {
     headerRender();
@@ -36,21 +58,40 @@ export default function Cart(
 
   return (
     <div className="cart">
-      {currentCart.length
-        ? (
-          <>
-            <section className="cart__items ">
-              <header className="cart__header">Products In Cart</header>
-              <CartList
-                currentCart={currentCart}
-                setCurrentCart={setCurrentCart}
-                products={products}
-              />
-            </section>
-            <CartSummary currentCart={currentCart} setModalVisible={setModalVisible} />
-          </>
-        )
-        : <CartEmpty />}
+      <div className="cart__wrapper">
+        {currentCart.length
+          ? (
+            <>
+              <section className="cart__items ">
+                <header className="cart__header">
+                  <h3 className="cart__title">Products In Cart</h3>
+                  <CartPagination
+                    currentCart={currentCart}
+                    itemsPerPage={itemsPerPage}
+                    setPage={(number: number):void => setPage(number)}
+                  />
+                </header>
+                <CartList
+                  currentItems={currentItems}
+                  currentCart={currentCart}
+                  setCurrentCart={setCurrentCart}
+                  products={products}
+                />
+                <div className="cart__btns">
+                  <Link to="/" className="cart__btn cart__btn_continue">
+                    continue shopping
+                  </Link>
+                  <button type="button" className="cart__btn cart__btn_clear" onClick={() => setCartEmpty(true)}>
+                    clear cart
+                  </button>
+                </div>
+              </section>
+              <CartSummary currentCart={currentCart} setModalVisible={setModalVisible} />
+            </>
+          )
+          : <CartEmpty isOrder={isOrder} />}
+      </div>
+
     </div>
   );
 }

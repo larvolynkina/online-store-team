@@ -1,26 +1,103 @@
+@import '../../sass/abstracts/variables';
+
 .desc-card {
-
-  &__title{}
-
-  &__list{}
-}
-
-.desc-card__item{
-
-  &_rating{}
-
-  &_brand{}
-
-  &_description{}
-
-  &_price{}
-
-  &_category{}
-
-  &_stock{}
-}
-
-.btns-card{
   display: flex;
   flex-direction: column;
+  flex: 1 1 50%;
+
+  &__title {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 400;
+    margin: 0 0 10px 0;
+  }
+
+  &__rating {
+    padding: 6px 30px 6px 10px;
+    border-radius: 3px;
+    min-width: 30px;
+    background: url('../../assets/icons/rating.svg') top 45% right 10px no-repeat, $main-color;
+    font-size: 14px;
+    line-height: 17px;
+    color: $background-color-light;
+    margin: 0 0 20px 0;
+    align-self: flex-start;
+  }
+
+  &__specifications {
+    margin: 0 0 15px 0;
+    position: relative;
+    padding: 0 0 3px 0;
+    text-transform: capitalize;
+    font-weight: 400;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: $light-grey-color;
+    }
+  }
+
+  &__list{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    margin: 0 5px 0 0;
+    text-transform: capitalize;
+  }
+
+  &__description {
+    font-weight: 300;
+  }
+}
+
+.desc-card__item {
+  font-size: 14px;
+  margin: 0 0 5px 0;
+  
+  &:last-child {
+    margin: 0 0 20px 0;
+  }
+}
+
+.btns-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordeon {
+  &__btn {
+    background: transparent;
+    padding: 0;
+    margin: 0 0 5px 0;
+  }
+
+  &__title {
+    margin: 0 5px 0 0;
+    font-weight: 600;
+  }
+
+  &__arrow {
+    &.up {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__panel {
+    font-weight: 300;
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.3s ease;
+
+    &.visible {
+      max-height: 1000px;
+      transition: all 2s ease;
+    }
+  }
 }

@@ -1,16 +1,67 @@
-.cart{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
+@import '../../sass/abstracts/variables';
 
-.cart__items{
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  border: 1px solid black;
-  margin: 0 10px 0 0;
-  flex: 1 1 auto;
-}
+.cart {
 
-.cart__header{}
+  &__wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0 30px 0 0;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+    border-radius: 8px;
+    background: $background-color-light;
+    flex: 1 1 auto;
+  }
+
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background: $main-color;
+  }
+
+  &__title {
+    color: $background-color-light;
+  }
+
+  &__btns {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px 20px 20px;
+  }
+
+  &__btn {
+    padding: 8px 10px;
+    border-radius: 5px;
+    text-transform: capitalize;
+    text-align: center;
+    min-width: 199px;
+    transition: all ease 0.5s;
+
+    &_clear {
+      background: $main-color;
+      color: $background-color-light;
+
+      &:hover {
+        background: $hover-color;
+      }
+    }
+
+    &_continue {
+      background: #e7e2e2;
+
+      &:hover {
+        background: darken(#e7e2e2, 10);
+      }
+    }
+  }
+}

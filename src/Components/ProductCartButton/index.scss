@@ -1,5 +1,17 @@
-.btns-card__cart{
+@import "../../sass/abstracts/variables";
+
+.btns-card__cart {
   margin: 0 0 10px 0;
-  padding: 5px 10px;
+  padding: 10px 10px 10px 35px;
+  min-width: 159px;
   width: max-content;
+  text-transform: uppercase;
+  color: $background-color-light;
+  border-radius: 8px;
+  background: url("../../assets/icons/shoppingBag.svg") top 50% left 10px no-repeat, $main-color;
+  transition: all 0.5s ease;
+
+  &:hover {
+    background: url("../../assets/icons/shoppingBag.svg") top 50% left 10px no-repeat, $hover-color;
+  }
 }

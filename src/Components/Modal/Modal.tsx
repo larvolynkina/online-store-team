@@ -4,7 +4,14 @@ import './index.scss';
 import useInput from '../../Hooks/useInput';
 import { IInput, IModal } from '../../types';
 
-export default function Modal({ className, setModalVisible, setCartEmpty }: IModal) {
+export default function Modal(
+  {
+    className,
+    setModalVisible,
+    setCartEmpty,
+    setOrder,
+  }: IModal,
+) {
   const cardNumber: IInput = useInput('', 'credit-card__input', { isEmpty: true, isCardNumber: false });
   const cardCvv: IInput = useInput('', 'credit-card__input', { isEmpty: true, isCvv: false });
   const cardValid: IInput = useInput('', 'credit-card__input', { isEmpty: true, isValid: false });
@@ -45,6 +52,7 @@ export default function Modal({ className, setModalVisible, setCartEmpty }: IMod
             email={email}
             closeModal={():void => closeModal()}
             setCartEmpty={setCartEmpty}
+            setOrder={setOrder}
           />
         </div>
       </div>

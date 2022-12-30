@@ -70,6 +70,14 @@ export default function Cart(
                     itemsPerPage={itemsPerPage}
                     setPage={(number: number):void => setPage(number)}
                   />
+                  <div className="cart__pages pages">
+                    <label htmlFor="pages-input" className="pages__label">Items per page:</label>
+                    <input
+                      type="text"
+                      className="pages__input"
+                      id="pages-input"
+                    />
+                  </div>
                 </header>
                 <CartList
                   currentItems={currentItems}

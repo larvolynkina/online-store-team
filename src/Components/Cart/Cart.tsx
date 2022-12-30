@@ -20,19 +20,21 @@ export default function Cart(
     isCartEmpty,
     setCartEmpty,
     cart,
+    isOrder,
   }:
   {
     products: Array<IProduct>,
     setModalVisible: React.Dispatch<SetStateAction<boolean>>,
     headerRender: () => void,
     isCartEmpty: boolean,
-    setCartEmpty: Dispatch<SetStateAction<boolean>>
-    cart: Array<ICartItem>
+    setCartEmpty: Dispatch<SetStateAction<boolean>>,
+    cart: Array<ICartItem>,
+    isOrder: boolean,
   },
 ) {
   const [currentCart, setCurrentCart] = useState<ICartItem[]>(cart);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(3);
+  const [itemsPerPage] = useState<number>(3);
 
   const indexOfLastItem: number = currentPage * itemsPerPage;
   const indexOfFirstItem: number = indexOfLastItem - itemsPerPage;
@@ -87,7 +89,7 @@ export default function Cart(
               <CartSummary currentCart={currentCart} setModalVisible={setModalVisible} />
             </>
           )
-          : <CartEmpty />}
+          : <CartEmpty isOrder={isOrder} />}
       </div>
 
     </div>

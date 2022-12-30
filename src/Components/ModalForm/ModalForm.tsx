@@ -1,6 +1,6 @@
 import './index.scss';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React from 'react';
 import FormGroupCard from '../FormGroupCard/FormGroupCard';
 import FormGroupPersonal from '../FormGroupPersonal/FormGroupPersonal';
 import { IModalForm } from '../../types';
@@ -16,9 +16,9 @@ export default function ModalForm(
     email,
     closeModal,
     setCartEmpty,
+    setOrder,
   }: IModalForm,
 ) {
-  const [isOrder, setOrder] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
 
   function validateForm(event: React.MouseEvent) {
@@ -60,7 +60,6 @@ export default function ModalForm(
         cardValid={cardValid}
       />
       <button type="submit" onClick={(e: React.MouseEvent):void => validateForm(e)}>confirm</button>
-      {isOrder && <p>Заказ успешно оформлен!!!</p>}
     </form>
   );
 }

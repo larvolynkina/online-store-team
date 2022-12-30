@@ -10,13 +10,15 @@ export default function ShoppingCart(
     isCartEmpty,
     setCartEmpty,
     cart,
+    isOrder,
   }:
   {
     setModalVisible: React.Dispatch<SetStateAction<boolean>>,
     headerRender: () => void,
     isCartEmpty: boolean,
     setCartEmpty: Dispatch<SetStateAction<boolean>>,
-    cart: Array<ICartItem>
+    cart: Array<ICartItem>,
+    isOrder: boolean
   },
 ) {
   const { products } = useFetch();
@@ -29,6 +31,7 @@ export default function ShoppingCart(
       headerRender={headerRender}
       cart={cart}
       setCartEmpty={setCartEmpty}
+      isOrder={isOrder}
     />
   );
 }

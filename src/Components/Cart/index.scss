@@ -5,6 +5,7 @@
   &__wrapper {
     display: flex;
     align-items: flex-start;
+    justify-content: center;
     padding: 20px;
     max-width: 1240px;
     margin: 0 auto;
@@ -43,7 +44,7 @@
     border-radius: 5px;
     text-transform: capitalize;
     text-align: center;
-    min-width: 179px;
+    min-width: 199px;
     transition: all ease 0.5s;
 
     &_clear {

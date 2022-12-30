@@ -15,6 +15,7 @@ export default function RootRouter() {
 
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
   const [isCartEmpty, setCartEmpty] = useState<boolean>(!cart.length);
+  const [isOrder, setOrder] = useState<boolean>(false);
 
   const [headerCartCount, setHeaderCartCount] = useState<number>(0);
   const [headerCartSum, setHeaderCartSum] = useState<number>(0);
@@ -61,6 +62,7 @@ export default function RootRouter() {
                 setModalVisible={setModalVisible}
                 headerRender={() => renderHeaderInfo()}
                 cart={cart}
+                isOrder={isOrder}
               />
             )}
           />
@@ -72,6 +74,7 @@ export default function RootRouter() {
         className={isModalVisible ? 'modal visible' : 'modal'}
         setModalVisible={setModalVisible}
         setCartEmpty={setCartEmpty}
+        setOrder={setOrder}
       />
     </>
   );

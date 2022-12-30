@@ -31,9 +31,13 @@ export default function SummaryPromo(
 
   function applyDiscount():void {
     let discounted: number = total;
+    let discountSum = 0;
+
     Object.values(appliedPromoCodes).forEach((item: [string, number]) => {
-      discounted = Math.floor(discounted - ((discounted / 100) * item[1]));
+      discountSum += item[1];
     });
+
+    discounted = Math.floor(discounted - ((discounted / 100) * discountSum));
     setAmount(discounted);
   }
 

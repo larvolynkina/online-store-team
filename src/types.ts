@@ -1,4 +1,4 @@
-import React, { SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 export enum ProductInnerButton {
   Remove = 'Remove',
@@ -79,6 +79,7 @@ interface IModal {
   className: string;
   setModalVisible: React.Dispatch<SetStateAction<boolean>>;
   setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
+  setOrder: Dispatch<SetStateAction<boolean>>;
 }
 
 interface IModalForm {
@@ -91,6 +92,7 @@ interface IModalForm {
   email: IInput;
   closeModal: () => void;
   setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
+  setOrder: Dispatch<SetStateAction<boolean>>;
 }
 
 type TBreadcrumbs = Pick<IProduct, 'category' | 'brand' | 'title'>;

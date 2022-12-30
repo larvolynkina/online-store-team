@@ -14,7 +14,7 @@ export default function ModalForm(
     phone,
     address,
     email,
-    closeModal,
+    setModalVisible,
     setCartEmpty,
     setOrder,
   }: IModalForm,
@@ -29,7 +29,7 @@ export default function ModalForm(
       && email.isValidInputs) {
       setOrder(true);
       setCartEmpty(true);
-      closeModal();
+      setModalVisible(false);
 
       setTimeout(():void => {
         navigate('/');
@@ -59,7 +59,13 @@ export default function ModalForm(
         cardCvv={cardCvv}
         cardValid={cardValid}
       />
-      <button type="submit" onClick={(e: React.MouseEvent):void => validateForm(e)}>confirm</button>
+      <button
+        type="submit"
+        className="form__confirm-btn"
+        onClick={(e: React.MouseEvent):void => validateForm(e)}
+      >
+        confirm
+      </button>
     </form>
   );
 }

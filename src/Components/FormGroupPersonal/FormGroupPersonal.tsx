@@ -12,9 +12,13 @@ export default function FormGroupPersonal(
 ) {
   return (
     <div className="form__group personal">
-      <h3 className="personal__title">Personal info</h3>
+      <h3 className="personal__title">Personal information</h3>
       <div className="personal__item">
-        <label htmlFor="name" className="personal__label">Name:</label>
+        <label htmlFor="name" className="personal__label">
+          <p className="personal__mark">Name</p>
+          {(name.isDirty && (name.isEmpty || !name.isName))
+          && <p className="personal__error">{name.emptyError || name.error}</p>}
+        </label>
         <input
           value={name.value}
           type="text"
@@ -24,13 +28,13 @@ export default function FormGroupPersonal(
           onBlur={():void => name.setDirtyInput()}
           onChange={(e: React.ChangeEvent<HTMLInputElement>):void => name.setInputValue(e)}
         />
-        <div className="personal__error-wrapper">
-          {(name.isDirty && (name.isEmpty || !name.isName))
-          && <p className="personal__error">{name.emptyError || name.error}</p>}
-        </div>
       </div>
       <div className="personal__item">
-        <label htmlFor="phone" className="personal__label">Phone number:</label>
+        <label htmlFor="phone" className="personal__label">
+          <p className="personal__mark">Phone number</p>
+          {(phone.isDirty && (phone.isEmpty || !phone.isPhone))
+          && <p className="personal__error">{phone.emptyError || phone.error}</p>}
+        </label>
         <input
           value={phone.value}
           type="tel"
@@ -40,13 +44,13 @@ export default function FormGroupPersonal(
           onBlur={():void => phone.setDirtyInput()}
           onChange={(e: React.ChangeEvent<HTMLInputElement>):void => phone.setInputValue(e)}
         />
-        <div className="personal__error-wrapper">
-          {(phone.isDirty && (phone.isEmpty || !phone.isPhone))
-          && <p className="personal__error">{phone.emptyError || phone.error}</p>}
-        </div>
       </div>
       <div className="personal__item">
-        <label htmlFor="address" className="personal__label">Delivery address:</label>
+        <label htmlFor="address" className="personal__label">
+          <p className="personal__mark">Delivery address</p>
+          {(address.isDirty && (address.isEmpty || !address.isAddress))
+          && <p className="personal__error">{address.emptyError || address.error}</p>}
+        </label>
         <input
           value={address.value}
           type="text"
@@ -56,13 +60,13 @@ export default function FormGroupPersonal(
           onBlur={():void => address.setDirtyInput()}
           onChange={(e: React.ChangeEvent<HTMLInputElement>):void => address.setInputValue(e)}
         />
-        <div className="personal__error-wrapper">
-          {(address.isDirty && (address.isEmpty || !address.isAddress))
-          && <p className="personal__error">{address.emptyError || address.error}</p>}
-        </div>
       </div>
       <div className="personal__item">
-        <label htmlFor="email" className="personal__label">Email:</label>
+        <label htmlFor="email" className="personal__label">
+          <p className="personal__mark">Email</p>
+          {(email.isDirty && (email.isEmpty || !email.isEmail))
+          && <p className="personal__error">{email.emptyError || email.error}</p>}
+        </label>
         <input
           value={email.value}
           type="email"
@@ -72,10 +76,6 @@ export default function FormGroupPersonal(
           onBlur={():void => email.setDirtyInput()}
           onChange={(e: React.ChangeEvent<HTMLInputElement>):void => email.setInputValue(e)}
         />
-        <div className="personal__error-wrapper">
-          {(email.isDirty && (email.isEmpty || !email.isEmail))
-          && <p className="personal__error">{email.emptyError || email.error}</p>}
-        </div>
       </div>
     </div>
   );

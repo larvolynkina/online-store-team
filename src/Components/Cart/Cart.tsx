@@ -24,7 +24,7 @@ export default function Cart(
   }:
   {
     products: Array<IProduct>,
-    setModalVisible: React.Dispatch<SetStateAction<boolean>>,
+    setModalVisible: Dispatch<SetStateAction<boolean>>,
     headerRender: () => void,
     isCartEmpty: boolean,
     setCartEmpty: Dispatch<SetStateAction<boolean>>,
@@ -34,16 +34,12 @@ export default function Cart(
 ) {
   const [currentCart, setCurrentCart] = useState<ICartItem[]>(cart);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage] = useState<number>(3);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(3);
+  const [pagesInputValue, setPagesInputValue] = useState<string>('3');
 
   const indexOfLastItem: number = currentPage * itemsPerPage;
   const indexOfFirstItem: number = indexOfLastItem - itemsPerPage;
-  const currentItems = currentCart.slice(indexOfFirstItem, indexOfLastItem);
-
-  function setPage(number: number):void {
-    const num = number;
-    setCurrentPage(num);
-  }
+  const currentItems: ICartItem[] = currentCart.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     headerRender();
@@ -55,6 +51,18 @@ export default function Cart(
       localStorage.setItem('cart_@vFKSQ', JSON.stringify([]));
     }
   }, [isCartEmpty]);
+
+  useEffect(() => {
+    if (pagesInputValue) {
+      setItemsPerPage(Number(pagesInputValue));
+    }
+  }, [pagesInputValue]);
+
+  useEffect(() => {
+    if (!currentItems.length) {
+      setCurrentPage(currentPage - 1);
+    }
+  }, [currentItems]);
 
   return (
     <div className="cart">
@@ -68,14 +76,20 @@ export default function Cart(
                   <CartPagination
                     currentCart={currentCart}
                     itemsPerPage={itemsPerPage}
-                    setPage={(number: number):void => setPage(number)}
+                    setCurrentPage={(number: number): void => setCurrentPage(number)}
                   />
                   <div className="cart__pages pages">
                     <label htmlFor="pages-input" className="pages__label">Items per page:</label>
                     <input
                       type="text"
                       className="pages__input"
+                      value={pagesInputValue}
                       id="pages-input"
+                      maxLength={2}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                        const inputValue: string = e.target.value.replace(/[^\d]/g, '');
+                        setPagesInputValue(inputValue);
+                      }}
                     />
                   </div>
                 </header>

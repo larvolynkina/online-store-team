@@ -6,27 +6,33 @@ export default function CartPagination(
   {
     currentCart,
     itemsPerPage,
-    setPage,
+    setCurrentPage,
   } :
   {
     currentCart: ICartItem[],
     itemsPerPage: number,
-    setPage: (number: number) => void
+    setCurrentPage: (number: number) => void
   },
 ) {
-  const pagesBtns = [];
-
-  for (let i = 1; i <= Math.ceil(currentCart.length / itemsPerPage); i += 1) {
-    pagesBtns.push(i);
+  function createBtns() {
+    const btns = [];
+    for (let i = 1; i <= Math.ceil(currentCart.length / itemsPerPage); i += 1) {
+      btns.push(i);
+    }
+    return btns;
   }
+
+  const pagesBtns = createBtns();
+
   return (
     <nav className="cart__nav nav">
       <ul className="nav__list">
-        {pagesBtns.map((btn: number) => (
+        {pagesBtns.map((btnNum: number) => (
           <CartPaginationItem
-            btn={btn}
-            key={btn}
-            setPage={(number: number) => setPage(number)}
+            btnNum={btnNum}
+            itemsPerPage={itemsPerPage}
+            key={btnNum}
+            setCurrentPage={(number: number) => setCurrentPage(number)}
           />
         ))}
       </ul>

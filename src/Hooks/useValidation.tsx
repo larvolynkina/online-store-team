@@ -29,7 +29,7 @@ export default function useValidation(currentValue: string, validations: {[key: 
             setEmptyError('');
           } else {
             setEmpty(true);
-            setEmptyError('Field cannot be empty');
+            setEmptyError('Empty field');
           }
           break;
         case 'isEmail':

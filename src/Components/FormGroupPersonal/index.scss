@@ -1,40 +1,54 @@
+@import "../../sass/abstracts/variables";
+@import "../../sass/abstracts/mixins";
+
 .personal {
   margin: 0 0 30px 0;
   
   &__title {
-    margin: 0 0 20px 0;
+    @include modal-title;
+
+    &::after {
+      @include modal-title-after;
+    }
   }
 
   &__item {
     display: flex;
     flex-direction: column;
-    margin: 0 0 10px 0;
+    margin: 0 0 15px 0;
+
     &:last-child {
       margin: 0;
     }
   }
 
   &__input {
-    
+    @include modal-input;
+
     &.invalid {
-      outline: 1px solid red;
-      outline-offset: -1px;
+     @include modal-input-invalid;
     }
 
     &.valid {
-      outline: 1px solid green;
-      outline-offset: -1px;
+      @include modal-input-valid;
+    }
+
+    &::placeholder {
+      @include modal-placeholder;
     }
   }
 
-  &__label{}
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+  }
 
-  &__error-wrapper {
-    height: 11.5px;
+  &__mark {
+    text-transform: uppercase;
   }
 
   &__error {
-    font-size: 10px;
     color: red;
   }
 }

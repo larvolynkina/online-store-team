@@ -1,0 +1,16 @@
+@import "../../sass/abstracts/variables";
+
+.nav__item {
+  &:not(:last-child) {
+    margin: 0 5px 0 0;
+  }
+}
+
+.nav__btn {
+  box-sizing: border-box;
+  padding: 3px;
+  border-radius: 3px;
+  min-width: 20px;
+  background: $background-color-light;
+  font-size: 12px;
+}

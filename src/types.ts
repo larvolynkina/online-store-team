@@ -72,11 +72,9 @@ interface IInput extends IValidations{
   isValidInputs: boolean;
   setInputValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setDirtyInput: () => void;
-  clearInput: () => void;
 }
 
 interface IModal {
-  className: string;
   setModalVisible: React.Dispatch<SetStateAction<boolean>>;
   setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
   setOrder: Dispatch<SetStateAction<boolean>>;
@@ -90,8 +88,8 @@ interface IModalForm {
   phone: IInput;
   address: IInput;
   email: IInput;
-  closeModal: () => void;
-  setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
+  setModalVisible: Dispatch<SetStateAction<boolean>>;
+  setCartEmpty: Dispatch<SetStateAction<boolean>>;
   setOrder: Dispatch<SetStateAction<boolean>>;
 }
 

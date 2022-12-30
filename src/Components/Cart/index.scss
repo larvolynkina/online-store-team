@@ -65,3 +65,25 @@
     }
   }
 }
+
+.pages {
+  display: flex;
+  align-items: center;
+
+  &__label {
+    color: $background-color-light;
+    font-size: 14px;
+    padding: 0 5px 0;
+  }
+
+  &__input {
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+    background: $background-color-light;
+    border: none;
+    padding: 3px 5px;
+    max-width: 30px;
+    text-align: center;
+  }
+}

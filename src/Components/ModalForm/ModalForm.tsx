@@ -21,9 +21,7 @@ export default function ModalForm(
 ) {
   const navigate: NavigateFunction = useNavigate();
 
-  function validateForm(event: React.MouseEvent) {
-    event.preventDefault();
-
+  function validateForm() {
     if (cardNumber.isValidInputs && cardValid.isValidInputs && cardCvv.isValidInputs
       && name.isValidInputs && phone.isValidInputs && address.isValidInputs
       && email.isValidInputs) {
@@ -47,7 +45,7 @@ export default function ModalForm(
   }
 
   return (
-    <form action="" className="modal__form form">
+    <form action="" className="modal__form form" onSubmit={(e: React.FormEvent) => e.preventDefault()}>
       <FormGroupPersonal
         name={name}
         phone={phone}
@@ -62,7 +60,7 @@ export default function ModalForm(
       <button
         type="submit"
         className="form__confirm-btn"
-        onClick={(e: React.MouseEvent):void => validateForm(e)}
+        onClick={():void => validateForm()}
       >
         confirm
       </button>

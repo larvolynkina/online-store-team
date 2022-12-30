@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import CartList from '../CartList/CartList';
 import CartEmpty from '../CartEmpty/CartEmpty';
 import CartSummary from '../CartSummary/CartSummary';
@@ -32,14 +32,32 @@ export default function Cart(
     isOrder: boolean,
   },
 ) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const limit: string | number = searchParams.get('limit') || 3;
+  const page: string | number = searchParams.get('page') || 1;
+
   const [currentCart, setCurrentCart] = useState<ICartItem[]>(cart);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(3);
-  const [pagesInputValue, setPagesInputValue] = useState<string>('3');
+  const [itemsPerPage, setItemsPerPage] = useState<number>(Number(page));
+  const [pagesInputValue, setPagesInputValue] = useState<string | number>(limit);
 
   const indexOfLastItem: number = currentPage * itemsPerPage;
   const indexOfFirstItem: number = indexOfLastItem - itemsPerPage;
   const currentItems: ICartItem[] = currentCart.slice(indexOfFirstItem, indexOfLastItem);
+
+  function setQueryParams(key: string, value: string): void {
+    searchParams.set(key, value);
+    setSearchParams(searchParams);
+  }
+
+  function handlePagesInput(event: React.ChangeEvent) {
+    const target = event.target as HTMLInputElement;
+    const inputValue: string = target.value.replace(/[^\d]/g, '');
+    if (inputValue) {
+      setQueryParams('limit', inputValue);
+    }
+    setPagesInputValue(inputValue);
+  }
 
   useEffect(() => {
     headerRender();
@@ -76,20 +94,19 @@ export default function Cart(
                   <CartPagination
                     currentCart={currentCart}
                     itemsPerPage={itemsPerPage}
-                    setCurrentPage={(number: number): void => setCurrentPage(number)}
+                    setCurrentPage={(value: number): void => setCurrentPage(value)}
+                    setQueryParams={(key: string, value: string):void => setQueryParams(key, value)}
                   />
                   <div className="cart__pages pages">
                     <label htmlFor="pages-input" className="pages__label">Items per page:</label>
                     <input
                       type="text"
                       className="pages__input"
+                      name="pages"
                       value={pagesInputValue}
                       id="pages-input"
                       maxLength={2}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                        const inputValue: string = e.target.value.replace(/[^\d]/g, '');
-                        setPagesInputValue(inputValue);
-                      }}
+                      onChange={(e: React.ChangeEvent): void => handlePagesInput(e)}
                     />
                   </div>
                 </header>
@@ -103,7 +120,11 @@ export default function Cart(
                   <Link to="/" className="cart__btn cart__btn_continue">
                     continue shopping
                   </Link>
-                  <button type="button" className="cart__btn cart__btn_clear" onClick={() => setCartEmpty(true)}>
+                  <button
+                    type="button"
+                    className="cart__btn cart__btn_clear"
+                    onClick={(): void => setCartEmpty(true)}
+                  >
                     clear cart
                   </button>
                 </div>

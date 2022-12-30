@@ -1,3 +1,4 @@
+import React from 'react';
 import { ICartItem } from '../../types';
 import './index.scss';
 import CartPaginationItem from '../CartPaginationItem/CartPaginationItem';
@@ -7,11 +8,13 @@ export default function CartPagination(
     currentCart,
     itemsPerPage,
     setCurrentPage,
+    setQueryParams,
   } :
   {
     currentCart: ICartItem[],
     itemsPerPage: number,
-    setCurrentPage: (number: number) => void
+    setCurrentPage: (number: number) => void,
+    setQueryParams: (key: string, value: string) => void,
   },
 ) {
   function createBtns() {
@@ -30,9 +33,9 @@ export default function CartPagination(
         {pagesBtns.map((btnNum: number) => (
           <CartPaginationItem
             btnNum={btnNum}
-            itemsPerPage={itemsPerPage}
             key={btnNum}
             setCurrentPage={(number: number) => setCurrentPage(number)}
+            setQueryParams={setQueryParams}
           />
         ))}
       </ul>

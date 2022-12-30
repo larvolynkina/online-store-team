@@ -1,21 +1,110 @@
-.item-cart{
+@import '../../sass/abstracts/variables';
+
+.item-cart {
   display: flex;
+  cursor: pointer;
 
-  &__number{}
-
-  &__details{
-    cursor: pointer;
+  &:not(:last-child) {
+    margin: 0 0 15px 0;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid $light-grey-color;
   }
 
-  &__title{}
+  &__number {
+    margin: 0 15px 0 0;
+    align-self: center;
+  }
 
-  &__description{}
+  &__img-wrapper{
+    flex: 0 0 300px;
+    height: 200px;
+    overflow: hidden;
+    border: 1px solid $light-grey-color;
+    border-radius: 5px;
+    margin: 0 15px 0 0;
+  }
 
-  &__rating{}
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-  &__controls{}
+  &__details{
+    flex: 1 1 auto;
+    margin: 0 30px 0 0;
+  }
 
-  &__stock{}
+  &__title {
+    font-weight: 400;
+    border-bottom: 1px solid $main-color;
+    margin: 0 30px 10px 0;
+    padding: 0 0 5px 0;
+  }
 
-  &__count-control{}
+  &__description {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0 0 10px 0;
+  }
+
+  &__rating {
+    padding: 6px 30px 6px 10px;
+    margin: 0 0 10px 0;
+    border-radius: 3px;
+    min-width: 30px;
+    background: url('../../assets/icons/rating.svg') top 45% right 10px no-repeat, $main-color;
+    font-size: 14px;
+    line-height: 17px;
+    color: $background-color-light;
+    width: max-content;
+  }
+
+  &__price {
+    padding: 6px 10px 6px 10px;
+    border-radius: 3px;
+    min-width: 40px;
+    background: $light-grey-color;
+    font-size: 14px;
+    line-height: 17px;
+    width: max-content;
+    text-align: center;
+  }
+
+  &__controls {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+  }
+
+  &__stock {
+    margin: 0 0 5px 0;
+    padding: 0 10px 10px 10px;
+  }
+
+  &__stock-label {
+    margin: 0 5px 0 0;
+  }
+
+  &__stock-content {
+    font-weight: 300;
+  }
+
+  &__sum {
+    font-weight: 300;
+  }
+}
+
+.control {
+  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+
+  &__count {
+    min-width: 20px;
+    text-align: center;
+  }
 }

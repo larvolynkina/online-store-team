@@ -1,0 +1,19 @@
+.control__btn {
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+
+  &_increase {
+    margin: 0 0 0 3px;
+  }
+
+  &_decrease {
+    margin: 0 3px 0 0;
+  }
+}
+
+.control__btn-img {
+  width: 100%;
+  height: 100%;
+}

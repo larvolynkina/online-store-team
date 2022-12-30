@@ -16,6 +16,7 @@ export default function ModalForm(
     email,
     closeModal,
     setCartEmpty,
+    setOrder,
   }: IModalForm,
 ) {
   const navigate: NavigateFunction = useNavigate();
@@ -26,12 +27,14 @@ export default function ModalForm(
     if (cardNumber.isValidInputs && cardValid.isValidInputs && cardCvv.isValidInputs
       && name.isValidInputs && phone.isValidInputs && address.isValidInputs
       && email.isValidInputs) {
-      closeModal();
+      setOrder(true);
       setCartEmpty(true);
+      closeModal();
 
-      setTimeout(() => {
+      setTimeout(():void => {
         navigate('/');
-      }, 3000);
+        setOrder(false);
+      }, 4000);
     } else {
       cardNumber.setDirtyInput();
       cardValid.setDirtyInput();

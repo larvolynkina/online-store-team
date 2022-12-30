@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TPromocodes, TPromo } from '../../types';
 import PromoCodesItem from '../PromoCodesItem/PromoCodesItem';
 import './index.scss';
+import arrowDown from '../../assets/icons/arrowDown.svg';
 
 export default function SummaryPromo(
   {
@@ -21,6 +22,7 @@ export default function SummaryPromo(
   const [isValidCode, setIsValidCode] = useState<boolean>(false);
   const [isAppliedCode, setIsAppliedCode] = useState<boolean>(false);
   const [currentCode, setCurrentCode] = useState<string>('');
+  const [isCodesVisible, setCodesVisible] = useState<boolean>(false);
 
   function changeInputValue(event: React.FocusEvent<HTMLInputElement>):void {
     const target = event.target as HTMLInputElement;
@@ -29,9 +31,13 @@ export default function SummaryPromo(
 
   function applyDiscount():void {
     let discounted: number = total;
+    let discountSum = 0;
+
     Object.values(appliedPromoCodes).forEach((item: [string, number]) => {
-      discounted = Math.floor(discounted - ((discounted / 100) * item[1]));
+      discountSum += item[1];
     });
+
+    discounted = Math.floor(discounted - ((discounted / 100) * discountSum));
     setAmount(discounted);
   }
 
@@ -97,21 +103,26 @@ export default function SummaryPromo(
         className="promo__input"
         onChange={(e: React.FocusEvent<HTMLInputElement>):void => changeInputValue(e)}
       />
-      {isValidCode && (
-      <div className="promo__output">
-        <p className="promo__title">{`${validPromoCodes[currentCode][0]} - ${validPromoCodes[currentCode][1]}%`}</p>
-        {!isAppliedCode
+      <div className="promo__output-wrapper">
+        {isValidCode && (
+        <div className="promo__output">
+          <p className="promo__title">{`${validPromoCodes[currentCode][0]} - ${validPromoCodes[currentCode][1]}%`}</p>
+          {!isAppliedCode
         && (
         <button className="promo__btn" type="button" onClick={():void => addNewPromocode()}>
           Add
         </button>
         )}
+        </div>
+        )}
       </div>
-      )}
-      {Object.keys(appliedPromoCodes).length > 0 && (
-      <div>
-        <h4>Applied codes</h4>
-        <ul className="promo__list applied-codes">
+      <div className="promo__applied applied">
+        <button type="button" className="applied__btn" onClick={():void => setCodesVisible(!isCodesVisible)}>
+          <span className="applied__title">Applied codes</span>
+          <img src={arrowDown} alt="open arrow" className={isCodesVisible ? 'applied__arrow up' : 'applied__arrow'} />
+        </button>
+        {Object.keys(appliedPromoCodes).length > 0 && (
+        <ul className={isCodesVisible ? 'applied__codes-list codes-list visible' : 'applied__codes-list codes-list'}>
           {Object.entries(appliedPromoCodes)
             .map((item: [string, [string, number]]) => (
               <PromoCodesItem
@@ -122,8 +133,8 @@ export default function SummaryPromo(
               />
             ))}
         </ul>
+        )}
       </div>
-      )}
     </div>
   );
 }

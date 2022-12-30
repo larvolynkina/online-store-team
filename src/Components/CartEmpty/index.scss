@@ -1,0 +1,34 @@
+@import '../../sass/abstracts/variables';
+
+.cart__order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart__order-item {
+  &:last-child {
+    color: $main-color;
+  }
+}
+
+.cart__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart__empty-message {
+  margin: 0 0 10px 0;
+}
+
+.cart__empty-link {
+  font-size: 14px;
+  color: $main-color;
+  border-bottom: 1px solid $main-color;
+  transition: all 0.5s ease;
+
+  &:hover {
+    color: $hover-color;
+  }
+}

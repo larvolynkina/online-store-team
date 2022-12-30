@@ -1,7 +1,7 @@
-import React, { SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 export enum ProductInnerButton {
-  Remove = 'Remove from cart',
+  Remove = 'Remove',
   Add = 'Add to cart'
 }
 
@@ -79,6 +79,7 @@ interface IModal {
   className: string;
   setModalVisible: React.Dispatch<SetStateAction<boolean>>;
   setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
+  setOrder: Dispatch<SetStateAction<boolean>>;
 }
 
 interface IModalForm {
@@ -91,6 +92,7 @@ interface IModalForm {
   email: IInput;
   closeModal: () => void;
   setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
+  setOrder: Dispatch<SetStateAction<boolean>>;
 }
 
 type TBreadcrumbs = Pick<IProduct, 'category' | 'brand' | 'title'>;
@@ -115,10 +117,10 @@ type TPromoCodesItem = {
 type TCountButton = {
   className: string;
   onClick: () => void;
-  children: string
+  src: string;
 }
 
-interface TProductCard {
+interface IProductCard {
   product: IProduct;
   products: IProduct[];
   headerRender: () => void;
@@ -129,5 +131,5 @@ interface TProductCard {
 export type {
   IProduct, IData, ICartItem, IGallery, IGalleryImage, IImageLink, TBreadcrumbs,
   TPromocodes, TPromo, TPromoCodesItem, TImages, IInput, IValidations, IModal, IModalForm,
-  TCountButton, TProductCard,
+  TCountButton, IProductCard,
 };

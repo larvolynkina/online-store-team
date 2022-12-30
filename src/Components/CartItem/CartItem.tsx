@@ -3,6 +3,8 @@ import React, { useEffect, useState, SetStateAction } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { ICartItem, IProduct } from '../../types';
 import CartCountButton from '../CartCountButton/CartCountButton';
+import plusCircle from '../../assets/icons/plusCircle.svg';
+import minusCircle from '../../assets/icons/minusCircle.svg';
 
 export default function CartItem(
   {
@@ -76,20 +78,34 @@ export default function CartItem(
   return (
     <li className="cart__item item-cart" onClick={(e: React.MouseEvent):void => goToProductPage(e)} role="presentation">
       <div className="item-cart__number">{index}</div>
-      <img className="cart-item__img" src={cartItem.thumbnail} alt={cartItem.title} />
+      <div className="item-cart__img-wrapper">
+        <img className="cart-item__img" src={cartItem.thumbnail} alt={cartItem.title} />
+      </div>
       <div className="item-cart__details">
         <h3 className="item-cart__title">{cartItem.title}</h3>
         <p className="item-cart__description">{cartItem.description}</p>
-        <p className="item cart__rating">{cartItem.rating}</p>
+        <div className="item-cart__rating">{cartItem.rating}</div>
+        <div className="item-cart__price">{`$${cartItem.price}`}</div>
       </div>
       <div className="item-cart__controls">
-        <p className="item-cart__stock">{`Stock: ${cartItem.stock}`}</p>
+        <p className="item-cart__stock">
+          <span className="item-cart__stock-label">Stock:</span>
+          <span className="item-cart__stock-content">{cartItem.stock}</span>
+        </p>
         <div className="item-cart__count-control control">
-          <CartCountButton className="control__btn control__btn_decrease" onClick={():void => decreaseCount()}>-</CartCountButton>
+          <CartCountButton
+            className="control__btn control__btn_decrease"
+            onClick={():void => decreaseCount()}
+            src={minusCircle}
+          />
           <span className="control__count">{itemCount}</span>
-          <CartCountButton className="control__btn control__btn_increase" onClick={():void => increaseCount()}>+</CartCountButton>
+          <CartCountButton
+            className="control__btn control__btn_increase"
+            onClick={():void => increaseCount()}
+            src={plusCircle}
+          />
         </div>
-        <p className="item-cart__sum">{sum}</p>
+        <p className="item-cart__sum">{`$${sum}`}</p>
       </div>
     </li>
   );

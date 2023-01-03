@@ -1,6 +1,6 @@
 import './index.scss';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import React, { SetStateAction } from 'react';
+import { TStateAction } from '../../types';
 
 export default function ProductBuyButton(
   {
@@ -12,8 +12,8 @@ export default function ProductBuyButton(
   {
     headerRender: () => void,
     addItem: () => void,
-    productInCart: boolean
-    setModalVisible: React.Dispatch<SetStateAction<boolean>>
+    productInCart: boolean,
+    setModalVisible: TStateAction<boolean>
   },
 ) {
   const navigate: NavigateFunction = useNavigate();

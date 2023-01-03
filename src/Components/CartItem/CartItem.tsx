@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events,
+jsx-a11y/no-noninteractive-element-interactions */
 import './index.scss';
-import React, { useEffect, useState, SetStateAction } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { ICartItem, IProduct } from '../../types';
+import { ICartItem, TItemCart } from '../../types';
 import CartCountButton from '../CartCountButton/CartCountButton';
 import plusCircle from '../../assets/icons/plusCircle.svg';
 import minusCircle from '../../assets/icons/minusCircle.svg';
@@ -14,35 +16,27 @@ export default function CartItem(
     count,
     setCurrentCart,
     setCartEmpty,
-  } :
-  {
-    currentCart: ICartItem[],
-    cartItem: IProduct,
-    index: number,
-    count: number,
-    setCurrentCart: React.Dispatch<SetStateAction<ICartItem[]>>,
-    setCartEmpty: React.Dispatch<SetStateAction<boolean>>,
-  },
+  } : TItemCart,
 ) {
   const [itemCount, setItemCount] = useState<number>(count);
   const [sum, setSum] = useState<number>(cartItem.price);
   const navigate: NavigateFunction = useNavigate();
 
-  function increaseCount():void {
+  function increaseCount(): void {
     if (itemCount >= cartItem.stock) {
       return;
     }
     setItemCount(itemCount + 1);
   }
 
-  function decreaseCount():void {
+  function decreaseCount(): void {
     if (itemCount < 1) {
       return;
     }
     setItemCount(itemCount - 1);
   }
 
-  function updateCart():void {
+  function updateCart(): void {
     const curCart: Array<ICartItem> = currentCart.map((item: ICartItem) => {
       const newItem: ICartItem = { ...item };
       if (newItem.id === cartItem.id) {
@@ -81,7 +75,7 @@ export default function CartItem(
   }, [itemCount]);
 
   return (
-    <li className="cart__item item-cart" onClick={(e: React.MouseEvent):void => goToProductPage(e)} role="presentation">
+    <li className="cart__item item-cart" onClick={(e: React.MouseEvent):void => goToProductPage(e)}>
       <div className="item-cart__number">{index}</div>
       <div className="item-cart__img-wrapper">
         <img className="cart-item__img" src={cartItem.thumbnail} alt={cartItem.title} />

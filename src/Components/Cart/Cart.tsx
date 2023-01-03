@@ -1,7 +1,5 @@
 import './index.scss';
 import React, {
-  Dispatch,
-  SetStateAction,
   useEffect,
   useState,
 } from 'react';
@@ -10,7 +8,7 @@ import CartList from '../CartList/CartList';
 import CartEmpty from '../CartEmpty/CartEmpty';
 import CartSummary from '../CartSummary/CartSummary';
 import CartPagination from '../CartPagination/CartPagination';
-import { IProduct, ICartItem } from '../../types';
+import { ICartItem, ICart } from '../../types';
 
 export default function Cart(
   {
@@ -21,16 +19,7 @@ export default function Cart(
     setCartEmpty,
     cart,
     isOrder,
-  }:
-  {
-    products: Array<IProduct>,
-    setModalVisible: Dispatch<SetStateAction<boolean>>,
-    headerRender: () => void,
-    isCartEmpty: boolean,
-    setCartEmpty: Dispatch<SetStateAction<boolean>>,
-    cart: Array<ICartItem>,
-    isOrder: boolean,
-  },
+  }: ICart,
 ) {
   const [searchParams, setSearchParams] = useSearchParams();
   const limit: string | number = searchParams.get('limit') || 3;

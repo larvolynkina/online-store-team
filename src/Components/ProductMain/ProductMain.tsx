@@ -2,13 +2,13 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import './ProductMain.scss';
 import { useNavigate } from 'react-router-dom';
-import React, { SetStateAction, useEffect, useState } from 'react';
-import { IProduct, ICartItem } from '../../types';
+import React, { useEffect, useState } from 'react';
+import { IProduct, ICartItem, TStateAction } from '../../types';
 
 type ProductMainProps = {
   product: IProduct;
   headerRender: () => void;
-  setCartEmpty: React.Dispatch<SetStateAction<boolean>>
+  setCartEmpty: TStateAction<boolean>;
 };
 
 type TCartArray = Array<ICartItem>;

@@ -5,10 +5,12 @@ import ProductGalleryImage from '../ProductGalleryImage/ProductGalleryImage';
 import { IGallery } from '../../types';
 
 export default function ProductGallery({ images = [], title }: IGallery) {
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState<string>('');
+
   useEffect(() => {
     setUrl(images[0]);
   }, [images[0]]);
+
   return (
     <section className="card-product__gallery gallery-product">
       <ul className="gallery-product__list">

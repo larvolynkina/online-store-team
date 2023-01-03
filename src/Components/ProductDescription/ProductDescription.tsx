@@ -1,8 +1,8 @@
 import './index.scss';
-import React, { SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import ProductBuyButton from '../ProductBuyButton/ProductBuyButton';
 import ProductCartButton from '../ProductCartButton/ProductCartButton';
-import { ProductInnerButton, IProduct } from '../../types';
+import { IProductDescription } from '../../types';
 import arrowDown from '../../assets/icons/arrowDown.svg';
 
 function ProductDescription(
@@ -15,19 +15,9 @@ function ProductDescription(
     addItem,
     removeItem,
     setModalVisible,
-  }:
-   {
-    productInCart: boolean,
-    setProductInCart: React.Dispatch<SetStateAction<boolean>>
-    product: IProduct,
-    headerRender: () => void,
-    btnInner: ProductInnerButton,
-    addItem: () => void,
-    removeItem: () => void,
-    setModalVisible: React.Dispatch<SetStateAction<boolean>>
-  },
+  }: IProductDescription,
 ) {
-  const [isDescription, setDescription] = useState(false);
+  const [isDescription, setDescription] = useState<boolean>(false);
   return (
     <section className="card-product__desc desc-card">
       <h3 className="desc-card__title">{product.title}</h3>

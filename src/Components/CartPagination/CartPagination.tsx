@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ICartItem } from '../../types';
+import { TCartPagination } from '../../types';
 import './index.scss';
 import CartPaginationItem from '../CartPaginationItem/CartPaginationItem';
 import doubleArrowLeft from '../../assets/icons/doubleArrowLeft.svg';
@@ -12,17 +12,10 @@ export default function CartPagination(
     setCurrentPage,
     setQueryParams,
     currentPage,
-  } :
-  {
-    currentCart: ICartItem[],
-    itemsPerPage: number,
-    setCurrentPage: (number: number) => void,
-    setQueryParams: (key: string, value: string) => void,
-    currentPage: number,
-  },
+  } : TCartPagination,
 ) {
-  const [isDisabledPrevBtn, setDisabledPrevBtn] = useState(false);
-  const [isDisabledNextBtn, setDisabledNextBtn] = useState(false);
+  const [isDisabledPrevBtn, setDisabledPrevBtn] = useState<boolean>(false);
+  const [isDisabledNextBtn, setDisabledNextBtn] = useState<boolean>(false);
 
   const totalPages: number = Math.ceil(currentCart.length / itemsPerPage);
 

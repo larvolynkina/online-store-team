@@ -1,9 +1,11 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { SetStateAction } from 'react';
 
 export enum ProductInnerButton {
   Remove = 'Remove',
   Add = 'Add to cart'
 }
+
+type TStateAction<T> = React.Dispatch<SetStateAction<T>>;
 
 interface IProduct {
   brand: string,
@@ -39,7 +41,7 @@ interface IGallery{
 
 interface IGalleryImage{
   url: string;
-  alt: string | undefined;
+  alt: string;
 }
 
 interface IImageLink{
@@ -75,9 +77,9 @@ interface IInput extends IValidations{
 }
 
 interface IModal {
-  setModalVisible: React.Dispatch<SetStateAction<boolean>>;
-  setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
-  setOrder: Dispatch<SetStateAction<boolean>>;
+  setModalVisible: TStateAction<boolean>;
+  setCartEmpty: TStateAction<boolean>;
+  setOrder: TStateAction<boolean>;
 }
 
 interface IModalForm {
@@ -88,9 +90,9 @@ interface IModalForm {
   phone: IInput;
   address: IInput;
   email: IInput;
-  setModalVisible: Dispatch<SetStateAction<boolean>>;
-  setCartEmpty: Dispatch<SetStateAction<boolean>>;
-  setOrder: Dispatch<SetStateAction<boolean>>;
+  setModalVisible: TStateAction<boolean>;
+  setCartEmpty: TStateAction<boolean>;
+  setOrder: TStateAction<boolean>;
 }
 
 type TBreadcrumbs = Pick<IProduct, 'category' | 'brand' | 'title'>;
@@ -100,8 +102,8 @@ type TPromocodes = {
 }
 
 type TPromo = {
-  setDiscount: React.Dispatch<SetStateAction<boolean>>;
-  setAmount: React.Dispatch<SetStateAction<number>>;
+  setDiscount: TStateAction<boolean>;
+  setAmount: TStateAction<number>;
   total: number;
   promocodes: TPromocodes;
 }
@@ -118,16 +120,62 @@ type TCountButton = {
   src: string;
 }
 
+interface ICart {
+  products: Array<IProduct>;
+  setModalVisible: TStateAction<boolean>;
+  headerRender: () => void;
+  isCartEmpty: boolean;
+  setCartEmpty: TStateAction<boolean>;
+  cart: Array<ICartItem>;
+  isOrder: boolean;
+}
+
 interface IProductCard {
   product: IProduct;
   products: IProduct[];
   headerRender: () => void;
-  setModalVisible: React.Dispatch<SetStateAction<boolean>>;
-  setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
+  setModalVisible: TStateAction<boolean>;
+  setCartEmpty: TStateAction<boolean>;
 }
 
+interface ICartList {
+  products: Array<IProduct>;
+  currentCart: Array<ICartItem>;
+  currentItems: Array<ICartItem>;
+  setCurrentCart: TStateAction<ICartItem[]>;
+  setCartEmpty: TStateAction<boolean>;
+}
+
+type TItemCart = {
+  currentCart: ICartItem[];
+  cartItem: IProduct;
+  index: number;
+  count: number;
+  setCurrentCart: TStateAction<ICartItem[]>;
+  setCartEmpty: TStateAction<boolean>;
+}
+
+ type TCartPagination = {
+  currentCart: ICartItem[];
+  itemsPerPage: number;
+  setCurrentPage: (number: number) => void;
+  setQueryParams: (key: string, value: string) => void;
+  currentPage: number;
+ }
+
+ interface IProductDescription {
+  productInCart: boolean;
+  setProductInCart: TStateAction<boolean>;
+  product: IProduct;
+  headerRender: () => void;
+  btnInner: ProductInnerButton;
+  addItem: () => void;
+  removeItem: () => void;
+  setModalVisible: TStateAction<boolean>;
+ }
+
 export type {
-  IProduct, IData, ICartItem, IGallery, IGalleryImage, IImageLink, TBreadcrumbs,
+  IProduct, IData, ICartItem, ICart, ICartList, IGallery, IGalleryImage, IImageLink, TBreadcrumbs,
   TPromocodes, TPromo, TPromoCodesItem, TImages, IInput, IValidations, IModal, IModalForm,
-  TCountButton, IProductCard,
+  TCountButton, IProductCard, TItemCart, TCartPagination, TStateAction, IProductDescription,
 };

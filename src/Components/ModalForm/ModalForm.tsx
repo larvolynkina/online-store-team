@@ -45,7 +45,7 @@ export default function ModalForm(
   }
 
   return (
-    <form action="" className="modal__form form" onSubmit={(e: React.FormEvent) => e.preventDefault()}>
+    <form action="" className="modal__form form" onSubmit={(e: React.FormEvent): void => e.preventDefault()}>
       <FormGroupPersonal
         name={name}
         phone={phone}

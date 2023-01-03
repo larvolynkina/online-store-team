@@ -9,12 +9,14 @@ export default function CartList(
     currentCart,
     currentItems,
     setCurrentCart,
+    setCartEmpty,
   }:
   {
     products: Array<IProduct>,
     currentCart: Array<ICartItem>,
     currentItems: Array<ICartItem>,
-    setCurrentCart: React.Dispatch<SetStateAction<ICartItem[]>>
+    setCurrentCart: React.Dispatch<SetStateAction<ICartItem[]>>,
+    setCartEmpty: React.Dispatch<SetStateAction<boolean>>
   },
 ) {
   function getCartItems():IProduct[] {
@@ -41,6 +43,7 @@ export default function CartList(
           count={currentCart[index].count}
           currentCart={currentCart}
           setCurrentCart={setCurrentCart}
+          setCartEmpty={setCartEmpty}
         />
       ))}
     </ul>

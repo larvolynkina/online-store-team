@@ -37,8 +37,8 @@ export default function Cart(
   const page: string | number = searchParams.get('page') || 1;
 
   const [currentCart, setCurrentCart] = useState<ICartItem[]>(cart);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(Number(page));
+  const [currentPage, setCurrentPage] = useState<number>(Number(page));
+  const [itemsPerPage, setItemsPerPage] = useState<number>(Number(limit));
   const [pagesInputValue, setPagesInputValue] = useState<string | number>(limit);
 
   const indexOfLastItem: number = currentPage * itemsPerPage;
@@ -50,7 +50,7 @@ export default function Cart(
     setSearchParams(searchParams);
   }
 
-  function handlePagesInput(event: React.ChangeEvent) {
+  function handlePagesInput(event: React.ChangeEvent): void {
     const target = event.target as HTMLInputElement;
     const inputValue: string = target.value.replace(/[^\d]/g, '');
     if (inputValue) {
@@ -67,6 +67,7 @@ export default function Cart(
     if (isCartEmpty) {
       setCurrentCart([]);
       localStorage.setItem('cart_@vFKSQ', JSON.stringify([]));
+      setSearchParams({});
     }
   }, [isCartEmpty]);
 
@@ -77,10 +78,16 @@ export default function Cart(
   }, [pagesInputValue]);
 
   useEffect(() => {
-    if (!currentItems.length) {
+    if (!currentItems.length && currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   }, [currentItems]);
+
+  useEffect(() => {
+    if (searchParams.has('page')) {
+      setQueryParams('page', String(currentPage));
+    }
+  }, [currentPage]);
 
   return (
     <div className="cart">
@@ -96,6 +103,7 @@ export default function Cart(
                     itemsPerPage={itemsPerPage}
                     setCurrentPage={(value: number): void => setCurrentPage(value)}
                     setQueryParams={(key: string, value: string):void => setQueryParams(key, value)}
+                    currentPage={currentPage}
                   />
                   <div className="cart__pages pages">
                     <label htmlFor="pages-input" className="pages__label">Items per page:</label>
@@ -115,6 +123,7 @@ export default function Cart(
                   currentCart={currentCart}
                   setCurrentCart={setCurrentCart}
                   products={products}
+                  setCartEmpty={setCartEmpty}
                 />
                 <div className="cart__btns">
                   <Link to="/" className="cart__btn cart__btn_continue">

@@ -13,13 +13,15 @@ export default function CartItem(
     index,
     count,
     setCurrentCart,
+    setCartEmpty,
   } :
   {
     currentCart: ICartItem[],
     cartItem: IProduct,
     index: number,
     count: number,
-    setCurrentCart: React.Dispatch<SetStateAction<ICartItem[]>>
+    setCurrentCart: React.Dispatch<SetStateAction<ICartItem[]>>,
+    setCartEmpty: React.Dispatch<SetStateAction<boolean>>,
   },
 ) {
   const [itemCount, setItemCount] = useState<number>(count);
@@ -57,6 +59,9 @@ export default function CartItem(
       .filter((item: ICartItem) => item.id !== cartItem.id);
     setCurrentCart(filteredCart);
     localStorage.setItem('cart_@vFKSQ', JSON.stringify(filteredCart));
+    if (!filteredCart.length) {
+      setCartEmpty(true);
+    }
   }
 
   function goToProductPage(e: React.MouseEvent):void {

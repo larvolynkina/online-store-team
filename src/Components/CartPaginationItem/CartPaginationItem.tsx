@@ -3,27 +3,29 @@ import React from 'react';
 
 export default function CartPaginationItem(
   {
-    btnNum,
+    page,
     setCurrentPage,
     setQueryParams,
+    currentPage,
   } :
   {
-    btnNum: number,
+    page: number,
     setCurrentPage: (number: number) => void,
-    setQueryParams: (key: string, value: string) => void
+    setQueryParams: (key: string, value: string) => void,
+    currentPage: number,
   },
 ) {
   return (
     <li className="nav__item">
       <button
         type="button"
-        className="nav__btn"
+        className={currentPage === page ? 'nav__btn active' : 'nav__btn'}
         onClick={():void => {
-          setCurrentPage(btnNum);
-          setQueryParams('page', String(btnNum));
+          setCurrentPage(+page);
+          setQueryParams('page', String(page));
         }}
       >
-        {btnNum}
+        {page}
       </button>
     </li>
   );

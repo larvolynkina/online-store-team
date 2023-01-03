@@ -6,7 +6,6 @@ import { IInput, IModal } from '../../types';
 
 export default function Modal(
   {
-    className,
     setModalVisible,
     setCartEmpty,
     setOrder,
@@ -20,21 +19,11 @@ export default function Modal(
   const address: IInput = useInput('', 'personal__input', { isEmpty: true, isAddress: false });
   const email: IInput = useInput('', 'personal__input', { isEmpty: true, isEmail: false });
 
-  function closeModal() {
-    setModalVisible(false);
-    cardNumber.clearInput();
-    cardValid.clearInput();
-    cardCvv.clearInput();
-    name.clearInput();
-    phone.clearInput();
-    address.clearInput();
-    email.clearInput();
-  }
   return (
     <div
-      className={className}
+      className="modal"
       role="presentation"
-      onClick={():void => closeModal()}
+      onClick={():void => setModalVisible(false)}
     >
       <div className="modal__wrapper">
         <div
@@ -50,7 +39,7 @@ export default function Modal(
             phone={phone}
             address={address}
             email={email}
-            closeModal={():void => closeModal()}
+            setModalVisible={setModalVisible}
             setCartEmpty={setCartEmpty}
             setOrder={setOrder}
           />

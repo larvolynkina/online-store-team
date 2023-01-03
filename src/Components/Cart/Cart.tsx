@@ -1,16 +1,14 @@
 import './index.scss';
 import React, {
-  Dispatch,
-  SetStateAction,
   useEffect,
   useState,
 } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import CartList from '../CartList/CartList';
 import CartEmpty from '../CartEmpty/CartEmpty';
 import CartSummary from '../CartSummary/CartSummary';
 import CartPagination from '../CartPagination/CartPagination';
-import { IProduct, ICartItem } from '../../types';
+import { ICartItem, ICart } from '../../types';
 
 export default function Cart(
   {
@@ -21,28 +19,33 @@ export default function Cart(
     setCartEmpty,
     cart,
     isOrder,
-  }:
-  {
-    products: Array<IProduct>,
-    setModalVisible: React.Dispatch<SetStateAction<boolean>>,
-    headerRender: () => void,
-    isCartEmpty: boolean,
-    setCartEmpty: Dispatch<SetStateAction<boolean>>,
-    cart: Array<ICartItem>,
-    isOrder: boolean,
-  },
+  }: ICart,
 ) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const limit: string | number = searchParams.get('limit') || 3;
+  const page: string | number = searchParams.get('page') || 1;
+
   const [currentCart, setCurrentCart] = useState<ICartItem[]>(cart);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage] = useState<number>(3);
+  const [currentPage, setCurrentPage] = useState<number>(Number(page));
+  const [itemsPerPage, setItemsPerPage] = useState<number>(Number(limit));
+  const [pagesInputValue, setPagesInputValue] = useState<string | number>(limit);
 
   const indexOfLastItem: number = currentPage * itemsPerPage;
   const indexOfFirstItem: number = indexOfLastItem - itemsPerPage;
-  const currentItems = currentCart.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems: ICartItem[] = currentCart.slice(indexOfFirstItem, indexOfLastItem);
 
-  function setPage(number: number):void {
-    const num = number;
-    setCurrentPage(num);
+  function setQueryParams(key: string, value: string): void {
+    searchParams.set(key, value);
+    setSearchParams(searchParams);
+  }
+
+  function handlePagesInput(event: React.ChangeEvent): void {
+    const target = event.target as HTMLInputElement;
+    const inputValue: string = target.value.replace(/[^\d]/g, '');
+    if (inputValue) {
+      setQueryParams('limit', inputValue);
+    }
+    setPagesInputValue(inputValue);
   }
 
   useEffect(() => {
@@ -53,8 +56,27 @@ export default function Cart(
     if (isCartEmpty) {
       setCurrentCart([]);
       localStorage.setItem('cart_@vFKSQ', JSON.stringify([]));
+      setSearchParams({});
     }
   }, [isCartEmpty]);
+
+  useEffect(() => {
+    if (pagesInputValue) {
+      setItemsPerPage(Number(pagesInputValue));
+    }
+  }, [pagesInputValue]);
+
+  useEffect(() => {
+    if (!currentItems.length && currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }, [currentItems]);
+
+  useEffect(() => {
+    if (searchParams.has('page')) {
+      setQueryParams('page', String(currentPage));
+    }
+  }, [currentPage]);
 
   return (
     <div className="cart">
@@ -68,20 +90,39 @@ export default function Cart(
                   <CartPagination
                     currentCart={currentCart}
                     itemsPerPage={itemsPerPage}
-                    setPage={(number: number):void => setPage(number)}
+                    setCurrentPage={(value: number): void => setCurrentPage(value)}
+                    setQueryParams={(key: string, value: string):void => setQueryParams(key, value)}
+                    currentPage={currentPage}
                   />
+                  <div className="cart__pages pages">
+                    <label htmlFor="pages-input" className="pages__label">Items per page:</label>
+                    <input
+                      type="text"
+                      className="pages__input"
+                      name="pages"
+                      value={pagesInputValue}
+                      id="pages-input"
+                      maxLength={2}
+                      onChange={(e: React.ChangeEvent): void => handlePagesInput(e)}
+                    />
+                  </div>
                 </header>
                 <CartList
                   currentItems={currentItems}
                   currentCart={currentCart}
                   setCurrentCart={setCurrentCart}
                   products={products}
+                  setCartEmpty={setCartEmpty}
                 />
                 <div className="cart__btns">
                   <Link to="/" className="cart__btn cart__btn_continue">
                     continue shopping
                   </Link>
-                  <button type="button" className="cart__btn cart__btn_clear" onClick={() => setCartEmpty(true)}>
+                  <button
+                    type="button"
+                    className="cart__btn cart__btn_clear"
+                    onClick={(): void => setCartEmpty(true)}
+                  >
                     clear cart
                   </button>
                 </div>

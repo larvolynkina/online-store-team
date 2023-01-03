@@ -70,12 +70,13 @@ export default function RootRouter() {
         </Routes>
       </main>
       <Footer />
+      {isModalVisible && (
       <Modal
-        className={isModalVisible ? 'modal visible' : 'modal'}
         setModalVisible={setModalVisible}
         setCartEmpty={setCartEmpty}
         setOrder={setOrder}
       />
+      )}
     </>
   );
 }

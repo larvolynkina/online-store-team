@@ -14,10 +14,6 @@ export default function useInput(
   const valid: IValidations = useValidation(value, validations);
   const setInputValue = (e: React.ChangeEvent<HTMLInputElement>):void => setValue(e.target.value);
   const setDirtyInput = ():void => setDirty(true);
-  const clearInput = ():void => {
-    setValue('');
-    setDirty(false);
-  };
 
   useEffect(() => {
     if (!isDirty) {
@@ -44,7 +40,6 @@ export default function useInput(
     isValidInputs,
     setInputValue,
     setDirtyInput,
-    clearInput,
     ...valid,
   };
 }

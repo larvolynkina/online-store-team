@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React, { createContext, SetStateAction } from 'react';
+import React, { createContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ProductsMain from '../../Components/ProductsMain/ProductsMain';
 import useFetch from '../../Hooks/useFetch';
 import ProductFilterList from '../../Components/ProductFilterList/ProductFilterList';
 import './index.scss';
-import { IProduct } from '../../types';
+import { IProduct, TStateAction } from '../../types';
 import ProductsMainHeader from '../../Components/ProductsMainHeader/ProductsMainHeader';
 import ProductsNotFound from '../../Components/ProductsNotFound/ProductsNotFound';
 
 type MainProps = {
   headerRender: () => void;
-  setCartEmpty: React.Dispatch<SetStateAction<boolean>>;
+  setCartEmpty: TStateAction<boolean>;
 };
 
 interface IFilterFunctions {

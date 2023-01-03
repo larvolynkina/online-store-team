@@ -1,13 +1,13 @@
-import React, { useState, useEffect, SetStateAction } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ProductMain from '../ProductMain/ProductMain';
-import { IProduct } from '../../types';
+import { IProduct, TStateAction } from '../../types';
 import './ProductsMain.scss';
 
 type ProductsMainProps = {
   products: IProduct[];
   headerRender: () => void;
-  setCartEmpty: React.Dispatch<SetStateAction<boolean>>
+  setCartEmpty: TStateAction<boolean>;
 };
 
 function ProductsMain({ products, headerRender, setCartEmpty }: ProductsMainProps) {

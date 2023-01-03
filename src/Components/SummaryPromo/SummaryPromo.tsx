@@ -87,11 +87,7 @@ export default function SummaryPromo(
 
   useEffect(() => {
     applyDiscount();
-  }, [appliedPromoCodes]);
-
-  useEffect(() => {
-    applyDiscount();
-  }, [total]);
+  }, [appliedPromoCodes, total]);
 
   return (
     <div className="summary__promo promo">

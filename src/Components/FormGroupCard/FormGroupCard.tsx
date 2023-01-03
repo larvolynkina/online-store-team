@@ -60,7 +60,7 @@ export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
 
   return (
     <div className="form__group credit-card">
-      <h3 className="credit-card__title">Card info</h3>
+      <h3 className="credit-card__title">Card information</h3>
       <div className="credit-card__wrapper">
         <div className="credit-card__item credit-card__item_number">
           <label htmlFor="card-number" className="credit-card__label">card number</label>
@@ -84,6 +84,9 @@ export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
             && (cardNumber.isEmpty || !cardNumber.isCardNumber)
             && <p className="credit-card__error">{cardNumber.emptyError || cardNumber.error}</p>}
           </div>
+        </div>
+        <div className="credit-card__item credit-card__item_payment-system">
+          <img className="credit-card__img" src={cardImageSrc} alt="card-icon" />
         </div>
         <div className="credit-card__item credit-card__item_valid">
           <label htmlFor="card-valid" className="credit-card__label">expires</label>
@@ -127,9 +130,6 @@ export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
             && (cardCvv.isEmpty || !cardCvv.isCvv)
             && <p className="credit-card__error">{cardCvv.emptyError || cardCvv.error}</p>}
           </div>
-        </div>
-        <div className="credit-card__item credit-card__item_payment-system">
-          <img className="credit-card__img" src={cardImageSrc} alt="card-icon" />
         </div>
       </div>
     </div>

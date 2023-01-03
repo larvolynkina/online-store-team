@@ -1,10 +1,10 @@
-import React, { SetStateAction, useEffect, useState } from 'react';
-import { ICartItem, TPromocodes } from '../../types';
+import React, { useEffect, useState } from 'react';
+import { ICartItem, TPromocodes, TStateAction } from '../../types';
 import './index.scss';
 import SummaryPromo from '../SummaryPromo/SummaryPromo';
 
 export default function CartSummary({ currentCart, setModalVisible }:
-  {currentCart: ICartItem[], setModalVisible: React.Dispatch<SetStateAction<boolean>>}) {
+  {currentCart: ICartItem[], setModalVisible: TStateAction<boolean>}) {
   const totalProduct: number = currentCart
     .reduce((total: number, product: ICartItem) => total + product.count, 0);
 

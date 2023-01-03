@@ -1,5 +1,4 @@
-import React, { SetStateAction } from 'react';
-import { IProduct, ICartItem } from '../../types';
+import { IProduct, ICartItem, ICartList } from '../../types';
 import CartItem from '../CartItem/CartItem';
 import './index.scss';
 
@@ -9,13 +8,8 @@ export default function CartList(
     currentCart,
     currentItems,
     setCurrentCart,
-  }:
-  {
-    products: Array<IProduct>,
-    currentCart: Array<ICartItem>,
-    currentItems: Array<ICartItem>,
-    setCurrentCart: React.Dispatch<SetStateAction<ICartItem[]>>
-  },
+    setCartEmpty,
+  }: ICartList,
 ) {
   function getCartItems():IProduct[] {
     const itemsArr: IProduct[] = [];
@@ -41,6 +35,7 @@ export default function CartList(
           count={currentCart[index].count}
           currentCart={currentCart}
           setCurrentCart={setCurrentCart}
+          setCartEmpty={setCartEmpty}
         />
       ))}
     </ul>

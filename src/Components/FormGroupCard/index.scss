@@ -1,42 +1,74 @@
+@import "../../sass/abstracts/variables";
+@import "../../sass/abstracts/mixins";
+
 .credit-card {
 
+  margin: 0 0 20px 0;
+
   &__title {
-    margin: 0 0 20px 0;
+    @include modal-title;
+
+    &::after {
+      @include modal-title-after;
+    }
   }
 
-  &__wrapper {}
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    gap: 20px;
+  }
 
   &__item {
     display: flex;
     flex-direction: column;
-    margin: 0 0 10px 0;
-    &:last-child {
-      margin: 0;
+
+    &_number {
+      grid-column: 1/4;
+      grid-row: 1/2;
     }
 
-    &_number {}
+    &_valid {
+      grid-column: 1/2;
+      grid-row: 2/3;
+      max-width: 70px;
+    }
 
-    &_valid {}
-
-    &_cvv {}
+    &_cvv {
+      grid-column: 2/3;
+      grid-row: 2/3;
+      max-width: 70px;
+    }
 
     &_payment-system {
-      width: 50px;
+      width: 40px;
+      height: auto;
+      grid-column: 3/4;
+      grid-row: 2/3;
+      justify-self: end;
     }
   }
 
-  &__label {}
+  &__label {
+    font-size: 10px;
+    text-transform: uppercase;
+  }
 
   &__input {
+    @include modal-input;
+    text-align: center;
     
     &.invalid {
-      outline: 1px solid red;
-      outline-offset: -1px;
+      @include modal-input-invalid;
     }
 
     &.valid {
-      outline: 1px solid green;
-      outline-offset: -1px;
+      @include modal-input-valid;
+    }
+
+    &::placeholder {
+      @include modal-placeholder;
     }
   }
 
@@ -50,8 +82,8 @@
   }
 
   &__img {
-    max-width: 100%;
-    // max-height: 100%;
+    width: 100%;
+    height: 100%;
   }
 
 }

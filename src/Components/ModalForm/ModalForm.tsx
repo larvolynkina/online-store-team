@@ -14,22 +14,20 @@ export default function ModalForm(
     phone,
     address,
     email,
-    closeModal,
+    setModalVisible,
     setCartEmpty,
     setOrder,
   }: IModalForm,
 ) {
   const navigate: NavigateFunction = useNavigate();
 
-  function validateForm(event: React.MouseEvent) {
-    event.preventDefault();
-
+  function validateForm() {
     if (cardNumber.isValidInputs && cardValid.isValidInputs && cardCvv.isValidInputs
       && name.isValidInputs && phone.isValidInputs && address.isValidInputs
       && email.isValidInputs) {
       setOrder(true);
       setCartEmpty(true);
-      closeModal();
+      setModalVisible(false);
 
       setTimeout(():void => {
         navigate('/');
@@ -47,7 +45,7 @@ export default function ModalForm(
   }
 
   return (
-    <form action="" className="modal__form form">
+    <form action="" className="modal__form form" onSubmit={(e: React.FormEvent): void => e.preventDefault()}>
       <FormGroupPersonal
         name={name}
         phone={phone}
@@ -59,7 +57,13 @@ export default function ModalForm(
         cardCvv={cardCvv}
         cardValid={cardValid}
       />
-      <button type="submit" onClick={(e: React.MouseEvent):void => validateForm(e)}>confirm</button>
+      <button
+        type="submit"
+        className="form__confirm-btn"
+        onClick={():void => validateForm()}
+      >
+        confirm
+      </button>
     </form>
   );
 }

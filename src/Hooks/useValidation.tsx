@@ -13,7 +13,7 @@ export default function useValidation(currentValue: string, validations: {[key: 
   const [isValid, setValid] = useState<boolean>(false);
 
   const emailReg = /^\S+@\S+\.\S+$/i;
-  const phoneReg = /\+\d{9,}/;
+  const phoneReg = /\+(\d{9,}$)/;
   const nameReg = /[A-ZА-ЯЁ]{3,}\s[A-ZА-ЯЁ]{3,}/i;
   const addressReg = /\S{5,}\s\S{5,}\s\S{5,}/i;
   const creditCardReg = /\d{4}\s\d{4}\s\d{4}\s\d{4}/;
@@ -88,16 +88,21 @@ export default function useValidation(currentValue: string, validations: {[key: 
           break;
         case 'isValid':
           if (validReg.test(currentValue)) {
+            const date = new Date();
             const month = Number(currentValue.slice(0, 2).replace(/^\0/, ''));
             const year = Number(currentValue.slice(-2).replace(/^\0/, ''));
-            const currentYear = Number(new Date().getFullYear().toString().slice(-2));
-            if ((month <= 12 && month > 0) && (year >= currentYear)) {
+            const currentYear = Number(date.getFullYear().toString().slice(-2));
+            const currentMonth = Number(date.getMonth().toString().slice(-2));
+            if (month > 12 || month < 1 || year < currentYear) {
+              setValid(false);
+              setError('Invalid date');
+            } else if (year === currentYear && month < currentMonth) {
+              setValid(false);
+              setError('Invalid date');
+            } else {
               setValid(true);
               setError('');
             }
-          } else {
-            setValid(false);
-            setError('Invalid date');
           }
           break;
         default:

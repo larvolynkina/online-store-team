@@ -32,7 +32,7 @@ export default function CartList(
           cartItem={cartItem}
           key={cartItem.id}
           index={currentCart.findIndex((el) => el.id === cartItem.id) + 1}
-          count={currentCart[index].count}
+          count={currentItems[index].count}
           currentCart={currentCart}
           setCurrentCart={setCurrentCart}
           setCartEmpty={setCartEmpty}

@@ -20,7 +20,7 @@ export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
   function replaceSymbols(event: React.ChangeEvent) {
     const target = event.target as HTMLInputElement;
     if (target.id === 'card-number') {
-      target.value = target.value.replace(/[^\d\s]/g, '').trim();
+      target.value = target.value.replace(/[^\d]/g, '').trim();
     }
     if (target.id === 'card-cvv') {
       target.value = target.value.replace(/[^\d]/g, '');

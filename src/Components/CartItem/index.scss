@@ -93,6 +93,28 @@
     font-weight: 300;
   }
 
+  &__info {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 15px 0;
+  }
+
+  &__category {
+    margin: 0 0 5px 0;
+  }
+
+  &__category-label,
+  &__brand-label {
+    margin: 0 5px 0 0;
+    font-size: 14px;
+  }
+
+  &__category-content,
+  &__brand-content {
+    font-size: 14px;
+    font-weight: 300;
+  }
+
   &__sum {
     font-weight: 300;
   }

@@ -23,7 +23,7 @@ export default function FormGroupPersonal(
           value={name.value}
           type="text"
           className={name.inputClassName}
-          placeholder="Enter name"
+          placeholder="Enter Name and Surname"
           id="name"
           onBlur={():void => name.setDirtyInput()}
           onChange={(e: React.ChangeEvent<HTMLInputElement>):void => name.setInputValue(e)}

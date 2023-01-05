@@ -41,9 +41,15 @@ export default function Cart(
 
   function handlePagesInput(event: React.ChangeEvent): void {
     const target = event.target as HTMLInputElement;
-    const inputValue: string = target.value.replace(/[^\d]/g, '');
-    if (inputValue) {
+    const inputValue = target.value.replace(/^0/g, '').slice(0, 2);
+
+    if (!inputValue) {
+      searchParams.delete('limit');
+      setSearchParams(searchParams);
+      setItemsPerPage(currentCart.length);
+    } else {
       setQueryParams('limit', inputValue);
+      setItemsPerPage(+inputValue);
     }
     setPagesInputValue(inputValue);
   }
@@ -59,12 +65,6 @@ export default function Cart(
       setSearchParams({});
     }
   }, [isCartEmpty]);
-
-  useEffect(() => {
-    if (pagesInputValue) {
-      setItemsPerPage(Number(pagesInputValue));
-    }
-  }, [pagesInputValue]);
 
   useEffect(() => {
     if (!currentItems.length && currentPage > 1) {
@@ -97,12 +97,13 @@ export default function Cart(
                   <div className="cart__pages pages">
                     <label htmlFor="pages-input" className="pages__label">Items per page:</label>
                     <input
-                      type="text"
+                      type="number"
                       className="pages__input"
                       name="pages"
                       value={pagesInputValue}
                       id="pages-input"
-                      maxLength={2}
+                      min="1"
+                      max="30"
                       onChange={(e: React.ChangeEvent): void => handlePagesInput(e)}
                     />
                   </div>

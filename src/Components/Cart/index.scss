@@ -83,7 +83,11 @@
     background: $background-color-light;
     border: none;
     padding: 3px 5px;
-    max-width: 30px;
+    max-width: 40px;
     text-align: center;
+  }
+
+  &__input-wrapper {
+    position: relative;
   }
 }

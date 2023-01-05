@@ -83,6 +83,16 @@ export default function CartItem(
       <div className="item-cart__details">
         <h3 className="item-cart__title">{cartItem.title}</h3>
         <p className="item-cart__description">{cartItem.description}</p>
+        <div className="item-cart__info">
+          <div className="item-cart__category">
+            <span className="item-cart__category-label">Category: </span>
+            <span className="item-cart__category-content">{cartItem.category}</span>
+          </div>
+          <div className="item-cart__brand">
+            <span className="item-cart__brand-label">Brand: </span>
+            <span className="item-cart__brand-content">{cartItem.brand}</span>
+          </div>
+        </div>
         <div className="item-cart__rating">{cartItem.rating}</div>
         <div className="item-cart__price">{`$${cartItem.price}`}</div>
       </div>

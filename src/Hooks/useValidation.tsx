@@ -13,7 +13,7 @@ export default function useValidation(currentValue: string, validations: {[key: 
   const [isValid, setValid] = useState<boolean>(false);
 
   const emailReg = /^\S+@\S+\.\S+$/i;
-  const phoneReg = /\+(\d{9,}$)/;
+  const phoneReg = /^\+{1}\d{9,}$/;
   const nameReg = /[A-ZА-ЯЁ]{3,}\s[A-ZА-ЯЁ]{3,}/i;
   const addressReg = /\S{5,}\s\S{5,}\s\S{5,}/i;
   const creditCardReg = /\d{4}\s\d{4}\s\d{4}\s\d{4}/;

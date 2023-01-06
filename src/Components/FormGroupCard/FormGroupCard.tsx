@@ -30,8 +30,8 @@ export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
     }
   }
 
-  function addCardSpaces(event: React.KeyboardEvent<HTMLInputElement>) {
-    const target = event.target;
+  function addCardSpaces(event: React.KeyboardEvent) {
+    const target = event.target as HTMLInputElement;
     if ((target.value.replace(/\s/g, '').length % 4 === 0)
     && event.key !== 'Backspace' && target.value.length !== 19) {
       target.value += ' ';

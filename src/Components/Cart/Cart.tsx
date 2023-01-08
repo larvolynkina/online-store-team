@@ -54,6 +54,13 @@ export default function Cart(
     setPagesInputValue(inputValue);
   }
 
+  function handleKeypress(e: React.KeyboardEvent): void {
+    const keys: Array<string> = ['-', '+', 'e', '.', ','];
+    if (keys.some((el: string) => el === e.key)) {
+      e.preventDefault();
+    }
+  }
+
   useEffect(() => {
     headerRender();
   }, [currentCart]);
@@ -105,6 +112,7 @@ export default function Cart(
                       min="1"
                       max="30"
                       onChange={(e: React.ChangeEvent): void => handlePagesInput(e)}
+                      onKeyDown={(e: React.KeyboardEvent): void => handleKeypress(e)}
                     />
                   </div>
                 </header>

@@ -1,7 +1,6 @@
-import React, { Dispatch, SetStateAction } from 'react';
 import Cart from '../../Components/Cart/Cart';
 import useFetch from '../../Hooks/useFetch';
-import { ICartItem } from '../../types';
+import { ICartItem, TStateAction } from '../../types';
 
 export default function ShoppingCart(
   {
@@ -13,10 +12,10 @@ export default function ShoppingCart(
     isOrder,
   }:
   {
-    setModalVisible: React.Dispatch<SetStateAction<boolean>>,
+    setModalVisible: TStateAction<boolean>,
     headerRender: () => void,
     isCartEmpty: boolean,
-    setCartEmpty: Dispatch<SetStateAction<boolean>>,
+    setCartEmpty: TStateAction<boolean>,
     cart: Array<ICartItem>,
     isOrder: boolean
   },

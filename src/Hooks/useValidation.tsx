@@ -13,12 +13,12 @@ export default function useValidation(currentValue: string, validations: {[key: 
   const [isValid, setValid] = useState<boolean>(false);
 
   const emailReg = /^\S+@\S+\.\S+$/i;
-  const phoneReg = /\+(\d{9,}$)/;
+  const phoneReg = /^\+{1}\d{9,}$/;
   const nameReg = /[A-ZА-ЯЁ]{3,}\s[A-ZА-ЯЁ]{3,}/i;
   const addressReg = /\S{5,}\s\S{5,}\s\S{5,}/i;
   const creditCardReg = /\d{4}\s\d{4}\s\d{4}\s\d{4}/;
   const cvvReg = /\d{3}/;
-  const validReg = /\d{2}\/\d{2}/;
+  const validReg = /^\d{2}\/\d{2}$/;
 
   useEffect(() => {
     Object.keys(validations).forEach((validation: string) => {
@@ -87,7 +87,10 @@ export default function useValidation(currentValue: string, validations: {[key: 
           }
           break;
         case 'isValid':
-          if (validReg.test(currentValue)) {
+          if (!validReg.test(currentValue)) {
+            setValid(false);
+            setError('Invalid date');
+          } else {
             const date = new Date();
             const month = Number(currentValue.slice(0, 2).replace(/^\0/, ''));
             const year = Number(currentValue.slice(-2).replace(/^\0/, ''));

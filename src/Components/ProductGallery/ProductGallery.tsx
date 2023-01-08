@@ -17,7 +17,7 @@ export default function ProductGallery({ images = [], title }: IGallery) {
         {images.map((link: string, index: number) => (
           <ProductGalleryItem
             imageLink={link}
-            key={link}
+            key={`${index + 1}`}
             alt={`${title} ${index + 1}`}
             onClick={():void => setUrl(link)}
           />

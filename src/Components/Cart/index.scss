@@ -9,6 +9,11 @@
     padding: 20px;
     max-width: 1240px;
     margin: 0 auto;
+
+    @media(max-width: 1000px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 
   &__items {
@@ -20,23 +25,40 @@
     border-radius: 8px;
     background: $background-color-light;
     flex: 1 1 auto;
+
+    @media(max-width: 1000px) {
+      margin: 0 0 20px 0;
+    }
   }
 
   &__header{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 20px;
     background: $main-color;
+
+    @media(max-width: 1000px) {
+     flex-direction: column;
+     }
   }
 
   &__title {
     color: $background-color-light;
+
+    @media(max-width: 1000px) {
+      margin: 0 0 10px 0;
+      }
   }
 
   &__btns {
     display: flex;
     justify-content: space-between;
     padding: 10px 20px 20px 20px;
+
+    @media(max-width: 600px) {
+      flex-direction: column;
+     }
   }
 
   &__btn {
@@ -62,6 +84,10 @@
       &:hover {
         background: darken(#e7e2e2, 10);
       }
+
+      @media(max-width: 600px) {
+       margin: 0 0 15px 0;
+       }
     }
   }
 }

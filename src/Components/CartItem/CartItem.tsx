@@ -107,7 +107,7 @@ export default function CartItem(
             onClick={():void => decreaseCount()}
             src={minusCircle}
           />
-          <span className="control__count">{itemCount}</span>
+          <span className="control__count" data-testid="count">{itemCount}</span>
           <CartCountButton
             className="control__btn control__btn_increase"
             onClick={():void => increaseCount()}

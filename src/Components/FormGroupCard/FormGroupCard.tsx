@@ -17,34 +17,16 @@ export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
 
   const [cardImageSrc, setCardImageSrc] = useState<string>(cardImages.universalCard);
 
-  function replaceSymbols(event: React.ChangeEvent) {
+  function replaceSymbols(event: React.ChangeEvent): void {
     const target = event.target as HTMLInputElement;
-    if (target.id === 'card-number') {
-      target.value = target.value.replace(/[^\d\s]/g, '').trim();
-    }
     if (target.id === 'card-cvv') {
       target.value = target.value.replace(/[^\d]/g, '');
     }
+    if (target.id === 'card-number') {
+      target.value = target.value.match(/\d{1,4}/g)?.join(' ').slice(0, 19) || '';
+    }
     if (target.id === 'card-valid') {
-      target.value = target.value.replace(/[^\d/]/g, '');
-    }
-  }
-
-  function addCardSpaces(event: React.KeyboardEvent) {
-    const target = event.target as HTMLInputElement;
-    if ((target.value.replace(/\s/g, '').length % 4 === 0)
-    && event.key !== 'Backspace' && target.value.length !== 19) {
-      target.value += ' ';
-    }
-  }
-
-  function addValidSeparator(event: React.KeyboardEvent) {
-    const target = event.target as HTMLInputElement;
-    if ((target.value.length > 0)
-    && (target.value.replace(/\//g, '').length % 2 === 0)
-    && target.value.length !== 5
-    && event.key !== 'Backspace') {
-      target.value += '/';
+      target.value = target.value.match(/\d{1,2}/g)?.join('/').slice(0, 5) || '';
     }
   }
 
@@ -71,7 +53,6 @@ export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
             placeholder="0000 0000 0000 0000"
             maxLength={19}
             value={cardNumber.value}
-            onKeyDown={(e: React.KeyboardEvent):void => addCardSpaces(e)}
             onKeyUp={(e: React.KeyboardEvent):void => checkPaymentSystem(e)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>):void => {
               replaceSymbols(e);
@@ -97,7 +78,6 @@ export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
             maxLength={5}
             value={cardValid.value}
             placeholder="MM/YY"
-            onKeyDown={(e: React.KeyboardEvent):void => addValidSeparator(e)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>):void => {
               replaceSymbols(e);
               cardValid.setInputValue(e);

@@ -3,6 +3,11 @@
 .dualSlider {
   margin-top: 10px;
   margin-bottom: 30px;
+  @media screen and (max-width: 960px) {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
 
   &__values {
     display: flex;
@@ -13,6 +18,9 @@
   &__ranges {
     margin-top: 20px;
     position: relative;
+    @media screen and (max-width: 960px) {
+      margin-top: 10px;
+    }
   }
 
   &__track {

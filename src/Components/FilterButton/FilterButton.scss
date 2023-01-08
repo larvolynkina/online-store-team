@@ -11,4 +11,7 @@
     &:hover {
         background: $hover-color;
     }
+    @media screen and (max-width: 960px) {
+        padding: 8px;
+    }
 }

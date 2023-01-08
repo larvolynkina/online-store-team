@@ -33,7 +33,7 @@ function DualSlider({ name, label }: DualSliderProps) {
       return +rangeMinValue;
     }
     const filterArray = array.map((item: IProduct) => +item[filter as keyof IProduct]);
-    const filterArrayMin = Math.min(...filterArray);
+    const filterArrayMin = searchParams.has(filter) ? Number(searchParams.get(filter)?.split('↕')[0]) : Math.min(...filterArray);
     return filterArrayMin;
   }
 
@@ -43,7 +43,7 @@ function DualSlider({ name, label }: DualSliderProps) {
       return +rangeMaxValue;
     }
     const filterArray = array.map((item: IProduct) => +item[filter as keyof IProduct]);
-    const filterArrayMax = Math.max(...filterArray);
+    const filterArrayMax = searchParams.has(filter) ? Number(searchParams.get(filter)?.split('↕')[1]) : Math.max(...filterArray);
     return filterArrayMax;
   }
 
@@ -78,6 +78,11 @@ function DualSlider({ name, label }: DualSliderProps) {
     if (filtered.length > 0) {
       setRangeMinValue(getMinValue(filtered).toString());
       setRangeMaxValue(getMaxValue(filtered).toString());
+    } else if (!isMoving) {
+      setRangeMinValue(min.toString());
+      setRangeMaxValue(max.toString());
+    } else {
+      setIsMoving(false);
     }
   }, [filtered]);
 
@@ -85,17 +90,23 @@ function DualSlider({ name, label }: DualSliderProps) {
     <>
       <h2 className="filter__title">{name}</h2>
       <div className="dualSlider">
-        <div className="dualSlider__values">
-          <span className="dualSlider__valueMin">
-            {label}
-            {rangeMinValue}
-          </span>
-          ⟷
-          <span className="dualSlider__valueMax">
-            {label}
-            {rangeMaxValue}
-          </span>
-        </div>
+        {
+          filtered.length > 0
+            ? (
+              <div className="dualSlider__values">
+                <span className="dualSlider__valueMin">
+                  {label}
+                  {rangeMinValue}
+                </span>
+                ⟷
+                <span className="dualSlider__valueMax">
+                  {label}
+                  {rangeMaxValue}
+                </span>
+              </div>
+            )
+            : <div className="dualSlider__notFound">Not found</div>
+        }
         <div className="dualSlider__ranges">
           <div className="dualSlider__track" />
           <DebounceInput

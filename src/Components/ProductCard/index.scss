@@ -1,0 +1,22 @@
+@import './../../sass/abstracts/variables';
+
+.card-product {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+  border-radius: 8px;
+  background: $background-color-light;
+
+  &__title {
+    margin: 0 0 20px 0;
+  }
+
+  &__content {
+    display: flex;
+
+    @media(max-width: 1000px) {
+      flex-direction: column;
+    }
+  }
+}

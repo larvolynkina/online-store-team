@@ -1,0 +1,193 @@
+@import './../../sass/abstracts/variables';
+
+.product {
+    background-color: $background-color-light;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    flex-basis: 32%;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+    border-radius: 8px;
+    cursor: pointer;
+    @media screen and (max-width: 1200px) {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    @media screen and (max-width: 470px) {
+        max-width: 260px;
+    }
+    @media screen and (max-width: 430px) {
+        width: 260px;
+        margin: 0;
+    }
+    @media screen and (max-width: 330px) {
+        width: 250px;
+    }
+
+    &_active {
+        box-shadow: 0px 2px 8px $main-color;
+    }
+
+    &__data {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    &__image {
+        height: 200px;
+        overflow: hidden;
+        margin-bottom: 5px;
+    }
+
+    &__img {
+        width: 100%;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        object-fit: cover;
+        height: inherit;
+        object-position: left top;
+        transition: all 0.4s ease;
+        &:hover {
+            scale: 1.1;
+            object-position: center center;
+        }
+    }
+
+    &__digits {
+        margin-top: 5px;
+        display: flex;
+        justify-content: space-between;
+        font-weight: 500;
+        padding: 0 10px;
+        align-items: center;
+        @media screen and (max-width: 430px) {
+            margin-bottom: 5px;
+        }
+    }
+
+    &__rating {
+        position: relative;
+        background-color: $main-color;
+        color: $background-color-light;
+        padding: 6px 24px 5px 8px;
+        border-radius: 3px;
+        font-size: 14px;
+        font-weight: 300;
+        @media screen and (max-width: 430px) {
+            padding: 4px 24px 4px 4px;
+        }
+        &:hover {
+            background: $hover-color;
+        }
+        &::after {
+            position: absolute;
+            content: url('./../../assets/icons/rating.svg');
+            right: 6px;
+            top: 5px;
+        }
+    }
+
+    &__info {
+        margin-top: 15px;
+        padding: 0 10px;
+        flex-grow: 1;
+        @media screen and (max-width: 430px) {
+            margin-top: 5px;
+        }
+    }
+
+    &__title {
+        font-size: 16px;
+        font-weight: 500;
+        @media screen and (max-width: 430px) {
+            font-size: 14px;
+        }
+    }
+
+    &__descr {
+        font-size: 14px;
+        font-weight: 300;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        @media screen and (max-width: 430px) {
+            display: none;
+        }
+    }
+
+    &__line {
+        height: 2px;
+        margin: 5px 0;
+        border: none;
+	    border-top: 2px solid #ededed;
+        @media screen and (max-width: 470px) {
+            display: none;
+        }
+    }
+
+    &__list {
+        margin: 0;
+        font-size: 14px;
+        line-height: 120%;
+        @media screen and (max-width: 470px) {
+            display: none;
+        }
+    }
+
+    &__term {
+        float: left;
+        margin-right: 5px;
+        font-weight: 500;
+    }
+
+    &__def {
+        font-weight: 300;
+    }
+
+    &__buttons {
+        margin-top: 10px;
+        @media screen and (max-width: 730px) {
+            margin-top: 2px;
+        }
+    }
+}
+
+.product_list {
+    
+}
+
+.btn {
+    width: 50%;
+    text-transform: uppercase;
+    padding: 14px 0;
+    font-size: 14px;
+    font-weight: 500;
+    @media screen and (max-width: 730px) {
+        padding: 7px 0;
+    }
+    @media screen and (max-width: 470px) {
+        width: 100%;
+    }
+
+    &_cart {
+        background-color: $main-color;
+        color: $background-color-light;
+        border-bottom-right-radius: 8px;
+        &:hover {
+            background: $hover-color;
+        }
+    }
+
+    &_details {
+        border-bottom-left-radius: 8px;
+        @media screen and (max-width: 470px) {
+            border-bottom-left-radius: 0;
+        }
+        
+        &:hover {
+            background: #dddddd;
+        }
+    }
+}

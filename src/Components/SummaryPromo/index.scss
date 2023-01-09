@@ -1,0 +1,108 @@
+@import "../../sass/abstracts/variables";
+
+.promo {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    font-size: 14px;
+    color: darken($light-grey-color, 20);
+    margin: 0 0 2px 0;
+  }
+
+  &__input { 
+    outline: none;
+    background: $background-color-light;
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: 1px solid $main-color;
+    margin: 0 0 5px 0; 
+    font-size: 14px;
+
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      background: url("../../assets/icons/inputCancel.svg") center/cover no-repeat;
+      cursor: pointer;
+    }
+
+    &::placeholder {
+      font-size: 14px;
+      color: darken($light-grey-color, 10);
+    }
+  }
+
+  &__output-wrapper {
+    height: 17px;
+    margin: 0 0 10px 0;
+
+    @media(max-width: 400px) {
+      height: 33px;
+    }
+  }
+
+  &__output {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    margin: 0 10px 0 0;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  &__btn {
+    padding: 0 5px;
+    border-radius: 2px;
+    background: $main-color;
+    color: $background-color-light;
+    font-size: 11px;
+    text-transform: uppercase;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background: $hover-color;
+    }
+  }
+}
+
+.applied {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 30px 0;
+
+  &__btn {
+    background: transparent;
+    padding: 0;
+    margin: 0 0 5px 0;
+    align-self: flex-start;
+  }
+
+  &__title {
+    margin: 0 5px 0 0;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  &__arrow {
+
+    &.up {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__codes-list {
+
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.3s ease;
+
+    &.visible {
+      max-height: 1000px;
+      transition: all 2s ease;
+    }
+  }
+}

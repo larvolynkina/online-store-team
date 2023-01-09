@@ -1,0 +1,15 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: $background-color;
+    color: $text-color;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main {
+    flex-grow: 1;
+}

@@ -1,0 +1,37 @@
+.products-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 15px 0;
+    align-items: center;
+    gap: 30px;
+    @media screen and (max-width: 730px) {
+        flex-direction: column;
+        gap: 15px;
+    }
+    @media screen and (max-width: 430px) {
+        align-items: flex-end;
+        gap: 5px;
+    }
+
+    &__total {
+        font-size: 14px;
+        font-weight: 500;
+        width: 40%;
+    }
+}
+
+.products-header-block {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 50%;
+    @media screen and (max-width: 730px) {
+        width: 80%;
+        justify-content: space-between;
+    }
+}
+
+.products-header-block:last-child {
+    justify-content: flex-end;
+}

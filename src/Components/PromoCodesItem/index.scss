@@ -1,0 +1,29 @@
+
+.codes-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin: 0 0 5px 0;
+  }
+  
+  &__title {
+    margin: 0 10px 0 0;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  &__btn {
+    padding: 0 5px;
+    border-radius: 2px;
+    background: #e7e2e2;
+    font-size: 11px;
+    text-transform: uppercase;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background: darken(#e7e2e2, 10);
+    }
+  }
+}

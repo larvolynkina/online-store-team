@@ -1,0 +1,73 @@
+@import '../../sass/abstracts/variables';
+
+.summary {
+  flex: 0 0 auto;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+  border-radius: 8px;
+  background: $background-color-light;
+  overflow: hidden;
+
+  &__header {
+    background: $main-color;
+    padding: 20px;
+  }
+
+  &__title {
+    color: $background-color-light;
+  }
+
+  &__container {
+    padding: 20px;
+  }
+
+  &__btn {
+    padding: 10px 10px 10px 10px;
+    min-width: 159px;
+    width: max-content;
+    text-transform: uppercase;
+    border-radius: 8px;
+    transition: all 0.5s ease;
+    background-color: #e7e2e2;
+  
+    &:hover {
+      background-color: darken(#e7e2e2, 10);
+    }
+  }
+}
+
+.products-summary {
+  margin: 0 0 5px 0;
+
+  &__label {
+    margin: 0 5px 0 0;
+  }
+
+  &__output {
+    font-weight: 300;
+  }
+}
+
+.total {
+  display: flex;
+  margin: 0 0 20px 0;
+
+  &.discounted {
+    .total__output {
+      text-decoration: line-through;
+      color: red;
+    }
+  }
+
+  &__label {
+    margin: 0 5px 0 0;
+  }
+
+  &__output {
+    margin: 0 5px 0 0;
+    font-weight: 300;
+  }
+
+  &__discount {
+    font-weight: 300;
+  }
+}

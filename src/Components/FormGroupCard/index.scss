@@ -1,0 +1,89 @@
+@import "../../sass/abstracts/variables";
+@import "../../sass/abstracts/mixins";
+
+.credit-card {
+
+  margin: 0 0 20px 0;
+
+  &__title {
+    @include modal-title;
+
+    &::after {
+      @include modal-title-after;
+    }
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    gap: 20px;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+
+    &_number {
+      grid-column: 1/4;
+      grid-row: 1/2;
+    }
+
+    &_valid {
+      grid-column: 1/2;
+      grid-row: 2/3;
+      max-width: 70px;
+    }
+
+    &_cvv {
+      grid-column: 2/3;
+      grid-row: 2/3;
+      max-width: 70px;
+    }
+
+    &_payment-system {
+      width: 40px;
+      height: auto;
+      grid-column: 3/4;
+      grid-row: 2/3;
+      justify-self: end;
+    }
+  }
+
+  &__label {
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  &__input {
+    @include modal-input;
+    text-align: center;
+    
+    &.invalid {
+      @include modal-input-invalid;
+    }
+
+    &.valid {
+      @include modal-input-valid;
+    }
+
+    &::placeholder {
+      @include modal-placeholder;
+    }
+  }
+
+  &__error-wrapper {
+    height: 11.5px;
+  }
+
+  &__error {
+    font-size: 11px;
+    color: red;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+  }
+
+}

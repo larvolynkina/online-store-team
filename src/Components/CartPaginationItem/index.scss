@@ -1,0 +1,44 @@
+@import "../../sass/abstracts/variables";
+
+.nav__item {
+  &:not(:last-child) {
+    margin: 0 10px 0 0;
+  }
+}
+
+.nav__btn {
+  box-sizing: border-box;
+  padding: 3px;
+  min-width: 20px;
+  background: none;
+  font-size: 12px;
+  transition: all 0.5s ease;
+  border-radius: 50%;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  &:hover {
+    background: $light-grey-color;
+  }
+
+  &.active {
+    background: darken($light-grey-color, 10);
+  }
+
+  &_prev, 
+  &_next {
+    width: 20px;
+    img {
+      width: 100%;
+    }
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  
+}

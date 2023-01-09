@@ -1,0 +1,27 @@
+.sortSelect {
+    width: 100%;
+    max-width: 190px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 9px 10px;
+    border: none;
+    outline: none;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+    border-radius: 8px;
+    cursor: pointer;
+    @media screen and (max-width: 730px) {
+        padding: 5px 10px;
+    }
+
+    &:focus {
+        box-shadow: inset 0px 0px 5px 1px #6f64f8;
+    }
+}
+
+.select-form {
+    width: 100%;
+    @media screen and (max-width: 730px) {
+        width: auto;
+    }
+}

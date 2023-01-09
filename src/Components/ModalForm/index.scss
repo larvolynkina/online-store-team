@@ -1,0 +1,20 @@
+@import "../../sass/abstracts/variables";
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &__confirm-btn {
+    padding: 5px 20px;
+    text-transform: uppercase;
+    background: $main-color;
+    color: $background-color-light;
+    transition: all 0.5s ease;
+    border-radius: 5px;
+    align-self: center;
+
+    &:hover {
+      background: $hover-color;
+    }
+  }
+}

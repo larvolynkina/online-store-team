@@ -1,0 +1,47 @@
+@import './../../sass/abstracts/variables';
+
+.filter {
+    overflow-y: auto;
+    max-height: 173px;
+    margin-bottom: 10px;
+    @media screen and (max-width: 960px) {
+        max-height: 60px;
+    }
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: #e9e8e8;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $main-color;
+        border-radius: 8px;
+    }
+
+    &__title {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 22px;
+        padding: 10px 0;
+        @media screen and (max-width: 960px) {
+            padding: 5px 0;
+            font-size: 16px;
+        }
+    }
+
+    &__line {
+        display: block;
+        width: 100%;
+        height: 1px;
+        background-color: #D6D6D6;
+        margin: 10px 0;
+        @media screen and (max-width: 960px) {
+            margin: 5px 0;
+        }
+        &:last-child {
+            display: none;
+        }
+    }
+}

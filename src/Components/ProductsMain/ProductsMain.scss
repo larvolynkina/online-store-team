@@ -2,11 +2,42 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
+    @media screen and (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width: 730px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    @media screen and (max-width: 430px) {
+        justify-items: end;
+    }
+    .btn_cart {
+        @media screen and (max-width: 470px) {
+            border-bottom-left-radius: 8px;
+        }
+    }
+    .btn_details {
+        border-bottom-left-radius: 8px;
+        @media screen and (max-width: 470px) {
+            border-bottom-left-radius: 0px;
+        }
+    }
     &_list {
         grid-template-columns: repeat(1, 1fr);
         .product {
+            @media screen and (max-width: 1200px) {
+                max-width: none;
+            }
+            @media screen and (max-width: 730px) {
+                max-width: 80%;
+            }
+            @media screen and (max-width: 430px) {
+                max-width: 100%;
+                margin-left: 40px;
+                max-height: 140px;
+                width: auto;
+            }
             flex-direction: row;
-
             &__data {
                 flex: auto;
                 width: 65%;
@@ -23,6 +54,12 @@
                 align-items: center;
                 flex-direction: column;
                 max-height: 206px;
+                @media screen and (max-width: 530px) {
+                    width: 45%;
+                }
+                @media screen and (max-width: 470px) {
+                    width: 65%;
+                }
             }
 
             &__img {
@@ -37,16 +74,33 @@
             &__info {
                 margin-left: 10px;
                 flex-grow: 1;
+                @media screen and (max-width: 730px) {
+                    margin-left: 5px;
+                    padding: 0;
+                    padding-right: 5px;
+                    margin-top: 0;
+                    font-size: 14px;
+                }
             }
 
             &__digits {
                 margin-left: 10px;
                 margin-top: 10px;
                 flex-direction: row-reverse;
+                @media screen and (max-width: 730px) {
+                    margin-left: 5px;
+                    margin-top: 5px;
+                    padding: 0;
+                    padding-right: 5px;
+                    font-size: 14px;
+                }
             }
 
             &__buttons {
                 .btn_details {
+                    border-bottom-left-radius: 0px;
+                }
+                .btn_cart {
                     border-bottom-left-radius: 0px;
                 }
             }

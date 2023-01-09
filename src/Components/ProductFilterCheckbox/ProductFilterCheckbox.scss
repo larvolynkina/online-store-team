@@ -8,6 +8,10 @@
         padding: 5px;
         padding-left: 0;
         padding-right: 10px;
+        @media screen and (max-width: 960px) {
+            font-size: 14px;
+            padding: 2px;
+        }
 
         &_active {
             font-weight: 500;

@@ -5,6 +5,9 @@
     margin-top: 50px;
     font-size: 14px;
     font-weight: 500;
+    @media screen and (max-width: 960px) {
+        padding: 0;
+    }
 
     &__wrapper {
         margin: 0 auto;

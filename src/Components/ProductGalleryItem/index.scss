@@ -6,9 +6,16 @@
   overflow: hidden;
   cursor: pointer;
   transition: all 0.5s ease;
+
+  @media(max-width: 1000px) {
+    margin: 0 10px 10px 0;
+    &:last-child {
+      margin: 0 0 10px 0;
+    }
+  }
 }
 
-.gallery-product__img-mini{
+.gallery-product__img-mini {
   width: 100%;
   height: 100%;
   transition: all 0.5s ease;

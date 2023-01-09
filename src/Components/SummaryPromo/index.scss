@@ -36,6 +36,10 @@
   &__output-wrapper {
     height: 17px;
     margin: 0 0 10px 0;
+
+    @media(max-width: 400px) {
+      height: 33px;
+    }
   }
 
   &__output {

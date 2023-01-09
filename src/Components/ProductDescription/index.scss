@@ -69,6 +69,10 @@
 .btns-card {
   display: flex;
   flex-direction: column;
+
+  @media(max-width: 1000px) {
+   align-self: center;
+  }
 }
 
 .accordeon {

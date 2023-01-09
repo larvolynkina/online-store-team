@@ -30,7 +30,7 @@ export default function FormGroupCard({ cardNumber, cardCvv, cardValid }:
     }
   }
 
-  function checkPaymentSystem(event: React.KeyboardEvent) {
+  function checkPaymentSystem(event: React.KeyboardEvent): void {
     const target = event.target as HTMLInputElement;
     const firstChar:string = target.value.slice(0, 1);
     if (firstChar in cardImages) {

@@ -14,6 +14,9 @@
         font-size: 14px;
         color: #999999;
         outline: none;
+        @media screen and (max-width: 730px) {
+            padding: 7px 40px;
+        }
         &:focus {
             box-shadow: inset 0px 0px 5px 1px #6f64f8;
         }
@@ -41,5 +44,8 @@
         left: 10px;
         top: 8px;
         opacity: 0.5;
+        @media screen and (max-width: 730px) {
+            top: 5px;
+        }
     }
 }
